@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"c:\\\\Users\\\\J\\\\Desktop\\\\Submachine_demo省级_ai\\\\Submachine_demo省级_ai\" /B)",
+      "WebFetch(domain:github.com)",
+      "PowerShell(cc-connect --version)",
+      "PowerShell(cc-connect --help)",
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "Bash(curl -s \"https://registry.npmjs.org/cc-connect\")",
+      "PowerShell(cc-connect --help 2>&1)",
+      "PowerShell(cc-connect feishu --help 2>&1)",
+      "Bash(mkdir -p \"/c/Users/J/.cc-connect\")",
+      "PowerShell(cc-connect feishu setup --project submachine-demo --qr-image qr.png 2>&1)",
+      "PowerShell(claude --version 2>&1)",
+      "PowerShell(Get-Command claude -ErrorAction SilentlyContinue)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\J"
+    ]
+  }
+}
