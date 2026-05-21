@@ -1,32 +1,32 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼þÃû: algo_pid.c
+* æ–‡ä»¶å: algo_pid.c
 
-* ÄÚÈÝ¼òÊö£ºPIDÏà¹Øº¯Êý
+* å†…å®¹ç®€è¿°ï¼šPIDç›¸å…³å‡½æ•°
 
-* ÎÄ¼þÀúÊ·£º
+* æ–‡ä»¶åŽ†å²ï¼š
 #include "algo_pid.h"
-* °æ±¾ºÅ		ÈÕÆÚ	    ×÷Õß		    ËµÃ÷
-*  2.4 	    2023-05-12	  ±«³Ìè´		 ´´½¨¸ÃÎÄ¼þ
+* ç‰ˆæœ¬å·		æ—¥æœŸ	    ä½œè€…		    è¯´æ˜Ž
+*  2.4 	    2023-05-12	  é²ç¨‹ç’		 åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "algo_pid.h"
 #include "math.h"
 /**
- * @brief PID³õÊ¼º¯Êý
- * @param _tPid-PID½á¹¹ÌåÖ¸Õë
- * @param _tPidInit-PID³õÊ¼»¯½á¹¹Ìå
+ * @brief PIDåˆå§‹å‡½æ•°
+ * @param _tPid-PIDç»“æž„ä½“æŒ‡é’ˆ
+ * @param _tPidInit-PIDåˆå§‹åŒ–ç»“æž„ä½“
  * @retval Null
 */
 void PID_Init(tagPID_T *_tPid,PIDInitStruct *_tPidInit)
 {
 	
-	/* ÀúÊ·Êý¾ÝÖÃ0 */
+	/* åŽ†å²æ•°æ®ç½®0 */
     _tPid->fDbuf[0] = _tPid->fDbuf[1] = _tPid->fDbuf[2] = _tPid->fError[0] = _tPid->fError[1] = _tPid->fError[2] = _tPid->fPout = _tPid->fIout = _tPid->fDout = _tPid->fCtrl_Out = _tPid->fPre_Out = 0.0f;
 	
-	/* ²ÎÊý¸³Öµ */
+	/* å‚æ•°èµ‹å€¼ */
 		_tPid->fKp = _tPidInit->fKp;
 		_tPid->fKi = _tPidInit->fKi;
 		_tPid->fKd = _tPidInit->fKd;
@@ -39,14 +39,14 @@ void PID_Init(tagPID_T *_tPid,PIDInitStruct *_tPidInit)
 }
 
 /**
- * @brief ¸üÐÂPIDÏµÊýº¯Êý
- * @param _tPid-PID½á¹¹ÌåÖ¸Õë
- * @param _tPidInit-PID³õÊ¼»¯½á¹¹Ìå
+ * @brief æ›´æ–°PIDç³»æ•°å‡½æ•°
+ * @param _tPid-PIDç»“æž„ä½“æŒ‡é’ˆ
+ * @param _tPidInit-PIDåˆå§‹åŒ–ç»“æž„ä½“
  * @retval Null
 */
 void PID_Update(tagPID_T *_tPid,PIDInitStruct *_tPidInit)
 {
-    /* ¸üÐÂPIDÏµÊý */
+    /* æ›´æ–°PIDç³»æ•° */
 
 		_tPid->fKp = _tPidInit->fKp;
 		_tPid->fKi = _tPidInit->fKi;
@@ -61,16 +61,16 @@ void PID_Update(tagPID_T *_tPid,PIDInitStruct *_tPidInit)
 
 
 ///**
-// * @brief PID¼ÆËãº¯Êý
-// * @param _tPid-PID½á¹¹ÌåÖ¸Õë
-// * @param _fCurrValue-µ±Ç°Öµ
-// * @param _fExpValue-ÆÚÍûÖµ
-// * @param dt-Ê±¼äÎ¢·Ö£¬½Ó½ü¼´¿É
-// * @retval float ¾­¹ýPID¼ÆËãºóµÄÊä³öÖµ
+// * @brief PIDè®¡ç®—å‡½æ•°
+// * @param _tPid-PIDç»“æž„ä½“æŒ‡é’ˆ
+// * @param _fCurrValue-å½“å‰å€¼
+// * @param _fExpValue-æœŸæœ›å€¼
+// * @param dt-æ—¶é—´å¾®åˆ†ï¼ŒæŽ¥è¿‘å³å¯
+// * @retval float ç»è¿‡PIDè®¡ç®—åŽçš„è¾“å‡ºå€¼
 //*/
 //int PID_Calculate(tagPID_T *_tPid,float _fCurrValue,float _fExpValue,float dt)
 //{
-//    /* Éè¶¨ÆÚÍûÖµºÍµ±Ç°Öµ */
+//    /* è®¾å®šæœŸæœ›å€¼å’Œå½“å‰å€¼ */
 //    _tPid->fExp_Value  = _fExpValue;
 //    _tPid->fCurr_Value = _fCurrValue;
 //    
@@ -78,24 +78,24 @@ void PID_Update(tagPID_T *_tPid,PIDInitStruct *_tPidInit)
 //	_tPid->fError[1] = _tPid->fError[0];
 //    _tPid->fError[0] = _fExpValue - _fCurrValue;
 //	
-//    /* µü´úÎ¢·ÖÏîµÄÊý×é */
+//    /* è¿­ä»£å¾®åˆ†é¡¹çš„æ•°ç»„ */
 //    _tPid->fDbuf[2] = _tPid->fDbuf[1];
 //    _tPid->fDbuf[1] = _tPid->fDbuf[0];
 
-//    /* Á½´ÎÎ¢·ÖÇóÆ½¾ù*/
+//    /* ä¸¤æ¬¡å¾®åˆ†æ±‚å¹³å‡*/
 //    _tPid->fDbuf[0] = (_tPid->fError[0] - 2.0f * _tPid->fError[1] + _tPid->fError[2]) / 2.0f;
 //	
 //    _tPid->fPout = _tPid->fKp * _tPid->fError[0];
 //    _tPid->fIout += _tPid->fKi * _tPid->fError[0] * dt;
 //	_tPid->fDout = _tPid->fKd * _tPid->fDbuf[0] / dt;
-//	//ÏÞ·ù
+//	//é™å¹…
 //	if(_tPid->fIout > _tPid->fMax_Iout)
 //		_tPid->fIout = _tPid->fMax_Iout;
 //    
-//    /* ½á¹û´¦Àí */
+//    /* ç»“æžœå¤„ç† */
 //    _tPid->fPre_Out = _tPid->fCtrl_Out;
 //    _tPid->fCtrl_Out = (int)(_tPid->fPout + _tPid->fIout + _tPid->fDout);
-//	//ÏÞ·ù
+//	//é™å¹…
 //	if(_tPid->fPre_Out > _tPid->fMax_Out)
 //		_tPid->fPre_Out = _tPid->fMax_Out;
 //	
@@ -103,119 +103,119 @@ void PID_Update(tagPID_T *_tPid,PIDInitStruct *_tPidInit)
 //}
 
 /**
- * @brief PIDÔöÁ¿¼ÆËãº¯Êý
- * @param _tPid-PID½á¹¹ÌåÖ¸Õë
- * @param _fCurrValue-µ±Ç°Öµ
- * @param _fExpValue-ÆÚÍûÖµ
- * @retval int ¾­¹ýPID¼ÆËãºóµÄÊä³öÖµ
+ * @brief PIDå¢žé‡è®¡ç®—å‡½æ•°
+ * @param _tPid-PIDç»“æž„ä½“æŒ‡é’ˆ
+ * @param _fCurrValue-å½“å‰å€¼
+ * @param _fExpValue-æœŸæœ›å€¼
+ * @retval int ç»è¿‡PIDè®¡ç®—åŽçš„è¾“å‡ºå€¼
 */
 int PID_Add_Calculate(tagPID_T *_tPid,float _fCurrValue,float _fExpValue)
 {
-    int Delt_Out; /* PIDÊä³öÔöÁ¿Öµ */
+    int Delt_Out; /* PIDè¾“å‡ºå¢žé‡å€¼ */
 	float Pre_I;
 
-    /* Éè¶¨ÆÚÍûÖµºÍµ±Ç°Öµ */
+    /* è®¾å®šæœŸæœ›å€¼å’Œå½“å‰å€¼ */
     _tPid->fExp_Value  = _fExpValue;
     _tPid->fCurr_Value = _fCurrValue;
     
-	/* ´æ·Å¹ýÈ¥Á½´ÎÎó²îÖµ */
+	/* å­˜æ”¾è¿‡åŽ»ä¸¤æ¬¡è¯¯å·®å€¼ */
     _tPid->fError[2] = _tPid->fError[1];
     _tPid->fError[1] = _tPid->fError[0];
     _tPid->fError[0] = _fExpValue - _fCurrValue;
 	
-	/* ¼ÇÂ¼¹ýÈ¥µÄIoutÏîµÄÖµ£¬ÓÃÓÚµÍÍ¨ÂË²¨ */
+	/* è®°å½•è¿‡åŽ»çš„Iouté¡¹çš„å€¼ï¼Œç”¨äºŽä½Žé€šæ»¤æ³¢ */
 	Pre_I = _tPid->fIout;
 
-    /* ²ÉÓÃÔöÁ¿Ê½PID */
+    /* é‡‡ç”¨å¢žé‡å¼PID */
 
-    /* ÒÔ±¾´ÎÎó²îÓëÉÏ´ÎÎó²îµÄ²îÖµ×÷Îª±ÈÀýÏîµÄÊäÈë´øÈë¼ÆËã */
+    /* ä»¥æœ¬æ¬¡è¯¯å·®ä¸Žä¸Šæ¬¡è¯¯å·®çš„å·®å€¼ä½œä¸ºæ¯”ä¾‹é¡¹çš„è¾“å…¥å¸¦å…¥è®¡ç®— */
     _tPid->fPout = _tPid->fKp * (_tPid->fError[0] - _tPid->fError[1]);
 
-    /* ÒÔ±¾´ÎÎó²î×÷Îª»ý·ÖÏî´øÈë¼ÆËã */
+    /* ä»¥æœ¬æ¬¡è¯¯å·®ä½œä¸ºç§¯åˆ†é¡¹å¸¦å…¥è®¡ç®— */
     _tPid->fIout = _tPid->fKi * _tPid->fError[0];
-	/* ¶Ô»ý·ÖÏî²ÉÓÃµÍÍ¨ÂË²¨ */
+	/* å¯¹ç§¯åˆ†é¡¹é‡‡ç”¨ä½Žé€šæ»¤æ³¢ */
 	_tPid->fIout = _tPid->alpha * _tPid->fIout + (1 - _tPid->alpha) * Pre_I;
 
-	//ÏÞ·ù
+	//é™å¹…
 	if(_tPid->fIout > _tPid->fMax_Iout)
 		_tPid->fIout = _tPid->fMax_Iout;
 	if(_tPid->fIout < -_tPid->fMax_Iout)
 		_tPid->fIout = -_tPid->fMax_Iout;
 
-    /* µü´úÎ¢·ÖÏîµÄÊý×é */
+    /* è¿­ä»£å¾®åˆ†é¡¹çš„æ•°ç»„ */
     _tPid->fDbuf[2] = _tPid->fDbuf[1];
     _tPid->fDbuf[1] = _tPid->fDbuf[0];
 
-    /* ÒÔ±¾´ÎÎó²îÓëÉÏ´ÎÎó²îµÄ²îÖµ¼õÈ¥ÉÏ´ÎÎó²îÓëÉÏÉÏ´ÎÎó²îµÄ²îÖµ×÷ÎªÎ¢·ÖÏîµÄÊäÈë´øÈë¼ÆËã */
+    /* ä»¥æœ¬æ¬¡è¯¯å·®ä¸Žä¸Šæ¬¡è¯¯å·®çš„å·®å€¼å‡åŽ»ä¸Šæ¬¡è¯¯å·®ä¸Žä¸Šä¸Šæ¬¡è¯¯å·®çš„å·®å€¼ä½œä¸ºå¾®åˆ†é¡¹çš„è¾“å…¥å¸¦å…¥è®¡ç®— */
     _tPid->fDbuf[0] = (_tPid->fError[0] - 2.0f * _tPid->fError[1] + _tPid->fError[2]);
     _tPid->fDout = _tPid->fKd * _tPid->fDbuf[0];
     
-    /* ½á¹û´¦Àí */
-    Delt_Out = (int)(_tPid->fPout + _tPid->fIout + _tPid->fDout);    /* ¼ÆËãÔöÁ¿Êä³ö */
+    /* ç»“æžœå¤„ç† */
+    Delt_Out = (int)(_tPid->fPout + _tPid->fIout + _tPid->fDout);    /* è®¡ç®—å¢žé‡è¾“å‡º */
 	
-	//ÏÞ·ù
+	//é™å¹…
 	if(Delt_Out > _tPid->fMax_Out)
 		Delt_Out = _tPid->fMax_Out;
 	if(Delt_Out < -_tPid->fMax_Out)
 		Delt_Out = -_tPid->fMax_Out;
 	
-    _tPid->fCtrl_Out = _tPid->fPre_Out + Delt_Out;                 /* ÓëÇ°ÖµÀÛ¼Ó */
-    _tPid->fPre_Out = _tPid->fCtrl_Out;                            /* ¼ÇÂ¼ÊýÖµ£¬ÎªÏÂ´ÎPID×ö×¼±¸ */
+    _tPid->fCtrl_Out = _tPid->fPre_Out + Delt_Out;                 /* ä¸Žå‰å€¼ç´¯åŠ  */
+    _tPid->fPre_Out = _tPid->fCtrl_Out;                            /* è®°å½•æ•°å€¼ï¼Œä¸ºä¸‹æ¬¡PIDåšå‡†å¤‡ */
 
 
     return (int)_tPid->fCtrl_Out;
 }
 
 /**
- * @brief PIDÎ»ÖÃ¼ÆËãº¯Êý
- * @param _tPid-PID½á¹¹ÌåÖ¸Õë
- * @param _fCurrValue-µ±Ç°Öµ
- * @param _fExpValue-ÆÚÍûÖµ
- * @retval int ¾­¹ýPID¼ÆËãºóµÄÊä³öÖµ
+ * @brief PIDä½ç½®è®¡ç®—å‡½æ•°
+ * @param _tPid-PIDç»“æž„ä½“æŒ‡é’ˆ
+ * @param _fCurrValue-å½“å‰å€¼
+ * @param _fExpValue-æœŸæœ›å€¼
+ * @retval int ç»è¿‡PIDè®¡ç®—åŽçš„è¾“å‡ºå€¼
 */
 int PID_Location_Calculate(tagPID_T *_tPid, float _fCurrValue, float _fExpValue)
 {
-    /* Éè¶¨ÆÚÍûÖµºÍµ±Ç°Öµ */
+    /* è®¾å®šæœŸæœ›å€¼å’Œå½“å‰å€¼ */
     _tPid->fExp_Value  = _fExpValue;
     _tPid->fCurr_Value = _fCurrValue;
     
-    /* ´æ·Å¹ýÈ¥Á½´ÎÎó²îÖµ */
+    /* å­˜æ”¾è¿‡åŽ»ä¸¤æ¬¡è¯¯å·®å€¼ */
     _tPid->fError[2] = _tPid->fError[1];
     _tPid->fError[1] = _tPid->fError[0];
     _tPid->fError[0] = _fExpValue - _fCurrValue;
     
-    /* ²ÉÓÃÎ»ÖÃÊ½PID */
+    /* é‡‡ç”¨ä½ç½®å¼PID */
     
-    /* ¼ÆËãPÏîµÄÖµ */
+    /* è®¡ç®—Pé¡¹çš„å€¼ */
     _tPid->fPout = _tPid->fKp * _tPid->fError[0];
     
-    /* ¼ÆËãDÏîµÄÖµ£¨Ìí¼ÓµÍÍ¨ÂË²¨£© */
-    float raw_dout = _tPid->fKd * (_tPid->fError[0] - _tPid->fError[1]);  // Ô­Ê¼DÏî
-    _tPid->fDout = _tPid->alpha * raw_dout + (1.0f - _tPid->alpha) * _tPid->fDout;  // µÍÍ¨ÂË²¨
+    /* è®¡ç®—Dé¡¹çš„å€¼ï¼ˆæ·»åŠ ä½Žé€šæ»¤æ³¢ï¼‰ */
+    float raw_dout = _tPid->fKd * (_tPid->fError[0] - _tPid->fError[1]);  // åŽŸå§‹Dé¡¹
+    _tPid->fDout = _tPid->alpha * raw_dout + (1.0f - _tPid->alpha) * _tPid->fDout;  // ä½Žé€šæ»¤æ³¢
     
-    /* ¼ÆËãIÏîµÄÖµ£¨Ìí¼Ó»ý·Ö·ÖÀë£© */
-    if (_tPid->fError[0] > -10.0f && _tPid->fError[0] < 10.0f)  // »ý·Ö·ÖÀëãÐÖµ£¬µ±Îó²îÐ¡ÓÚ10¶ÈÊ±²Å»ý·Ö
+    /* è®¡ç®—Ié¡¹çš„å€¼ï¼ˆæ·»åŠ ç§¯åˆ†åˆ†ç¦»ï¼‰ */
+    if (_tPid->fError[0] > -10.0f && _tPid->fError[0] < 10.0f)  // ç§¯åˆ†åˆ†ç¦»é˜ˆå€¼ï¼Œå½“è¯¯å·®å°äºŽ10åº¦æ—¶æ‰ç§¯åˆ†
     {
         _tPid->fIout += _tPid->fKi * _tPid->fError[0];
     }
     else
     {
-        _tPid->fIout = 0.0f;  // ´óÎó²îÊ±ÇåÁã»ý·Ö£¬±ÜÃâ»ý·Ö±¥ºÍ
+        _tPid->fIout = 0.0f;  // å¤§è¯¯å·®æ—¶æ¸…é›¶ç§¯åˆ†ï¼Œé¿å…ç§¯åˆ†é¥±å’Œ
     }
     
-    // »ý·ÖÏÞ·ù
+    // ç§¯åˆ†é™å¹…
     if(_tPid->fIout > _tPid->fMax_Iout)
         _tPid->fIout = _tPid->fMax_Iout;
-    if(_tPid->fIout < -_tPid->fMax_Iout)  // ²¹³ä¸ºÏòÏÞ·ù
+    if(_tPid->fIout < -_tPid->fMax_Iout)  // è¡¥å……è´Ÿå‘é™å¹…
         _tPid->fIout = -_tPid->fMax_Iout;
     
-    // ¼ÆËãÊä³ö
+    // è®¡ç®—è¾“å‡º
     _tPid->fCtrl_Out = _tPid->fPout + _tPid->fIout + _tPid->fDout;
     
-    // Êä³öÏÞ·ù
+    // è¾“å‡ºé™å¹…
     if(_tPid->fCtrl_Out > _tPid->fMax_Out)
         _tPid->fCtrl_Out = _tPid->fMax_Out;
-    if(_tPid->fCtrl_Out < -_tPid->fMax_Out)  // ²¹³ä¸ºÏòÏÞ·ù
+    if(_tPid->fCtrl_Out < -_tPid->fMax_Out)  // è¡¥å……è´Ÿå‘é™å¹…
         _tPid->fCtrl_Out = -_tPid->fMax_Out;
     
     return (int)_tPid->fCtrl_Out;
@@ -229,22 +229,22 @@ int PID_Location_Calculate(tagPID_T *_tPid, float _fCurrValue, float _fExpValue)
 
 
 /**
- * @brief PIDÀúÊ·´¢´æÊý¾ÝÇå¿Õº¯Êý
- * @param _tPid-PID½á¹¹ÌåÖ¸Õë
+ * @brief PIDåŽ†å²å‚¨å­˜æ•°æ®æ¸…ç©ºå‡½æ•°
+ * @param _tPid-PIDç»“æž„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 void PID_Clear(tagPID_T *_tPid)
 {
-	/* µ±Ç°Îó²îÇåÁã */
+	/* å½“å‰è¯¯å·®æ¸…é›¶ */
     _tPid->fError[0] = _tPid->fError[1] = _tPid->fError[2] = 0.0f;
 
-    /* Î¢·ÖÏîÇåÁã */
+    /* å¾®åˆ†é¡¹æ¸…é›¶ */
     _tPid->fDbuf[0] = _tPid->fDbuf[1] = _tPid->fDbuf[2] = 0.0f;
 
-    /* Êä³öÇåÁã */
+    /* è¾“å‡ºæ¸…é›¶ */
     _tPid->fCtrl_Out = _tPid->fPout = _tPid->fIout = _tPid->fDout = 0.0f;
 
-    /* Ä¿±êÖµºÍµ±Ç°ÖµÇåÁã */
+    /* ç›®æ ‡å€¼å’Œå½“å‰å€¼æ¸…é›¶ */
     _tPid->fCurr_Value = _tPid->fExp_Value = _tPid->fPre_Out =0.0f;
 	
 }

@@ -1,13 +1,13 @@
-#ifndef __OCD_SDCARD_FUNC_H_
+﻿#ifndef __OCD_SDCARD_FUNC_H_
 #define __OCD_SDCARD_FUNC_H_
 
 #include "ocd_sdcard.h"
 
 #include <ff.h>
 
-#define FILE_NAME_LENTH		20		/* �洢�ļ�������֧��20�ֽ��ַ����üܹ��µ�fatfs�ļ�ϵͳ�ݲ�֧�������ļ��� */
+#define FILE_NAME_LENTH		20		/* 存储文件名长度支持20字节字符，该架构下的fatfs文件系统暂不支持中文文件名 */
 
-/* FATFS�ļ�ϵͳ�����Ϣ�ṹ�� */
+/* FATFS文件系统相关信息结构体 */
 typedef struct 
 {
 	FATFS tFATFS;
@@ -17,17 +17,17 @@ typedef struct
 	DIR   tDIR;
 }tagFATFSInfo_T;
 
-/* FATFS�ļ������Ϣ�ṹ�� */
+/* FATFS文件相关信息结构体 */
 typedef struct 
 {
 	uint8_t ucFile_Name[FILE_NAME_LENTH];
-}tagFileInfo_T;		/* FATFS�ļ������Ϣ�ṹ�� */
+}tagFileInfo_T;		/* FATFS文件相关信息结构体 */
 
-/* FATFS�ļ�ϵͳ�ṹ�� */
+/* FATFS文件系统结构体 */
 typedef struct
 {
-	tagSPI_T 		tSPI;		/* STM32�ڲ�SPI�豸ָ�� */
-	tagFATFSInfo_T	tFATFSInfo;	/* FATFS�ļ�ϵͳ�����Ϣ�ṹ�� */
+	tagSPI_T 		tSPI;		/* STM32内部SPI设备指针 */
+	tagFATFSInfo_T	tFATFSInfo;	/* FATFS文件系统相关信息结构体 */
 }tagFATFS_T;
 
 int8_t OCD_FATFS_CreateDir(tagFATFS_T *_tFATFS, const char *_cpPath);

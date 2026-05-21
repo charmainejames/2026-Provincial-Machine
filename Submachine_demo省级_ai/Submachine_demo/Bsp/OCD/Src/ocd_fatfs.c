@@ -1,65 +1,65 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: ocd_fatfs.c
+* æ–‡ä»¶å: ocd_fatfs.c
 
-* ÄÚÈİ¼òÊö£ºFATFSÄ£¿éÎÄ¼ş
-            ĞèÅäºÏocd_sdcard.cÊ¹ÓÃ
-			Ê¹ÓÃÇ°ĞèÒªÔÚ¹¤³ÌÖĞÌí¼ÓBsp/FatfsÎÄ¼ş¼Ğ£¬¼ÓÈëff.cºÍdiskio.c
+* å†…å®¹ç®€è¿°ï¼šFATFSæ¨¡å—æ–‡ä»¶
+            éœ€é…åˆocd_sdcard.cä½¿ç”¨
+			ä½¿ç”¨å‰éœ€è¦åœ¨å·¥ç¨‹ä¸­æ·»åŠ Bsp/Fatfsæ–‡ä»¶å¤¹ï¼ŒåŠ å…¥ff.cå’Œdiskio.c
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ		ÈÕÆÚ		×÷Õß		    ËµÃ÷
-*  2.5	 	2023-05-14	  ±«³Ìè´		ĞŞ¸´¶ÁĞ´º¯ÊıÎŞ·µ»ØÓĞĞ§×Ö½ÚÊıµÄÎÊÌâ£¬¸ñÊ½ÓÅ»¯
+* ç‰ˆæœ¬å·		æ—¥æœŸ		ä½œè€…		    è¯´æ˜
+*  2.5	 	2023-05-14	  é²ç¨‹ç’		ä¿®å¤è¯»å†™å‡½æ•°æ— è¿”å›æœ‰æ•ˆå­—èŠ‚æ•°çš„é—®é¢˜ï¼Œæ ¼å¼ä¼˜åŒ–
 
-* 1.0.1a 	2020-03-29	  Àî»·Óî		ĞŞ¸ÄOCD_FATFS_ReadDirµÄ½Ó¿Ú²ÎÊıÒÔ¼°ÄÚ²¿Âß¼­£¬ĞŞ¸ÄOCD_FATFS_ReadData_SpecifyIndexÖ´ĞĞÂß¼­
-									    ĞÂÔöOCD_FATFS_GetFileInfoº¯Êı
+* 1.0.1a 	2020-03-29	  æç¯å®‡		ä¿®æ”¹OCD_FATFS_ReadDirçš„æ¥å£å‚æ•°ä»¥åŠå†…éƒ¨é€»è¾‘ï¼Œä¿®æ”¹OCD_FATFS_ReadData_SpecifyIndexæ‰§è¡Œé€»è¾‘
+									    æ–°å¢OCD_FATFS_GetFileInfoå‡½æ•°
 
-* 1.0.0a 	2020-02-22	  Àî»·Óî		´´½¨¸ÃÎÄ¼ş
+* 1.0.0a 	2020-02-22	  æç¯å®‡		åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "ocd_fatfs.h"
 
 /**
- * @brief FATFSÎÄ¼şÏµÍ³´´½¨ÎÄ¼ş¼Ğ
- * @param _tFATFS-FATFS½á¹¹ÌåÖ¸Õë
- * @param _cpPath-ÎÄ¼ş¼ĞÂ·¾¶Ö¸Õë
- * @retval uint8_t FR_OK£º³É¹¦ FR_EXIST:ÎÄ¼ş¼ĞÒÑ¾­´æÔÚ -1£ºÊ§°Ü
+ * @brief FATFSæ–‡ä»¶ç³»ç»Ÿåˆ›å»ºæ–‡ä»¶å¤¹
+ * @param _tFATFS-FATFSç»“æ„ä½“æŒ‡é’ˆ
+ * @param _cpPath-æ–‡ä»¶å¤¹è·¯å¾„æŒ‡é’ˆ
+ * @retval uint8_t FR_OKï¼šæˆåŠŸ FR_EXIST:æ–‡ä»¶å¤¹å·²ç»å­˜åœ¨ -1ï¼šå¤±è´¥
  */
 int8_t OCD_FATFS_CreateDir(tagFATFS_T *_tFATFS, const char *_cpPath)
 {
 	FRESULT res;
 
-	f_mount(&_tFATFS->tFATFSInfo.tFATFS, "0:", 1); /* ÎªSD¿¨¿ª±ÙÒ»¸ö¹¤×÷Çø */
+	f_mount(&_tFATFS->tFATFSInfo.tFATFS, "0:", 1); /* ä¸ºSDå¡å¼€è¾Ÿä¸€ä¸ªå·¥ä½œåŒº */
 
 	res = f_mkdir(_cpPath);
     
-    /* ÎÄ¼ş¼ĞÒÑ¾­´æÔÚ */
+    /* æ–‡ä»¶å¤¹å·²ç»å­˜åœ¨ */
     if(res == FR_EXIST)
     {
-        f_mount(NULL, 0, 1);	/* ×¢Ïú¹¤×÷Çø */
+        f_mount(NULL, 0, 1);	/* æ³¨é”€å·¥ä½œåŒº */
         return FR_EXIST;
     }
         
-	/* ´´½¨ÎÄ¼ş¼ĞÊ§°Ü */
+	/* åˆ›å»ºæ–‡ä»¶å¤¹å¤±è´¥ */
 	if(res != FR_OK)
 	{
 		Drv_HAL_Error(__FILE__,__LINE__);
 		return -1;
 	}
 	
-	f_mount(NULL, 0, 1);	/* ×¢Ïú¹¤×÷Çø */
+	f_mount(NULL, 0, 1);	/* æ³¨é”€å·¥ä½œåŒº */
 	return FR_OK;
 }
 
 /**
- * @brief FATFSÎÄ¼şÏµÍ³¶ÁÈ¡¶ÔÓ¦ÎÄ¼ş¼ĞÄ¿Â¼ÏÂµÄÎÄ¼şÃû
- * @param _tFATFS-FATFS½á¹¹ÌåÖ¸Õë
- * @param _tpINFO-ÎÄ¼şÏà¹ØĞÅÏ¢½á¹¹ÌåÖ¸Õë
- * @param _cpPath-ÎÄ¼ş¼ĞÂ·¾¶Ö¸Õë
- * @param _ucNameLen-ÎÄ¼şÃû³¤¶È
- * @retval uint8_t-ÎÄ¼ş¸öÊı
+ * @brief FATFSæ–‡ä»¶ç³»ç»Ÿè¯»å–å¯¹åº”æ–‡ä»¶å¤¹ç›®å½•ä¸‹çš„æ–‡ä»¶å
+ * @param _tFATFS-FATFSç»“æ„ä½“æŒ‡é’ˆ
+ * @param _tpINFO-æ–‡ä»¶ç›¸å…³ä¿¡æ¯ç»“æ„ä½“æŒ‡é’ˆ
+ * @param _cpPath-æ–‡ä»¶å¤¹è·¯å¾„æŒ‡é’ˆ
+ * @param _ucNameLen-æ–‡ä»¶åé•¿åº¦
+ * @retval uint8_t-æ–‡ä»¶ä¸ªæ•°
  */
 int8_t OCD_FATFS_ReadDir(tagFATFS_T *_tFATFS, tagFileInfo_T *_tpINFO, const char *_cpPath, uint8_t _ucNameLen)
 {  
@@ -92,13 +92,13 @@ int8_t OCD_FATFS_ReadDir(tagFATFS_T *_tFATFS, tagFileInfo_T *_tpINFO, const char
 }
 
 /**
- * @brief FATFSÎÄ¼şÏµÍ³¶ÁÈ¡¶ÔÓ¦Â·¾¶ÏÂÎÄ¼şÖ¸¶¨³¤¶ÈµÄÊı¾İ
- * @param _tFATFS-FATFSÎÄ¼şÏµÍ³½á¹¹Ìå
- * @param _cpFileName-ÎÄ¼şÂ·¾¶Ö¸Õë
- * @param _ucpData-´æ·ÅÊı¾İµÄ»º³åÊı×éÖ¸Õë
- * @param _usLen-Êı¾İ³¤¶È
- * @param _ulpByteVal-·µ»Ø¶ÁÈ¡µ½µÄÓĞĞ§×Ö½ÚÊıµÄµØÖ·
- * @retval uint8_t FR_OK£º³É¹¦ -1£ºÊ§°Ü
+ * @brief FATFSæ–‡ä»¶ç³»ç»Ÿè¯»å–å¯¹åº”è·¯å¾„ä¸‹æ–‡ä»¶æŒ‡å®šé•¿åº¦çš„æ•°æ®
+ * @param _tFATFS-FATFSæ–‡ä»¶ç³»ç»Ÿç»“æ„ä½“
+ * @param _cpFileName-æ–‡ä»¶è·¯å¾„æŒ‡é’ˆ
+ * @param _ucpData-å­˜æ”¾æ•°æ®çš„ç¼“å†²æ•°ç»„æŒ‡é’ˆ
+ * @param _usLen-æ•°æ®é•¿åº¦
+ * @param _ulpByteVal-è¿”å›è¯»å–åˆ°çš„æœ‰æ•ˆå­—èŠ‚æ•°çš„åœ°å€
+ * @retval uint8_t FR_OKï¼šæˆåŠŸ -1ï¼šå¤±è´¥
  */
 int8_t OCD_FATFS_Read_SpecifyFiles(tagFATFS_T *_tFATFS, char *_cpFileName, uint8_t *_ucpData, uint32_t _ulLength, uint32_t *_ulpByteVal)
 {
@@ -131,14 +131,14 @@ int8_t OCD_FATFS_Read_SpecifyFiles(tagFATFS_T *_tFATFS, char *_cpFileName, uint8
 }
 
 /**
- * @brief FATFSÎÄ¼şÏµÍ³¶ÁÈ¡¶ÔÓ¦Â·¾¶ÏÂÎÄ¼şµÄÖ¸¶¨Î»ÖÃµÄÊı¾İ
- * @param _tFATFS-ÎÄ¼şÏµÍ³½á¹¹Ìå
- * @param _cpFileName-ÎÄ¼şÂ·¾¶Ö¸Õë
- * @param _ucpData-´æ·ÅÊı¾İµÄ»º³åÊı×éÖ¸Õë
- * @param _ulLength-¶ÁÈ¡Êı¾İµÄ³¤¶È
- * @param _ulOffset-¶ÁÈ¡Î»ÖÃµÄÆ«ÒÆÁ¿
- * @param _ulpByteVal-·µ»Ø¶ÁÈ¡µ½µÄÓĞĞ§×Ö½ÚÊıµÄµØÖ·
- * @retval uint8_t FR_OK£º³É¹¦ -1£ºÊ§°Ü
+ * @brief FATFSæ–‡ä»¶ç³»ç»Ÿè¯»å–å¯¹åº”è·¯å¾„ä¸‹æ–‡ä»¶çš„æŒ‡å®šä½ç½®çš„æ•°æ®
+ * @param _tFATFS-æ–‡ä»¶ç³»ç»Ÿç»“æ„ä½“
+ * @param _cpFileName-æ–‡ä»¶è·¯å¾„æŒ‡é’ˆ
+ * @param _ucpData-å­˜æ”¾æ•°æ®çš„ç¼“å†²æ•°ç»„æŒ‡é’ˆ
+ * @param _ulLength-è¯»å–æ•°æ®çš„é•¿åº¦
+ * @param _ulOffset-è¯»å–ä½ç½®çš„åç§»é‡
+ * @param _ulpByteVal-è¿”å›è¯»å–åˆ°çš„æœ‰æ•ˆå­—èŠ‚æ•°çš„åœ°å€
+ * @retval uint8_t FR_OKï¼šæˆåŠŸ -1ï¼šå¤±è´¥
  */
 int8_t OCD_FATFS_Read_SpecifyIndex(tagFATFS_T *_tFATFS, char *_cpFileName, uint8_t *_ucpData, uint32_t _ulLength, uint32_t _ulOffset, uint32_t *_ulpByteVal)
 {
@@ -178,14 +178,14 @@ int8_t OCD_FATFS_Read_SpecifyIndex(tagFATFS_T *_tFATFS, char *_cpFileName, uint8
 }
 
 /**
- * @brief FATFSÎÄ¼şÏµÍ³¶ÔÓ¦Â·¾¶ÏÂÎÄ¼şµÄÖ¸¶¨Î»ÖÃĞ´ÈëÊı¾İ
- * @param _tFATFS-ÎÄ¼şÏµÍ³½á¹¹Ìå
- * @param _cpFileName-ÎÄ¼şÂ·¾¶Ö¸Õë
- * @param _ucpData-ĞèÒªĞ´ÈëÊı¾İµÄ»º³åÊı×éÖ¸Õë
- * @param _ulLength-Ğ´ÈëÊı¾İµÄ³¤¶È
- * @param _ulOffset-Ğ´ÈëÎ»ÖÃµÄÆ«ÒÆÁ¿
- * @param _ulpByteVal-·µ»ØĞ´Èëµ½µÄÓĞĞ§×Ö½ÚÊıµÄµØÖ·
- * @retval uint8_t FR_OK£º³É¹¦ -1£ºÊ§°Ü
+ * @brief FATFSæ–‡ä»¶ç³»ç»Ÿå¯¹åº”è·¯å¾„ä¸‹æ–‡ä»¶çš„æŒ‡å®šä½ç½®å†™å…¥æ•°æ®
+ * @param _tFATFS-æ–‡ä»¶ç³»ç»Ÿç»“æ„ä½“
+ * @param _cpFileName-æ–‡ä»¶è·¯å¾„æŒ‡é’ˆ
+ * @param _ucpData-éœ€è¦å†™å…¥æ•°æ®çš„ç¼“å†²æ•°ç»„æŒ‡é’ˆ
+ * @param _ulLength-å†™å…¥æ•°æ®çš„é•¿åº¦
+ * @param _ulOffset-å†™å…¥ä½ç½®çš„åç§»é‡
+ * @param _ulpByteVal-è¿”å›å†™å…¥åˆ°çš„æœ‰æ•ˆå­—èŠ‚æ•°çš„åœ°å€
+ * @retval uint8_t FR_OKï¼šæˆåŠŸ -1ï¼šå¤±è´¥
  */
 int8_t OCD_FATFS_Write_SpecifyIndex(tagFATFS_T *_tFATFS, char *_cpFileName, uint8_t *_ucpData, uint32_t _ulLength, uint32_t _ulOffset, uint32_t *_ulpByteVal)
 {
@@ -231,13 +231,13 @@ int8_t OCD_FATFS_Write_SpecifyIndex(tagFATFS_T *_tFATFS, char *_cpFileName, uint
 }
 
 /**
- * @brief FATFSÎÄ¼şÏµÍ³¶ÔÓ¦Â·¾¶ÏÂÎÄ¼şµÄÎ²²¿Ğ´ÈëÊı¾İ
- * @param _tFATFS-ÎÄ¼şÏµÍ³½á¹¹Ìå
- * @param _cpFileName-ÎÄ¼şÂ·¾¶Ö¸Õë
- * @param _ucpData-ĞèÒªĞ´ÈëÊı¾İµÄ»º³åÊı×éÖ¸Õë
- * @param _ulLength-Ğ´ÈëÊı¾İµÄ³¤¶È
- * @param _ulpByteVal-·µ»ØĞ´Èëµ½µÄÓĞĞ§×Ö½ÚÊıµÄµØÖ·
- * @retval uint8_t FR_OK£º³É¹¦ -1£ºÊ§°Ü
+ * @brief FATFSæ–‡ä»¶ç³»ç»Ÿå¯¹åº”è·¯å¾„ä¸‹æ–‡ä»¶çš„å°¾éƒ¨å†™å…¥æ•°æ®
+ * @param _tFATFS-æ–‡ä»¶ç³»ç»Ÿç»“æ„ä½“
+ * @param _cpFileName-æ–‡ä»¶è·¯å¾„æŒ‡é’ˆ
+ * @param _ucpData-éœ€è¦å†™å…¥æ•°æ®çš„ç¼“å†²æ•°ç»„æŒ‡é’ˆ
+ * @param _ulLength-å†™å…¥æ•°æ®çš„é•¿åº¦
+ * @param _ulpByteVal-è¿”å›å†™å…¥åˆ°çš„æœ‰æ•ˆå­—èŠ‚æ•°çš„åœ°å€
+ * @retval uint8_t FR_OKï¼šæˆåŠŸ -1ï¼šå¤±è´¥
  */
 int8_t OCD_FATFS_Write_End(tagFATFS_T *_tFATFS, char *_cpFileName, uint8_t *_ucpData, uint32_t _ulLength , uint32_t *_ulpByteVal)
 {
@@ -283,13 +283,13 @@ int8_t OCD_FATFS_Write_End(tagFATFS_T *_tFATFS, char *_cpFileName, uint8_t *_ucp
 }
 
 /**
- * @brief FATFSÎÄ¼şÏµÍ³¶ÔÓ¦Â·¾¶ÏÂÎÄ¼şĞ´ÈëÊı¾İ
- * @param _tFATFS-ÎÄ¼şÏµÍ³½á¹¹Ìå
- * @param _cpFileName-ÎÄ¼şÂ·¾¶Ö¸Õë
- * @param _ucpData-ĞèÒªĞ´ÈëÊı¾İµÄ»º³åÊı×éÖ¸Õë
- * @param _ulLength-Ğ´ÈëÊı¾İµÄ³¤¶È
- * @param _ulpByteVal-·µ»ØĞ´Èëµ½µÄÓĞĞ§×Ö½ÚÊıµÄµØÖ·
- * @retval uint8_t FR_OK£º³É¹¦ -1£ºÊ§°Ü
+ * @brief FATFSæ–‡ä»¶ç³»ç»Ÿå¯¹åº”è·¯å¾„ä¸‹æ–‡ä»¶å†™å…¥æ•°æ®
+ * @param _tFATFS-æ–‡ä»¶ç³»ç»Ÿç»“æ„ä½“
+ * @param _cpFileName-æ–‡ä»¶è·¯å¾„æŒ‡é’ˆ
+ * @param _ucpData-éœ€è¦å†™å…¥æ•°æ®çš„ç¼“å†²æ•°ç»„æŒ‡é’ˆ
+ * @param _ulLength-å†™å…¥æ•°æ®çš„é•¿åº¦
+ * @param _ulpByteVal-è¿”å›å†™å…¥åˆ°çš„æœ‰æ•ˆå­—èŠ‚æ•°çš„åœ°å€
+ * @retval uint8_t FR_OKï¼šæˆåŠŸ -1ï¼šå¤±è´¥
  */
 int8_t OCD_FATFS_Write(tagFATFS_T *_tFATFS, char *_cpFileName,uint8_t *_ucpData, uint32_t _ulLength, uint32_t *_ulpByteVal)
 {
@@ -328,10 +328,10 @@ int8_t OCD_FATFS_Write(tagFATFS_T *_tFATFS, char *_cpFileName,uint8_t *_ucpData,
 }
 
 /**
- * @brief FATFSÎÄ¼şÏµÍ³¶ÁÈ¡ÎÄ¼şĞÅÏ¢
- * @param _tFATFS-ÎÄ¼şÏµÍ³½á¹¹Ìå
- * @param _cpFileName-ÎÄ¼şÂ·¾¶Ö¸Õë
- * @retval uint8_t FR_OK£º³É¹¦ -1£ºÊ§°Ü
+ * @brief FATFSæ–‡ä»¶ç³»ç»Ÿè¯»å–æ–‡ä»¶ä¿¡æ¯
+ * @param _tFATFS-æ–‡ä»¶ç³»ç»Ÿç»“æ„ä½“
+ * @param _cpFileName-æ–‡ä»¶è·¯å¾„æŒ‡é’ˆ
+ * @retval uint8_t FR_OKï¼šæˆåŠŸ -1ï¼šå¤±è´¥
  */
 int8_t OCD_FATFS_GetFileInfo(tagFATFS_T *_tFATFS, char *_cpFileName)
 {
@@ -357,8 +357,8 @@ int8_t OCD_FATFS_GetFileInfo(tagFATFS_T *_tFATFS, char *_cpFileName)
 }
 
 /**
- * @brief FATFSÎÄ¼şÏµÍ³³õÊ¼»¯
- * @param _tFATFS-FATFS½á¹¹ÌåÖ¸Õë
+ * @brief FATFSæ–‡ä»¶ç³»ç»Ÿåˆå§‹åŒ–
+ * @param _tFATFS-FATFSç»“æ„ä½“æŒ‡é’ˆ
  * @retval uint8_t
  */
 uint8_t OCD_FATFS_Init(tagFATFS_T *_tFATFS)

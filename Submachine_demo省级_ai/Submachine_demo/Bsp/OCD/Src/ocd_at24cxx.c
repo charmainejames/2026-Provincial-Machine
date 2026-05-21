@@ -1,26 +1,26 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: ocd_at24c02.c
+* æ–‡ä»¶å: ocd_at24c02.c
 
-* ÄÚÈİ¼òÊö£ºat24c02Ä£¿éÎÄ¼ş
+* å†…å®¹ç®€è¿°ï¼šat24c02æ¨¡å—æ–‡ä»¶
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ	ÈÕÆÚ		×÷Õß		ËµÃ÷
+* ç‰ˆæœ¬å·	æ—¥æœŸ		ä½œè€…		è¯´æ˜
 
-* 1.0.0a 	2020-03-14	Àî»·Óî		´´½¨¸ÃÎÄ¼ş
-* 1.1.0a 	2020-03-29	Àî»·Óî		ĞŞ¸Ä²¿·ÖÎÄ±¾£¬ĞŞ¸ÄOCD_AT24CXX_WriteLenByteºÍOCD_AT24CXX_ReadLenByte²ÎÊı
+* 1.0.0a 	2020-03-14	æç¯å®‡		åˆ›å»ºè¯¥æ–‡ä»¶
+* 1.1.0a 	2020-03-29	æç¯å®‡		ä¿®æ”¹éƒ¨åˆ†æ–‡æœ¬ï¼Œä¿®æ”¹OCD_AT24CXX_WriteLenByteå’ŒOCD_AT24CXX_ReadLenByteå‚æ•°
 
 ****************************************************************************/
 #include "ocd_at24cxx.h"
 
 /**
- * @brief AT24CXXÖ¸¶¨µØÖ·¿ªÊ¼¶ÁÒ»¸ö×Ö½ÚÊı¾İ
- * @param _tAT24CXX-AT24CXX½á¹¹Ìå
- * @param _usAddr-µØÖ·
- * @retval uint8_t-¶Áµ½µÄÊı¾İ
+ * @brief AT24CXXæŒ‡å®šåœ°å€å¼€å§‹è¯»ä¸€ä¸ªå­—èŠ‚æ•°æ®
+ * @param _tAT24CXX-AT24CXXç»“æ„ä½“
+ * @param _usAddr-åœ°å€
+ * @retval uint8_t-è¯»åˆ°çš„æ•°æ®
  */
 uint8_t S_AT24CXX_ReadOneByte(tagAT24CXX_T *_tAT24CXX, uint16_t _usAddr)
 {				  
@@ -29,28 +29,28 @@ uint8_t S_AT24CXX_ReadOneByte(tagAT24CXX_T *_tAT24CXX, uint16_t _usAddr)
     Drv_IICSoft_Start(&_tAT24CXX->tIIC);  
 	if(EE_TYPE>AT24C16)
 	{
-		Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, 0XA0);		/* ·¢ËÍĞ´ÃüÁî */
+		Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, 0XA0);		/* å‘é€å†™å‘½ä»¤ */
 		Drv_IICSoft_WaitAck(&_tAT24CXX->tIIC);
-		Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, _usAddr>>8);	/* ·¢ËÍ¸ßµØÖ· */    
+		Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, _usAddr>>8);	/* å‘é€é«˜åœ°å€ */    
 	}
 	else 
-		Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, 0XA0+((_usAddr/256)<<1));   /* ·¢ËÍÆ÷¼şµØÖ·0XA0,Ğ´Êı¾İ */
+		Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, 0XA0+((_usAddr/256)<<1));   /* å‘é€å™¨ä»¶åœ°å€0XA0,å†™æ•°æ® */
 	
 	Drv_IICSoft_WaitAck(&_tAT24CXX->tIIC);
-    Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, _usAddr % 256);  /* ·¢ËÍµÍµØÖ· */
+    Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, _usAddr % 256);  /* å‘é€ä½åœ°å€ */
 	Drv_IICSoft_WaitAck(&_tAT24CXX->tIIC);	    
 	Drv_IICSoft_Start(&_tAT24CXX->tIIC);  	 	   
-	Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, 0XA1);           /* ½øÈë½ÓÊÕÄ£Ê½ */			   
+	Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, 0XA1);           /* è¿›å…¥æ¥æ”¶æ¨¡å¼ */			   
 	Drv_IICSoft_WaitAck(&_tAT24CXX->tIIC);	 
     ucTemp = Drv_IICSoft_ReadByte(&_tAT24CXX->tIIC, 0);		   
-    Drv_IICSoft_Stop(&_tAT24CXX->tIIC);						/* ²úÉúÒ»¸öÍ£Ö¹Ìõ¼ş */	
+    Drv_IICSoft_Stop(&_tAT24CXX->tIIC);						/* äº§ç”Ÿä¸€ä¸ªåœæ­¢æ¡ä»¶ */	
     
 	return ucTemp;
 }
 
 /**
- * @brief AT24CXXÑÓÊ±º¯Êı
- * @param _ucMs-ÑÓÊ±Ê±¼ä
+ * @brief AT24CXXå»¶æ—¶å‡½æ•°
+ * @param _ucMs-å»¶æ—¶æ—¶é—´
  * @retval Null
  */
 static void S_AT24CXX_Delay(uint8_t _ucMs)
@@ -59,10 +59,10 @@ static void S_AT24CXX_Delay(uint8_t _ucMs)
 }
 
 /**
- * @brief AT24CXXÖ¸¶¨µØÖ·¿ªÊ¼Ğ´ÈëÒ»¸ö×Ö½ÚÊı¾İ
- * @param _tAT24CXX-AT24CXX½á¹¹Ìå
- * @param _usAddr-µØÖ·
- * @param _ucData-Ğ´ÈëµÄÊı¾İ
+ * @brief AT24CXXæŒ‡å®šåœ°å€å¼€å§‹å†™å…¥ä¸€ä¸ªå­—èŠ‚æ•°æ®
+ * @param _tAT24CXX-AT24CXXç»“æ„ä½“
+ * @param _usAddr-åœ°å€
+ * @param _ucData-å†™å…¥çš„æ•°æ®
  * @retval Null
  */
 static void S_AT24CXX_WriteOneByte(tagAT24CXX_T *_tAT24CXX, uint16_t _usAddr, uint8_t _ucData)
@@ -70,28 +70,28 @@ static void S_AT24CXX_WriteOneByte(tagAT24CXX_T *_tAT24CXX, uint16_t _usAddr, ui
     Drv_IICSoft_Start(&_tAT24CXX->tIIC); 
 	if(EE_TYPE>AT24C16)
 	{
-		Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, 0XA0);	    //·¢ËÍĞ´ÃüÁî
+		Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, 0XA0);	    //å‘é€å†™å‘½ä»¤
 		Drv_IICSoft_WaitAck(&_tAT24CXX->tIIC);
-		Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, _usAddr>>8);//·¢ËÍ¸ßµØÖ·	  
+		Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, _usAddr>>8);//å‘é€é«˜åœ°å€	  
 	}
 	else 
-		Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, 0XA0 + ((_usAddr/256)<<1));   //·¢ËÍÆ÷¼şµØÖ·0XA0,Ğ´Êı¾İ 	
+		Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, 0XA0 + ((_usAddr/256)<<1));   //å‘é€å™¨ä»¶åœ°å€0XA0,å†™æ•°æ® 	
 	
 	Drv_IICSoft_WaitAck(&_tAT24CXX->tIIC);	   
-    Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, _usAddr % 256);   //·¢ËÍµÍµØÖ·
+    Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, _usAddr % 256);   //å‘é€ä½åœ°å€
 	Drv_IICSoft_WaitAck(&_tAT24CXX->tIIC); 	 										  		   
-	Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, _ucData);     //·¢ËÍ×Ö½Ú							   
+	Drv_IICSoft_SendByte(&_tAT24CXX->tIIC, _ucData);     //å‘é€å­—èŠ‚							   
 	Drv_IICSoft_WaitAck(&_tAT24CXX->tIIC);  		    	   
-    Drv_IICSoft_Stop(&_tAT24CXX->tIIC);//²úÉúÒ»¸öÍ£Ö¹Ìõ¼ş 
+    Drv_IICSoft_Stop(&_tAT24CXX->tIIC);//äº§ç”Ÿä¸€ä¸ªåœæ­¢æ¡ä»¶ 
 	S_AT24CXX_Delay(10);	 
 }
 
 /**
- * @brief AT24CXXÖ¸¶¨µØÖ·¿ªÊ¼Ğ´Èë³¤¶ÈÎªLenµÄÊı¾İ
- * @param _tAT24CXX-AT24CXX½á¹¹Ìå
- * @param _usAddr-µØÖ·
- * @param _ulpData-Êı¾İµÄÊ×µØÖ·
- * @param _ucLen-³¤¶È
+ * @brief AT24CXXæŒ‡å®šåœ°å€å¼€å§‹å†™å…¥é•¿åº¦ä¸ºLençš„æ•°æ®
+ * @param _tAT24CXX-AT24CXXç»“æ„ä½“
+ * @param _usAddr-åœ°å€
+ * @param _ulpData-æ•°æ®çš„é¦–åœ°å€
+ * @param _ucLen-é•¿åº¦
  * @retval Null
  */
 void OCD_AT24CXX_WriteLenByte(tagAT24CXX_T *_tAT24CXX, uint16_t _usAddr, uint8_t *_ulpData, uint8_t _ucLen)
@@ -105,11 +105,11 @@ void OCD_AT24CXX_WriteLenByte(tagAT24CXX_T *_tAT24CXX, uint16_t _usAddr, uint8_t
 }
 
 /**
- * @brief AT24CXXÖ¸¶¨µØÖ·¿ªÊ¼¶Á³ö³¤¶ÈÎªLenµÄÊı¾İ
- * @param _tAT24CXX-AT24CXX½á¹¹Ìå
- * @param _usAddr-µØÖ·
- * @param _ulpData-Êı¾İµÄÊ×µØÖ·
- * @param _ucLen-³¤¶È
+ * @brief AT24CXXæŒ‡å®šåœ°å€å¼€å§‹è¯»å‡ºé•¿åº¦ä¸ºLençš„æ•°æ®
+ * @param _tAT24CXX-AT24CXXç»“æ„ä½“
+ * @param _usAddr-åœ°å€
+ * @param _ulpData-æ•°æ®çš„é¦–åœ°å€
+ * @param _ucLen-é•¿åº¦
  * @retval Null
  */
 void OCD_AT24CXX_ReadLenByte(tagAT24CXX_T *_tAT24CXX, uint16_t _usAddr, uint8_t *_ulpData, uint8_t _ucLen)
@@ -123,18 +123,18 @@ void OCD_AT24CXX_ReadLenByte(tagAT24CXX_T *_tAT24CXX, uint16_t _usAddr, uint8_t 
 }
 
 /**
- * @brief AT24CXX¼ì²é
- * @param _tAT24CXX-AT24CXX½á¹¹Ìå
- * @retval uint8_t-0-¼ì²âÊ§°Ü£»1-¼ì²â³É¹¦
+ * @brief AT24CXXæ£€æŸ¥
+ * @param _tAT24CXX-AT24CXXç»“æ„ä½“
+ * @retval uint8_t-0-æ£€æµ‹å¤±è´¥ï¼›1-æ£€æµ‹æˆåŠŸ
  */
 uint8_t OCD_AT24CXX_Check(tagAT24CXX_T *_tAT24CXX)
 {
 	uint8_t ucTemp;
 	
-	ucTemp = S_AT24CXX_ReadOneByte(_tAT24CXX, 255);		/* ±ÜÃâÃ¿´Î¿ª»ú¶¼Ğ´AT24CXX */		   
+	ucTemp = S_AT24CXX_ReadOneByte(_tAT24CXX, 255);		/* é¿å…æ¯æ¬¡å¼€æœºéƒ½å†™AT24CXX */		   
 	if(ucTemp == 0X55)
 		return 1;
-	else	/* ÅÅ³ıµÚÒ»´Î³õÊ¼»¯µÄÇé¿ö */
+	else	/* æ’é™¤ç¬¬ä¸€æ¬¡åˆå§‹åŒ–çš„æƒ…å†µ */
 	{
 		S_AT24CXX_WriteOneByte(_tAT24CXX, 255,0X55);
 	    ucTemp = S_AT24CXX_ReadOneByte(_tAT24CXX, 255);
@@ -147,16 +147,16 @@ uint8_t OCD_AT24CXX_Check(tagAT24CXX_T *_tAT24CXX)
 }
 
 /**
- * @brief AT24CXXÖ¸¶¨µØÖ·¿ªÊ¼¶Á³öÖ¸¶¨¸öÊıµÄÊı¾İ
- * @param _tAT24CXX-AT24CXX½á¹¹Ìå
- * @param _usAddr-µØÖ·
- * @param _ucpBuffer-»º´æµØÖ·
- * @param _usNum-ÊıÁ¿
+ * @brief AT24CXXæŒ‡å®šåœ°å€å¼€å§‹è¯»å‡ºæŒ‡å®šä¸ªæ•°çš„æ•°æ®
+ * @param _tAT24CXX-AT24CXXç»“æ„ä½“
+ * @param _usAddr-åœ°å€
+ * @param _ucpBuffer-ç¼“å­˜åœ°å€
+ * @param _usNum-æ•°é‡
  * @retval Null
  */
 void OCD_AT24CXX_Read(tagAT24CXX_T *_tAT24CXX, uint16_t _usAddr, uint8_t *_ucpBuffer, uint16_t _usNum)
 {
-	/* Èç¹ûÎ´¶ÁÈ¡Íê */
+	/* å¦‚æœæœªè¯»å–å®Œ */
 	while(_usNum)
 	{
 		*_ucpBuffer ++= S_AT24CXX_ReadOneByte(_tAT24CXX, _usAddr++);	
@@ -165,16 +165,16 @@ void OCD_AT24CXX_Read(tagAT24CXX_T *_tAT24CXX, uint16_t _usAddr, uint8_t *_ucpBu
 }  
 
 /**
- * @brief AT24CXXÖ¸¶¨µØÖ·¿ªÊ¼Ğ´ÈëÖ¸¶¨¸öÊıµÄÊı¾İ
- * @param _tAT24CXX-AT24CXX½á¹¹Ìå
- * @param _usAddr-µØÖ·
- * @param _ucpBuffer-»º´æµØÖ·
- * @param _usNum-ÊıÁ¿
+ * @brief AT24CXXæŒ‡å®šåœ°å€å¼€å§‹å†™å…¥æŒ‡å®šä¸ªæ•°çš„æ•°æ®
+ * @param _tAT24CXX-AT24CXXç»“æ„ä½“
+ * @param _usAddr-åœ°å€
+ * @param _ucpBuffer-ç¼“å­˜åœ°å€
+ * @param _usNum-æ•°é‡
  * @retval Null
  */
 void OCD_AT24CXX_Write(tagAT24CXX_T *_tAT24CXX, uint16_t _usAddr, uint8_t *_ucpBuffer, uint16_t _usNum)
 {
-	/* Èç¹ûÎ´Ğ´ÈëÍê */
+	/* å¦‚æœæœªå†™å…¥å®Œ */
 	while(_usNum--)
 	{
 		S_AT24CXX_WriteOneByte(_tAT24CXX, _usAddr,*_ucpBuffer);
@@ -184,8 +184,8 @@ void OCD_AT24CXX_Write(tagAT24CXX_T *_tAT24CXX, uint16_t _usAddr, uint8_t *_ucpB
 }
 
 /**
- * @brief AT24CXX³õÊ¼»¯º¯Êı
- * @param _tAT24CXX-AT24CXX½á¹¹Ìå
+ * @brief AT24CXXåˆå§‹åŒ–å‡½æ•°
+ * @param _tAT24CXX-AT24CXXç»“æ„ä½“
  * @retval Null
  */
 void OCD_AT24CXX_Init(tagAT24CXX_T *_tAT24CXX)

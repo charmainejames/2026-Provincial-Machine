@@ -423,7 +423,7 @@ void jy901_yaw_anti_rotate_open(void)
     int target_output;
     if(abs_err > SLOW_ANGLE)
     {
-        // 远程：PID 主导，限幅到 MAX
+        // 远程：PID 主导，限幅	到 MAX
         if(output >  MAX_OFFSET) output =  MAX_OFFSET;
         if(output < -MAX_OFFSET) output = -MAX_OFFSET;
         target_output = output;

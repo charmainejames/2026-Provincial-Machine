@@ -1,17 +1,17 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: drv_hal_spi_soft.c
+* æ–‡ä»¶å: drv_hal_spi_soft.c
 
-* ÄÚÈİ¼òÊö£ºÈí¼şspiÄ£ÄâÇı¶¯ÎÄ¼ş
+* å†…å®¹ç®€è¿°ï¼šè½¯ä»¶spiæ¨¡æ‹Ÿé©±åŠ¨æ–‡ä»¶
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ		ÈÕÆÚ		×÷Õß		ËµÃ÷
-*  1.2		2023-2-22	  ±«³Ìè´     °´ÕÕ¾ä±ú×ÊÔ´¾ÙÀı£¬Í³Ò»³õÊ¼»¯Ë³Ğò
+* ç‰ˆæœ¬å·		æ—¥æœŸ		ä½œè€…		è¯´æ˜
+*  1.2		2023-2-22	  é²ç¨‹ç’     æŒ‰ç…§å¥æŸ„èµ„æºä¸¾ä¾‹ï¼Œç»Ÿä¸€åˆå§‹åŒ–é¡ºåº
 
-* 1.1.8 	2022-10-25     ÀîºÀ		 ´´½¨¸ÃÎÄ¼ş
+* 1.1.8 	2022-10-25     æè±ª		 åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "drv_hal_conf.h"
@@ -19,9 +19,9 @@
 #ifdef DRV_HAL_SPI_SOFT_ENABLE
 
 /**
- * @brief SPICLK Êä³ö
- * @param _tSPISoft-Èí¼şspi½á¹¹ÌåÖ¸Õë
- * @param _ucLevel-µçÆ½ 0-µÍ 1-¸ß  
+ * @brief SPICLK è¾“å‡º
+ * @param _tSPISoft-è½¯ä»¶spiç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucLevel-ç”µå¹³ 0-ä½ 1-é«˜  
  * @retval NULL
 */
 static void S_SPI_CLK(tagSPISoft_T *_tSPISoft, uint8_t _ucLevel)
@@ -30,9 +30,9 @@ static void S_SPI_CLK(tagSPISoft_T *_tSPISoft, uint8_t _ucLevel)
 }
 
 /**
- * @brief SPIMISO Êä³ö
- * @param _tSPISoft-Èí¼şspi½á¹¹ÌåÖ¸Õë
- * @retval GPIO_PinState-¶Áµ½µÄµçÆ½
+ * @brief SPIMISO è¾“å‡º
+ * @param _tSPISoft-è½¯ä»¶spiç»“æ„ä½“æŒ‡é’ˆ
+ * @retval GPIO_PinState-è¯»åˆ°çš„ç”µå¹³
 */
 static GPIO_PinState S_SPI_MISO(tagSPISoft_T *_tSPISoft)
 {
@@ -40,9 +40,9 @@ static GPIO_PinState S_SPI_MISO(tagSPISoft_T *_tSPISoft)
 }
 
 /**
- * @brief SPIMOSI Êä³ö
- * @param _tSPISoft-Èí¼şspi½á¹¹ÌåÖ¸Õë
- * @param _ucLevel-µçÆ½ 0-µÍ 1-¸ß  
+ * @brief SPIMOSI è¾“å‡º
+ * @param _tSPISoft-è½¯ä»¶spiç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucLevel-ç”µå¹³ 0-ä½ 1-é«˜  
  * @retval NULL
 */
 static void S_SPI_MOSI(tagSPISoft_T *_tSPISoft, uint8_t _ucLevel)
@@ -51,9 +51,9 @@ static void S_SPI_MOSI(tagSPISoft_T *_tSPISoft, uint8_t _ucLevel)
 }
 
 /**
- * @brief SPIÆ¬Ñ¡
- * @param _tSPISoft-Èí¼şspi½á¹¹ÌåÖ¸Õë
- * @param _ucLevel-µãÆÀ 0-µÍ 1-¸ß  
+ * @brief SPIç‰‡é€‰
+ * @param _tSPISoft-è½¯ä»¶spiç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucLevel-ç‚¹è¯„ 0-ä½ 1-é«˜  
  * @retval NULL
 */
 void Drv_SPI_NSS(tagSPISoft_T *_tSPISoft,uint8_t _ucLevel)
@@ -62,10 +62,10 @@ void Drv_SPI_NSS(tagSPISoft_T *_tSPISoft,uint8_t _ucLevel)
 }
 
 /**
- * @brief ¶ÁĞ´Ò»¸ö×Ö½Ú
- * @param _tSPISoft-Èí¼şspi½á¹¹ÌåÖ¸Õë
- * @param _ucData-Ğ´ÈëÊı¾İ  
- * @retval ¶ÁÈ¡µÄÊı¾İ
+ * @brief è¯»å†™ä¸€ä¸ªå­—èŠ‚
+ * @param _tSPISoft-è½¯ä»¶spiç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucData-å†™å…¥æ•°æ®  
+ * @retval è¯»å–çš„æ•°æ®
 */
 uint8_t Drv_SPI_WriteByte_Soft(tagSPISoft_T *_tSPISoft,uint8_t _ucData)
 {
@@ -90,8 +90,8 @@ uint8_t Drv_SPI_WriteByte_Soft(tagSPISoft_T *_tSPISoft,uint8_t _ucData)
 }
 
 /**
- * @brief Ä£ÄâSPI³õÊ¼»¯
- * @param _tSPISoft-SPI½á¹¹ÌåÖ¸Õë
+ * @brief æ¨¡æ‹ŸSPIåˆå§‹åŒ–
+ * @param _tSPISoft-SPIç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null 
 */
 void Drv_SPISoft_Init(tagSPISoft_T *_tSPISoft)

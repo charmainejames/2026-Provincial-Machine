@@ -1,20 +1,20 @@
-#ifndef __DEV_PS2_H_
+ï»¿#ifndef __DEV_PS2_H_
 #define __DEV_PS2_H_
 
 #include "drv_hal_conf.h"
 
-#define DI  Drv_GPIO_Read(&_tPS2->tGPIO[0])     /* DIÊäÈë */
+#define DI  Drv_GPIO_Read(&_tPS2->tGPIO[0])     /* DIè¾“å…¥ */
 
-#define DO_H Drv_GPIO_Set(&_tPS2->tGPIO[1])     /* ÃüÁîÎ»¸ß */
-#define DO_L Drv_GPIO_Reset(&_tPS2->tGPIO[1])   /* ÃüÁîÎ»µÍ */
+#define DO_H Drv_GPIO_Set(&_tPS2->tGPIO[1])     /* å‘½ä»¤ä½é«˜ */
+#define DO_L Drv_GPIO_Reset(&_tPS2->tGPIO[1])   /* å‘½ä»¤ä½ä½ */
 
-#define CS_H Drv_GPIO_Set(&_tPS2->tGPIO[2])     /* CSÀ­¸ß */
-#define CS_L Drv_GPIO_Reset(&_tPS2->tGPIO[2])   /* CSÀ­µÍ */
+#define CS_H Drv_GPIO_Set(&_tPS2->tGPIO[2])     /* CSæ‹‰é«˜ */
+#define CS_L Drv_GPIO_Reset(&_tPS2->tGPIO[2])   /* CSæ‹‰ä½ */
 
-#define CLK_H Drv_GPIO_Set(&_tPS2->tGPIO[3])    /* Ê±ÖÓÀ­¸ß */
-#define CLK_L Drv_GPIO_Reset(&_tPS2->tGPIO[3])  /* Ê±ÖÓÀ­µÍ */
+#define CLK_H Drv_GPIO_Set(&_tPS2->tGPIO[3])    /* æ—¶é’Ÿæ‹‰é«˜ */
+#define CLK_L Drv_GPIO_Reset(&_tPS2->tGPIO[3])  /* æ—¶é’Ÿæ‹‰ä½ */
 
-/* °´¼ü¶ÔÓ¦ */
+/* æŒ‰é”®å¯¹åº” */
 #define PSB_SELECT      1
 #define PSB_L3          2
 #define PSB_R3          3
@@ -27,28 +27,28 @@
 #define PSB_R2          10
 #define PSB_L1          11
 #define PSB_R1          12
-/* ÑÕÉ«·Ö±æ */
+/* é¢œè‰²åˆ†è¾¨ */
 #define PSB_GREEN       13
 #define PSB_RED         14
 #define PSB_BLUE        15
 #define PSB_PINK        16
-/* Í¼ĞÎ·Ö±æ */
+/* å›¾å½¢åˆ†è¾¨ */
 #define PSB_TRIANGLE    13
 #define PSB_CIRCLE      14
 #define PSB_CROSS       15
 #define PSB_SQUARE      16
 
-/* Ò¡¸Ë´æ´¢Î»ÖÃ */
-#define PSS_RX 5                /* ÓÒÒ¡¸ËXÖáÊı¾İ */
-#define PSS_RY 6                /* ÓÒÒ¡¸ËYÖáÊı¾İ */
-#define PSS_LX 7                /* ×óÒ¡¸ËXÖáÊı¾İ */
-#define PSS_LY 8                /* ×óÒ¡¸ËYÖáÊı¾İ */
+/* æ‘‡æ†å­˜å‚¨ä½ç½® */
+#define PSS_RX 5                /* å³æ‘‡æ†Xè½´æ•°æ® */
+#define PSS_RY 6                /* å³æ‘‡æ†Yè½´æ•°æ® */
+#define PSS_LX 7                /* å·¦æ‘‡æ†Xè½´æ•°æ® */
+#define PSS_LY 8                /* å·¦æ‘‡æ†Yè½´æ•°æ® */
 
 #define DELAY_TIME  Drv_Delay_Us(5); 
 
 typedef struct 
 {
-	tagGPIO_T tGPIO[4];     /* °´ÕÕ[0]DI/DAT [1]DO/CMD [2]CS [3]CLKË³Ğò */
+	tagGPIO_T tGPIO[4];     /* æŒ‰ç…§[0]DI/DAT [1]DO/CMD [2]CS [3]CLKé¡ºåº */
 }tagPS2_T;
 
 void Dev_PS2_ReadData(tagPS2_T *_tPS2);

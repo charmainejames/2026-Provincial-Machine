@@ -1,79 +1,79 @@
-#include "task_conf.h"
+ï»¿#include "task_conf.h"
 
 #include "config.h"
 
 
 
-////×¦×Ó´ò¿ªº¯Êı
+////çˆªå­æ‰“å¼€å‡½æ•°
 //void servo_open(void) 
 //{
-//   Drv_PWM_HighLvTimeSet(&paw[0],2500);	    //×¦×Ó´ò¿ª
+//   Drv_PWM_HighLvTimeSet(&paw[0],2500);	    //çˆªå­æ‰“å¼€
 //   printf("paw open\n");
 //}
-////×¦×Ó±ÕºÏº¯Êı
+////çˆªå­é—­åˆå‡½æ•°
 //void servo_close(void) 
 //{
-//   Drv_PWM_HighLvTimeSet(&paw[0],500);	    //×¦×Ó±ÕºÏ
+//   Drv_PWM_HighLvTimeSet(&paw[0],500);	    //çˆªå­é—­åˆ
 //   printf("paw close\n");
 //}
 
 
-//Ë®ÏÂ»úÆ÷ÈËÉÏÉıº¯Êı
+//æ°´ä¸‹æœºå™¨äººä¸Šå‡å‡½æ•°
 void thruster_vertical_up(void)
 {
-   Drv_PWM_HighLvTimeSet(&thruster[2],1750);	//ÍÆ½øÆ÷3ÏòÏÂ
-   Drv_PWM_HighLvTimeSet(&thruster[3],1750);	//ÍÆ½øÆ÷4ÏòÏÂ
+   Drv_PWM_HighLvTimeSet(&thruster[2],1750);	//æ¨è¿›å™¨3å‘ä¸‹
+   Drv_PWM_HighLvTimeSet(&thruster[3],1750);	//æ¨è¿›å™¨4å‘ä¸‹
    printf("vertical up\n");
 }
 
-//Ë®ÏÂ»úÆ÷ÈËÊúÖ±Í£Ö¹º¯Êı
+//æ°´ä¸‹æœºå™¨äººç«–ç›´åœæ­¢å‡½æ•°
 void thruster_vertical_stop(void)
 {
-   Drv_PWM_HighLvTimeSet(&thruster[2],1500);	//ÍÆ½øÆ÷3Í£Ö¹
-   Drv_PWM_HighLvTimeSet(&thruster[3],1500);	//ÍÆ½øÆ÷4Í£Ö¹
+   Drv_PWM_HighLvTimeSet(&thruster[2],1500);	//æ¨è¿›å™¨3åœæ­¢
+   Drv_PWM_HighLvTimeSet(&thruster[3],1500);	//æ¨è¿›å™¨4åœæ­¢
    printf("vertical stop\n");
 }
 
-//Ë®ÏÂ»úÆ÷ÈËÏÂÇ±º¯Êı
+//æ°´ä¸‹æœºå™¨äººä¸‹æ½œå‡½æ•°
 void thruster_vertical_down(void)
 {
-   Drv_PWM_HighLvTimeSet(&thruster[2],1250);	//ÍÆ½øÆ÷3ÏòÉÏ
-   Drv_PWM_HighLvTimeSet(&thruster[3],1250);	//ÍÆ½øÆ÷4ÏòÉÏ
+   Drv_PWM_HighLvTimeSet(&thruster[2],1250);	//æ¨è¿›å™¨3å‘ä¸Š
+   Drv_PWM_HighLvTimeSet(&thruster[3],1250);	//æ¨è¿›å™¨4å‘ä¸Š
    printf("vertical down\n");
 }
-//Ë®ÏÂ»úÆ÷ÈËË®Æ½Ç°½øº¯Êı
+//æ°´ä¸‹æœºå™¨äººæ°´å¹³å‰è¿›å‡½æ•°
 void thruster_horizontal_forward(void)
 {
-   Drv_PWM_HighLvTimeSet(&thruster[0],1750);	//ÍÆ½øÆ÷1Ç°½ø
-   Drv_PWM_HighLvTimeSet(&thruster[1],1750);	//ÍÆ½øÆ÷2Ç°½ø
+   Drv_PWM_HighLvTimeSet(&thruster[0],1750);	//æ¨è¿›å™¨1å‰è¿›
+   Drv_PWM_HighLvTimeSet(&thruster[1],1750);	//æ¨è¿›å™¨2å‰è¿›
    printf("horizontal forward\n");
 }
-//Ë®ÏÂ»úÆ÷ÈËË®Æ½Í£Ö¹º¯Êı
+//æ°´ä¸‹æœºå™¨äººæ°´å¹³åœæ­¢å‡½æ•°
 void thruster_horizontal_stop(void)
 {
-   Drv_PWM_HighLvTimeSet(&thruster[0],1500);	//ÍÆ½øÆ÷1Í£Ö¹
-   Drv_PWM_HighLvTimeSet(&thruster[1],1500);	//ÍÆ½øÆ÷2Í£Ö¹
+   Drv_PWM_HighLvTimeSet(&thruster[0],1500);	//æ¨è¿›å™¨1åœæ­¢
+   Drv_PWM_HighLvTimeSet(&thruster[1],1500);	//æ¨è¿›å™¨2åœæ­¢
    printf("horizontal stop\n");
 }
-//Ë®ÏÂ»úÆ÷ÈËË®Æ½ºóÍËº¯Êı
+//æ°´ä¸‹æœºå™¨äººæ°´å¹³åé€€å‡½æ•°
 void thruster_horizontal_backward(void)
 {
-   Drv_PWM_HighLvTimeSet(&thruster[0],1250);	//ÍÆ½øÆ÷1ºóÍË
-   Drv_PWM_HighLvTimeSet(&thruster[1],1250);	//ÍÆ½øÆ÷2ºóÍË
+   Drv_PWM_HighLvTimeSet(&thruster[0],1250);	//æ¨è¿›å™¨1åé€€
+   Drv_PWM_HighLvTimeSet(&thruster[1],1250);	//æ¨è¿›å™¨2åé€€
    printf("horizontal backward\n");
 }
-//Ë®ÏÂ»úÆ÷ÈËÔ­µØ×ó×ªº¯Êı
+//æ°´ä¸‹æœºå™¨äººåŸåœ°å·¦è½¬å‡½æ•°
 void thruster_horizontal_left_turn(void)
 {
-   Drv_PWM_HighLvTimeSet(&thruster[0],1250);	//ÍÆ½øÆ÷1ºóÍË
-   Drv_PWM_HighLvTimeSet(&thruster[1],1750);	//ÍÆ½øÆ÷2Ç°½ø
+   Drv_PWM_HighLvTimeSet(&thruster[0],1250);	//æ¨è¿›å™¨1åé€€
+   Drv_PWM_HighLvTimeSet(&thruster[1],1750);	//æ¨è¿›å™¨2å‰è¿›
    printf("horizontal left turn\n");
 }
-//Ë®ÏÂ»úÆ÷ÈËÔ­µØÓÒ×ªº¯Êı
+//æ°´ä¸‹æœºå™¨äººåŸåœ°å³è½¬å‡½æ•°
 void thruster_horizontal_right_turn(void)
 {
-   Drv_PWM_HighLvTimeSet(&thruster[0],1750);	//ÍÆ½øÆ÷1Ç°½ø
-   Drv_PWM_HighLvTimeSet(&thruster[1],1250);	//ÍÆ½øÆ÷2ºóÍË
+   Drv_PWM_HighLvTimeSet(&thruster[0],1750);	//æ¨è¿›å™¨1å‰è¿›
+   Drv_PWM_HighLvTimeSet(&thruster[1],1250);	//æ¨è¿›å™¨2åé€€
    printf("horizontal right turn\n");
 }
 

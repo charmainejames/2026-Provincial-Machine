@@ -1,13 +1,13 @@
-#ifndef __DRV_WDG_H_
+ï»¿#ifndef __DRV_WDG_H_
 #define __DRV_WDG_H_
 
 #include "drv_hal_conf.h"
 
-/* ¶ÀÁ¢¿´ÃÅ¹·½á¹¹Ìå */
+/* ç‹¬ç«‹çœ‹é—¨ç‹—ç»“æ„ä½“ */
 typedef struct
 {
     IWDG_HandleTypeDef  tIWDGHandle;
-	uint16_t			usResetTime;	/* ¸´Î»Ê±¼ä(ms)£¬×î´óÖµ26,208ms */
+	uint16_t			usResetTime;	/* å¤ä½æ—¶é—´(ms)ï¼Œæœ€å¤§å€¼26,208ms */
 }tagIWDG_T;
 
 void Drv_IWDG_Init(tagIWDG_T *_tIWDG);

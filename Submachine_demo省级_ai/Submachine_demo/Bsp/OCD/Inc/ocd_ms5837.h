@@ -1,15 +1,15 @@
-#ifndef __OCD_MS5837_H_
+ï»¿#ifndef __OCD_MS5837_H_
 #define __OCD_MS5837_H_
 
 #include "drv_hal_conf.h"
 
-/* Ğ£×¼Êı¾İ 
-    C1  Ñ¹Á¦ÁéÃô¶È SENS|T1
-    C2  Ñ¹Á¦²¹³¥  OFF|T1
-    C3	ÎÂ¶ÈÑ¹Á¦ÁéÃô¶ÈÏµÊı TCS
-    C4	ÎÂ¶ÈÏµÊıµÄÑ¹Á¦²¹³¥ TCO
-    C5	²Î¿¼ÎÂ¶È T|REF
-    C6 	ÎÂ¶ÈÏµÊıµÄÎÂ¶È TEMPSENS
+/* æ ¡å‡†æ•°æ® 
+    C1  å‹åŠ›çµæ•åº¦ SENS|T1
+    C2  å‹åŠ›è¡¥å¿  OFF|T1
+    C3	æ¸©åº¦å‹åŠ›çµæ•åº¦ç³»æ•° TCS
+    C4	æ¸©åº¦ç³»æ•°çš„å‹åŠ›è¡¥å¿ TCO
+    C5	å‚è€ƒæ¸©åº¦ T|REF
+    C6 	æ¸©åº¦ç³»æ•°çš„æ¸©åº¦ TEMPSENS
 */
 #define C1 _tMS5837->usaCaliData[1]
 #define C2 _tMS5837->usaCaliData[2]
@@ -18,12 +18,12 @@
 #define C5 _tMS5837->usaCaliData[5]
 #define C6 _tMS5837->usaCaliData[6]
 
-/* ÖØÁ¦¼ÓËÙ¶È(m/s^2) */
+/* é‡åŠ›åŠ é€Ÿåº¦(m/s^2) */
 #define G   9.8
-/* ±ê×¼´óÆøÑ¹Öµ£¨mBar£© */
+/* æ ‡å‡†å¤§æ°”å‹å€¼ï¼ˆmBarï¼‰ */
 #define ATM 1013
 
-/* MS5837¶ÁĞ´µØÖ· */
+/* MS5837è¯»å†™åœ°å€ */
 #define MS5837_WRITEADDR            0xEC
 #define MS5837_READADDR             0xED
 
@@ -31,7 +31,7 @@
 #define MS5837_ADC_READ             0X00
 #define MS5837_PROM_READ            0XA0
 
-/* ·Ö±æÂÊ¼Ä´æÆ÷ */
+/* åˆ†è¾¨ç‡å¯„å­˜å™¨ */
 #define MS5837_D1_OSR_256			0x40
 #define MS5837_D2_OSR_256			0x50
 #define MS5837_D1_OSR_512			0x42
@@ -45,7 +45,7 @@
 #define	MS5837_D1_OSR_8192          0x4A
 #define	MS5837_D2_OSR_8192          0x5A
 
-/* ¹ı²ÉÑù±ÈÂÊ¿ÉÑ¡Öµ */
+/* è¿‡é‡‡æ ·æ¯”ç‡å¯é€‰å€¼ */
 typedef enum{
     MS5837_OSR256,
     MS5837_OSR512,
@@ -57,24 +57,24 @@ typedef enum{
 
 typedef struct
 {
-    /* Ò»½×²¹³¥Öµ */
+    /* ä¸€é˜¶è¡¥å¿å€¼ */
     float fTemp1;
     float fPress1;
 
-    /* ¶ş½×²¹³¥Öµ */
+    /* äºŒé˜¶è¡¥å¿å€¼ */
     float fTemp2;
     float fPress2;
 
-    /* Êµ¼ÊÉî¶È(cm) */
+    /* å®é™…æ·±åº¦(cm) */
     float fDepth;
 
-    /* Êµ¼ÊÎÂ¶È(C) */
+    /* å®é™…æ¸©åº¦(C) */
     float fTemperature;
 
-    /* ¹ı²ÉÑù±ÈÂÊ */
+    /* è¿‡é‡‡æ ·æ¯”ç‡ */
     MS5837OSR_E setOSR;
 
-    /* Ğ£×¼Êı¾İ */
+    /* æ ¡å‡†æ•°æ® */
     uint32_t usaCaliData[7];    
 
     tagIICSoft_T tIIC;

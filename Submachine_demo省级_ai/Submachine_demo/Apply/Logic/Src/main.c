@@ -1,7 +1,8 @@
 #include "main.h"
-#include "drv_hal_conf.h"	/* Âã»úÏà¹Ø¶¨ÒåÒÔ¼°RTOS¿ª¹Ø */ 
+#include "drv_hal_conf.h"	/* è£¸æœºç›¸å…³å®šä¹‰ä»¥åŠRTOSå¼€å…³ */
 #include "task_userinit.h"
-#include "usercode.h"       
+#include "usercode.h"
+#include "usercode_wallfollow.h"    /* æ²¿å³å²¸è‡ªä¸»ä¸»å¾ªç¯ï¼ˆç¼–è¯‘å® WALL_FOLLOW_MODE åˆ‡æ¢ï¼‰ */
 
 #if !defined(RTT_ENABLE)
 #include "task_sysinit.h"
@@ -10,30 +11,34 @@
 int main()
 {
 #if !defined(RTT_ENABLE)
-    Task_Sys_Init();		/* ÏµÍ³³õÊ¼»¯£¬±ØĞè */
+    Task_Sys_Init();		/* ç³»ç»Ÿåˆå§‹åŒ–ï¼Œå¿…éœ€ */
 #endif
     
-    Task_UserInit();		/* ÓÃ»§ÍâÉè³õÊ¼»¯ */	
+    Task_UserInit();		/* ç”¨æˆ·å¤–è®¾åˆå§‹åŒ– */	
     
 #ifdef RTT_ENABLE
 	rt_kprintf("RTT Start!\r\n");
 	/*
-     * ¿ª·¢°åÓ²¼ş³õÊ¼»¯£¬ RT-Thread ÏµÍ³³õÊ¼»¯ÒÑ¾­ÔÚ main º¯ÊıÖ®Ç°Íê³É
-     * ¼´ÔÚ component.c ÎÄ¼şÖĞµÄ rtthread_startup()º¯ÊıÖĞÍê³ÉÁË¡£ 
-     * 1.ÔÚ usercode ÖĞ£¬´´½¨Ïß³ÌºÍÆô¶¯Ïß³Ì¡£
-     * 2.ÔÚ threadpool ÖĞ£¬Ğ´ÈëÏß³ÌÈë¿Úº¯Êı¡£
+     * å¼€å‘æ¿ç¡¬ä»¶åˆå§‹åŒ–ï¼Œ RT-Thread ç³»ç»Ÿåˆå§‹åŒ–å·²ç»åœ¨ main å‡½æ•°ä¹‹å‰å®Œæˆ
+     * å³åœ¨ component.c æ–‡ä»¶ä¸­çš„ rtthread_startup()å‡½æ•°ä¸­å®Œæˆäº†ã€‚ 
+     * 1.åœ¨ usercode ä¸­ï¼Œåˆ›å»ºçº¿ç¨‹å’Œå¯åŠ¨çº¿ç¨‹ã€‚
+     * 2.åœ¨ threadpool ä¸­ï¼Œå†™å…¥çº¿ç¨‹å…¥å£å‡½æ•°ã€‚
     */
 #endif
 
 #ifdef FREERTOS_ENABLE
     printf("FreeRTOS Start!\r\n");
 	/*
-     * 1.ÔÚ usercode ÖĞ£¬´´½¨Ïß³ÌºÍÆô¶¯Ïß³Ì¡£
-     * 2.ÔÚ threadpool ÖĞ£¬Ğ´ÈëÏß³ÌÈë¿Úº¯Êı¡£
-     * 3.ÊÖ¶¯µ÷ÓÃosKernelStart()º¯Êı¿ªÆôµ÷¶È¡£
+     * 1.åœ¨ usercode ä¸­ï¼Œåˆ›å»ºçº¿ç¨‹å’Œå¯åŠ¨çº¿ç¨‹ã€‚
+     * 2.åœ¨ threadpool ä¸­ï¼Œå†™å…¥çº¿ç¨‹å…¥å£å‡½æ•°ã€‚
+     * 3.æ‰‹åŠ¨è°ƒç”¨osKernelStart()å‡½æ•°å¼€å¯è°ƒåº¦ã€‚
     */
 #endif
 
-    UserLogic_Code();		/* ÓÃ»§Âß¼­Ö´ĞĞ */
+#ifdef WALL_FOLLOW_MODE
+    UserLogic_WallFollow();	/* æ²¿å³æ¹–å²¸è‡ªä¸»ç»•è¡Œï¼ˆKeil Define åŠ  WALL_FOLLOW_MODE å¯ç”¨ï¼‰ */
+#else
+    UserLogic_Code();		/* é»˜è®¤ï¼šæ ‘è“æ´¾é¥æ§ + JY901 PIDï¼ˆé˜Ÿå‹çš„åŸç‰ˆï¼‰ */
+#endif
 }
 

@@ -1,10 +1,10 @@
-#ifndef __OCD_RM3100_H_
+ï»¿#ifndef __OCD_RM3100_H_
 #define __OCD_RM3100_H_
 #include "drv_hal_conf.h"
 
 #define RM3100_SINGLE
 
-/* ¼Ä´æÆ÷µØÖ·*/
+/* å¯„å­˜å™¨åœ°å€*/
 #define RM3100_ADDRESS          0x20
 #define M3D_3100_POLL 	        0			  /* 0X00 */
 #define M3D_3100_CMM		    1			  /* 0X00 */
@@ -21,7 +21,7 @@
 #define M3D_3100_REVID          0x36
 
 
-/*  ³õÊ¼»¯Ê±²âÁ¿ */
+/*  åˆå§‹åŒ–æ—¶æµ‹é‡ */
 #define CMM_OFF                       0x00
 #define CM_START                      0x01
 #define ALARM_BIT                     0x02
@@ -35,7 +35,7 @@
 #define CMM_Z_AXIS                    0x40
 #define LDM_BIT                       0x80
 
-/* ¿ÉÄÜµÄÊı¾İ×ª»»Ñ¡Ôñ */
+/* å¯èƒ½çš„æ•°æ®è½¬æ¢é€‰æ‹© */
 #define CMM_UPDATERATE_600            0x92
 #define CMM_UPDATERATE_300            0x93
 #define CMM_UPDATERATE_150            0x94
@@ -51,7 +51,7 @@
 #define CMM_UPDATERATE_0_15           0x9E
 #define CMM_UPDATERATE_0_075          0x9F
 
-/* ×´Ì¬¼Ä´æÆ÷ÖĞµÚ7Î»ÎªÊı¾İÊÇ·ñ¿ÉÒÔ¶ÁÈ¡±êÖ¾*/
+/* çŠ¶æ€å¯„å­˜å™¨ä¸­ç¬¬7ä½ä¸ºæ•°æ®æ˜¯å¦å¯ä»¥è¯»å–æ ‡å¿—*/
 #define STATUS_MASK    0x80 
 
 typedef struct 
@@ -61,7 +61,7 @@ typedef struct
 	int32_t MAG_Z;
 }MagData_t;
 
-/* RM3100³õÊ¼»¯Êı¾İ½á¹¹Ìå */
+/* RM3100åˆå§‹åŒ–æ•°æ®ç»“æ„ä½“ */
 struct config
 {
     unsigned int ucCycle_Count;
@@ -70,18 +70,18 @@ struct config
     float fGain;
 };
 
-/* RM3100½á¹¹Ìå */
+/* RM3100ç»“æ„ä½“ */
 typedef struct
 {
-    /* Ê¹ÓÃÓ²¼şSPI */
+    /* ä½¿ç”¨ç¡¬ä»¶SPI */
     bool            bSPIEnable;
     tagSPI_T        tSPI;
 
-    /* Ê¹ÓÃÈí¼şSPI */
+    /* ä½¿ç”¨è½¯ä»¶SPI */
     bool            bSPISoftEnable;
     tagSPISoft_T    tSoftSPI;
 
-    /* Êı¾İ´¢´æ */
+    /* æ•°æ®å‚¨å­˜ */
     MagData_t       tMagData;
 }tagRM3100_T;
 

@@ -1,16 +1,16 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼þÃû: drv_hal_dac.c
+* æ–‡ä»¶å: drv_hal_dac.c
 
-* ÄÚÈÝ¼òÊö£ºDACÇý¶¯ÎÄ¼þ
+* å†…å®¹ç®€è¿°ï¼šDACé©±åŠ¨æ–‡ä»¶
 
-* ÎÄ¼þÀúÊ·£º
+* æ–‡ä»¶åŽ†å²ï¼š
 
-* °æ±¾ºÅ	ÈÕÆÚ		×÷Õß		ËµÃ÷
+* ç‰ˆæœ¬å·	æ—¥æœŸ		ä½œè€…		è¯´æ˜Ž
 
-*  2.5 	 2023-06-01	  ±«³Ìè´	´´½¨¸ÃÎÄ¼þ
+*  2.5 	 2023-06-01	  é²ç¨‹ç’	åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "drv_hal_conf.h"
@@ -18,32 +18,32 @@
 #ifdef DRV_HAL_DAC_ENABLE
 
 /**
- * @brief DACÊ±ÖÓÊ¹ÄÜº¯Êý
- * @param _tDAC-DAC½á¹¹ÌåÖ¸Õë
+ * @brief DACæ—¶é’Ÿä½¿èƒ½å‡½æ•°
+ * @param _tDAC-DACç»“æž„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_DAC_CLKEnable(tagDAC_T *_tDAC)
 {
-    /* Ê¹ÄÜDACÊ±ÖÓ */
+    /* ä½¿èƒ½DACæ—¶é’Ÿ */
     __HAL_RCC_DAC_CLK_ENABLE();
 }
 
 /**
- * @brief DAC²ÎÊýÅäÖÃº¯Êý
- * @param _tDAC-DAC½á¹¹ÌåÖ¸Õë
+ * @brief DACå‚æ•°é…ç½®å‡½æ•°
+ * @param _tDAC-DACç»“æž„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_DAC_ParamConfig(tagDAC_T *_tDAC)
 {
     _tDAC->tDACHandle.Instance = DAC;
 
-    /* DAC¾ä±ú³õÊ¼»¯ */
+    /* DACå¥æŸ„åˆå§‹åŒ– */
     if(HAL_DAC_Init(&_tDAC->tDACHandle) != HAL_OK)
     {
         Drv_HAL_Error(__FILE__, __LINE__);
     }
 
-    /* DACÍ¨µÀ¹¦ÄÜ³õÊ¼»¯ */
+    /* DACé€šé“åŠŸèƒ½åˆå§‹åŒ– */
     if(HAL_DAC_ConfigChannel(&_tDAC->tDACHandle,&_tDAC->tDACChannel,_tDAC->ulDACChannelSelect) != HAL_OK)
     {
         Drv_HAL_Error(__FILE__, __LINE__);
@@ -51,13 +51,13 @@ static void S_DAC_ParamConfig(tagDAC_T *_tDAC)
 }
 
 /**
- * @brief DAC GPIOÅäÖÃº¯Êý
- * @param _tDAC-DAC½á¹¹ÌåÖ¸Õë
+ * @brief DAC GPIOé…ç½®å‡½æ•°
+ * @param _tDAC-DACç»“æž„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_DAC_GPIOConfig(tagDAC_T *_tDAC)
 {
-    /* Èç¹ûÊÇÍ¨µÀ1£¬¶ÔPA4½øÐÐÅäÖÃ */
+    /* å¦‚æžœæ˜¯é€šé“1ï¼Œå¯¹PA4è¿›è¡Œé…ç½® */
     if(_tDAC->ulDACChannelSelect == DAC_CHANNEL_1)
     {
         _tDAC->tGPIO.tGPIOInit.Pin  = GPIO_PIN_4;
@@ -66,7 +66,7 @@ static void S_DAC_GPIOConfig(tagDAC_T *_tDAC)
         _tDAC->tGPIO.tGPIOPort      = GPIOA;
     }
 
-    /* Èç¹ûÊÇÍ¨µÀ2£¬¶ÔPA5½øÐÐÅäÖÃ */
+    /* å¦‚æžœæ˜¯é€šé“2ï¼Œå¯¹PA5è¿›è¡Œé…ç½® */
     if(_tDAC->ulDACChannelSelect == DAC_CHANNEL_2)
     {
         _tDAC->tGPIO.tGPIOInit.Pin  = GPIO_PIN_5;
@@ -79,16 +79,16 @@ static void S_DAC_GPIOConfig(tagDAC_T *_tDAC)
 }
 
 /**
- * @brief DAC³õÊ¼»¯º¯Êý
- * @param _tDAC-DAC½á¹¹ÌåÖ¸Õë
- * @param _ucNum-³õÊ¼»¯DAC¸öÊý,¸öÊýÉÏÏÞÎª2
+ * @brief DACåˆå§‹åŒ–å‡½æ•°
+ * @param _tDAC-DACç»“æž„ä½“æŒ‡é’ˆ
+ * @param _ucNum-åˆå§‹åŒ–DACä¸ªæ•°,ä¸ªæ•°ä¸Šé™ä¸º2
  * @retval Null
 */
 void Drv_DAC_Init(tagDAC_T *_tDAC, uint8_t _ucNum)
 {
 	uint8_t index;
 
-    /* ÒòÎªDACÖ»ÓÐÁ½¸ö£¬³õÊ¼»¯ÊýÁ¿´óÓÚ2±¨´í */
+    /* å› ä¸ºDACåªæœ‰ä¸¤ä¸ªï¼Œåˆå§‹åŒ–æ•°é‡å¤§äºŽ2æŠ¥é”™ */
 	if(_ucNum > 2)
     {
         Drv_HAL_Error(__FILE__, __LINE__);
@@ -97,16 +97,16 @@ void Drv_DAC_Init(tagDAC_T *_tDAC, uint8_t _ucNum)
 
 	for(index = 0; index < _ucNum; index++)
 	{
-		S_DAC_CLKEnable(&_tDAC[index]);		/* DACÊ±ÖÓÊ¹ÄÜ */
-		S_DAC_GPIOConfig(&_tDAC[index]);	/* DACµÄGPIOÅäÖÃ */
-		S_DAC_ParamConfig(&_tDAC[index]);	/* DAC²ÎÊýÅäÖÃ */
+		S_DAC_CLKEnable(&_tDAC[index]);		/* DACæ—¶é’Ÿä½¿èƒ½ */
+		S_DAC_GPIOConfig(&_tDAC[index]);	/* DACçš„GPIOé…ç½® */
+		S_DAC_ParamConfig(&_tDAC[index]);	/* DACå‚æ•°é…ç½® */
 	}
 }
 
 /**
- * @brief DACÉèÖÃÖ±½ÓÖµº¯Êý
- * @param _tDAC-DAC½á¹¹ÌåÖ¸Õë
- * @param _ulData-ÉèÖÃÖ±½ÓÖµ£¬·¶Î§[0,4095]
+ * @brief DACè®¾ç½®ç›´æŽ¥å€¼å‡½æ•°
+ * @param _tDAC-DACç»“æž„ä½“æŒ‡é’ˆ
+ * @param _ulData-è®¾ç½®ç›´æŽ¥å€¼ï¼ŒèŒƒå›´[0,4095]
  * @retval Null
 */
 void Drv_DAC_SetData(tagDAC_T *_tDAC, uint32_t _ulData)
@@ -117,17 +117,17 @@ void Drv_DAC_SetData(tagDAC_T *_tDAC, uint32_t _ulData)
         while(1);
     }
 
-    /* ¿ªÆôDACÊä³ö */
+    /* å¼€å¯DACè¾“å‡º */
     HAL_DAC_Start(&_tDAC->tDACHandle,_tDAC->ulDACChannelSelect);
 
-    /* ÉèÖÃDACÊä³öÖµ */
+    /* è®¾ç½®DACè¾“å‡ºå€¼ */
     HAL_DAC_SetValue(&_tDAC->tDACHandle,_tDAC->ulDACChannelSelect,DAC_ALIGN_12B_R,_ulData);
 }
 
 /**
- * @brief DACÉèÖÃÊµ¼ÊµçÑ¹Öµº¯Êý
- * @param _tDAC-DAC½á¹¹ÌåÖ¸Õë
- * @param _ulValue-ÉèÖÃÊµ¼ÊµçÑ¹Öµ£¬·¶Î§[0,3.3]V
+ * @brief DACè®¾ç½®å®žé™…ç”µåŽ‹å€¼å‡½æ•°
+ * @param _tDAC-DACç»“æž„ä½“æŒ‡é’ˆ
+ * @param _ulValue-è®¾ç½®å®žé™…ç”µåŽ‹å€¼ï¼ŒèŒƒå›´[0,3.3]V
  * @retval Null
 */
 void Drv_DAC_SetValue(tagDAC_T *_tDAC, float _fValue)
@@ -140,13 +140,13 @@ void Drv_DAC_SetValue(tagDAC_T *_tDAC, float _fValue)
         while(1);
     }
 
-    /* ×ª»»ÎªÖ±½ÓÖµ */
+    /* è½¬æ¢ä¸ºç›´æŽ¥å€¼ */
     ulDACData = (uint32_t)(_fValue / 3.3 * 4095);
 
-    /* ¿ªÆôDACÊä³ö */
+    /* å¼€å¯DACè¾“å‡º */
     HAL_DAC_Start(&_tDAC->tDACHandle,_tDAC->ulDACChannelSelect);
 
-    /* ÉèÖÃDACÊä³öÖµ */
+    /* è®¾ç½®DACè¾“å‡ºå€¼ */
     HAL_DAC_SetValue(&_tDAC->tDACHandle,_tDAC->ulDACChannelSelect,DAC_ALIGN_12B_R,ulDACData);
 }
 

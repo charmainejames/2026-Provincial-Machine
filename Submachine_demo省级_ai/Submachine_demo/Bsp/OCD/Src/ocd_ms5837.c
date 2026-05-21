@@ -1,41 +1,41 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: ocd_ms5837.c
+* æ–‡ä»¶å: ocd_ms5837.c
 
-* ÄÚÈİ¼òÊö£ºms5837Ä£¿éÎÄ¼ş
+* å†…å®¹ç®€è¿°ï¼šms5837æ¨¡å—æ–‡ä»¶
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ		ÈÕÆÚ	  ×÷Õß		ËµÃ÷
-*  2.7  	2023-07-19	±«³Ìè´	 ´´½¨¸ÃÎÄ¼ş
+* ç‰ˆæœ¬å·		æ—¥æœŸ	  ä½œè€…		è¯´æ˜
+*  2.7  	2023-07-19	é²ç¨‹ç’	 åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "ocd_ms5837.h"
 
 /*
-dT Êµ¼ÊºÍ²Î¿¼ÎÂ¶ÈÖ®¼äµÄ²îÒì
-TEMP Ò»½×²¹³¥ºóµÄÎÂ¶ÈÖµ
+dT å®é™…å’Œå‚è€ƒæ¸©åº¦ä¹‹é—´çš„å·®å¼‚
+TEMP ä¸€é˜¶è¡¥å¿åçš„æ¸©åº¦å€¼
 */
 int32_t dT = 0,TEMP = 0;
 
 /*
-OFF Êµ¼ÊÎÂ¶È²¹³¥
-SENS Êµ¼ÊÎÂ¶ÈÁéÃô¶È
+OFF å®é™…æ¸©åº¦è¡¥å¿
+SENS å®é™…æ¸©åº¦çµæ•åº¦
 */
 int64_t OFF = 0,SENS = 0;
 
-/* Êı×ÖÑ¹Á¦Öµ,Êı×ÖÎÂ¶ÈÖµ */
+/* æ•°å­—å‹åŠ›å€¼,æ•°å­—æ¸©åº¦å€¼ */
 uint32_t D1_Press = 0,D2_Temp = 0;	
 
-/* ÖĞ¼ä¼ÆËã±äÁ¿ */
+/* ä¸­é—´è®¡ç®—å˜é‡ */
 int32_t OFFi = 0,SENSi = 0,Ti = 0;
 int64_t OFF2 = 0,SENS2 = 0;
 
 /**
- * @brief MS5837¸´Î»º¯Êı
- * @param _tMS5837-MS5837¾ä±úÖ¸Õë
+ * @brief MS5837å¤ä½å‡½æ•°
+ * @param _tMS5837-MS5837å¥æŸ„æŒ‡é’ˆ
  * @retval Null
 */
 static void S_MS5837_Reset(tagMS5837_T *_tMS5837)
@@ -49,8 +49,8 @@ static void S_MS5837_Reset(tagMS5837_T *_tMS5837)
 }
 
 /**
- * @brief MS5837»ñÈ¡Ğ£ÑéÊı¾İº¯Êı
- * @param _tMS5837-MS5837¾ä±úÖ¸Õë
+ * @brief MS5837è·å–æ ¡éªŒæ•°æ®å‡½æ•°
+ * @param _tMS5837-MS5837å¥æŸ„æŒ‡é’ˆ
  * @retval Null
 */
 static void S_MS5837_GetCalibrationData(tagMS5837_T *_tMS5837)
@@ -60,7 +60,7 @@ static void S_MS5837_GetCalibrationData(tagMS5837_T *_tMS5837)
     S_MS5837_Reset(_tMS5837);
     Drv_Delay_Ms(20);
 
-    /* ¶ÁÈ¡³ö³§Ğ£ÑéÖµ */
+    /* è¯»å–å‡ºå‚æ ¡éªŒå€¼ */
     for(int index = 0;index < 7; index++)
     {
         Drv_IICSoft_Start(&_tMS5837->tIIC);
@@ -86,9 +86,9 @@ static void S_MS5837_GetCalibrationData(tagMS5837_T *_tMS5837)
 }
 
 /**
- * @brief MS5837Êı¾İ×ª»»º¯Êı
- * @param _tMS5837-MS5837¾ä±úÖ¸Õë
- * @param _ucOSR-·Ö±æÂÊ²ÎÊı
+ * @brief MS5837æ•°æ®è½¬æ¢å‡½æ•°
+ * @param _tMS5837-MS5837å¥æŸ„æŒ‡é’ˆ
+ * @param _ucOSR-åˆ†è¾¨ç‡å‚æ•°
  * @retval Null
 */
 static uint32_t S_MS5837_GetConversion(tagMS5837_T *_tMS5837, uint8_t _ucOSR)
@@ -115,9 +115,9 @@ static uint32_t S_MS5837_GetConversion(tagMS5837_T *_tMS5837, uint8_t _ucOSR)
     Drv_IICSoft_Start(&_tMS5837->tIIC);
     Drv_IICSoft_SendByte(&_tMS5837->tIIC,MS5837_READADDR);
     Drv_IICSoft_WaitAck(&_tMS5837->tIIC);
-    ucaAdcValue[0] = Drv_IICSoft_ReadByte(&_tMS5837->tIIC,1);    /* ´øACKµÄ¶ÁÊı¾İ  bit 23-16 */
-    ucaAdcValue[1] = Drv_IICSoft_ReadByte(&_tMS5837->tIIC,1);    /* ´øACKµÄ¶ÁÊı¾İ  bit 8-15 */
-    ucaAdcValue[2] = Drv_IICSoft_ReadByte(&_tMS5837->tIIC,0);    /* ´øNACKµÄ¶ÁÊı¾İ bit 0-7 */
+    ucaAdcValue[0] = Drv_IICSoft_ReadByte(&_tMS5837->tIIC,1);    /* å¸¦ACKçš„è¯»æ•°æ®  bit 23-16 */
+    ucaAdcValue[1] = Drv_IICSoft_ReadByte(&_tMS5837->tIIC,1);    /* å¸¦ACKçš„è¯»æ•°æ®  bit 8-15 */
+    ucaAdcValue[2] = Drv_IICSoft_ReadByte(&_tMS5837->tIIC,0);    /* å¸¦NACKçš„è¯»æ•°æ® bit 0-7 */
     Drv_IICSoft_Stop(&_tMS5837->tIIC);
 
     ulConversion = (uint32_t)ucaAdcValue[0];
@@ -128,9 +128,9 @@ static uint32_t S_MS5837_GetConversion(tagMS5837_T *_tMS5837, uint8_t _ucOSR)
 }
 
 /**
- * @brief MS5837 CRC4Ğ£Ñéº¯Êı
- * @param _tMS5837-MS5837¾ä±úÖ¸Õë
- * @retval uint8_t 1-Ğ£Ñé³É¹¦ 0-Ğ£ÑéÊ§°Ü
+ * @brief MS5837 CRC4æ ¡éªŒå‡½æ•°
+ * @param _tMS5837-MS5837å¥æŸ„æŒ‡é’ˆ
+ * @retval uint8_t 1-æ ¡éªŒæˆåŠŸ 0-æ ¡éªŒå¤±è´¥
 */
 static uint8_t S_MS5837_CRC4(tagMS5837_T *_tMS5837)
 {
@@ -173,14 +173,14 @@ static uint8_t S_MS5837_CRC4(tagMS5837_T *_tMS5837)
 }
 
 /**
- * @brief MS5837»ñÈ¡Êı¾İº¯Êı
- * @param _tMS5837-MS5837¾ä±úÖ¸Õë
- * @note Êµ¼ÊÎÂ¶È±£´æÔÚfTemperatureÖĞ£¬Êµ¼ÊÉî¶È±£´æÔÚfDepthÖĞ
+ * @brief MS5837è·å–æ•°æ®å‡½æ•°
+ * @param _tMS5837-MS5837å¥æŸ„æŒ‡é’ˆ
+ * @note å®é™…æ¸©åº¦ä¿å­˜åœ¨fTemperatureä¸­ï¼Œå®é™…æ·±åº¦ä¿å­˜åœ¨fDepthä¸­
  * @retval Null
 */
 void OCD_MS5837_GetData(tagMS5837_T *_tMS5837)
 {
-    /* ¸ù¾İ²ÉÑù·Ö±æÂÊÑ¡Ôñ */
+    /* æ ¹æ®é‡‡æ ·åˆ†è¾¨ç‡é€‰æ‹© */
     switch (_tMS5837->setOSR)
     {
         case MS5837_OSR256:
@@ -217,7 +217,7 @@ void OCD_MS5837_GetData(tagMS5837_T *_tMS5837)
     _tMS5837->fTemp1 = TEMP/100;
     _tMS5837->fPress1 = (D1_Press * SENS / 2097152L - OFF) / 8192L / 10;
 
-    /* ¶ş½×ÎÂ¶È²¹³¥ */
+    /* äºŒé˜¶æ¸©åº¦è¡¥å¿ */
     if(TEMP < 2000)
     {
         Ti = (3*(int64_t)(dT)*(int64_t)(dT) / (8589934592LL));
@@ -238,17 +238,17 @@ void OCD_MS5837_GetData(tagMS5837_T *_tMS5837)
 
     OFF2  = OFF - OFFi;
     SENS2 = SENS - SENSi;
-    _tMS5837->fPress2 = (float)((D1_Press * SENS2)/2097152L - OFF2) / 8192L / 10;           /* Ğ£×¼ºóÑ¹Á¦Êı¾İ */
-    _tMS5837->fTemp2 = (float)(TEMP - Ti)/100.0;                                            /* Ğ£×¼ºóÎÂ¶ÈÊı¾İ */
+    _tMS5837->fPress2 = (float)((D1_Press * SENS2)/2097152L - OFF2) / 8192L / 10;           /* æ ¡å‡†åå‹åŠ›æ•°æ® */
+    _tMS5837->fTemp2 = (float)(TEMP - Ti)/100.0;                                            /* æ ¡å‡†åæ¸©åº¦æ•°æ® */
 
-    _tMS5837->fTemperature = _tMS5837->fTemp2;                                              /* ±£´æÊµ¼ÊÎÂ¶È */
-    _tMS5837->fDepth = (_tMS5837->fPress2 - ATM)/1000 * G * 100;                            /* ±£´æÊµ¼ÊÉî¶È */
+    _tMS5837->fTemperature = _tMS5837->fTemp2;                                              /* ä¿å­˜å®é™…æ¸©åº¦ */
+    _tMS5837->fDepth = (_tMS5837->fPress2 - ATM)/1000 * G * 100;                            /* ä¿å­˜å®é™…æ·±åº¦ */
 }
 
 /**
- * @brief MS5837³õÊ¼»¯º¯Êı
- * @param _tMS5837-MS5837¾ä±úÖ¸Õë
- * @retval uint8_t 1-³É¹¦ 0-Ê§°Ü
+ * @brief MS5837åˆå§‹åŒ–å‡½æ•°
+ * @param _tMS5837-MS5837å¥æŸ„æŒ‡é’ˆ
+ * @retval uint8_t 1-æˆåŠŸ 0-å¤±è´¥
 */
 uint8_t OCD_MS5837_Init(tagMS5837_T *_tMS5837)
 {

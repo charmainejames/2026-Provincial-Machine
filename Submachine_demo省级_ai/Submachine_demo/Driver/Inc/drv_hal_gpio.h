@@ -1,4 +1,4 @@
-#ifndef __DRV_GPIO_H_
+ï»¿#ifndef __DRV_GPIO_H_
 #define __DRV_GPIO_H_
 
 #include "drv_hal.h"
@@ -7,18 +7,18 @@
   * @brief GPIO remap
   * @{
   */
-#define NO_REMAP 		0	/*²»½øĞĞÓ³Éä²Ù×÷*/
-#define PARTIAL_REMAP 	1	/*²¿·ÖÖØÓ³Éä*/
-#define PARTIAL_REMAP2 	2	/*²¿·ÖÖØÓ³Éä2 ½öTIM2¶ÀÓĞ*/
-#define FULL_REMAP 		3	/*ÍêÈ«ÖØÓ³Éä*/
+#define NO_REMAP 		0	/*ä¸è¿›è¡Œæ˜ å°„æ“ä½œ*/
+#define PARTIAL_REMAP 	1	/*éƒ¨åˆ†é‡æ˜ å°„*/
+#define PARTIAL_REMAP2 	2	/*éƒ¨åˆ†é‡æ˜ å°„2 ä»…TIM2ç‹¬æœ‰*/
+#define FULL_REMAP 		3	/*å®Œå…¨é‡æ˜ å°„*/
 
 typedef struct
 {
 	GPIO_InitTypeDef 	tGPIOInit;
 	GPIO_TypeDef        *tGPIOPort;
-	uint8_t				ucPriority;		/* ÖĞ¶ÏÓÅÏÈ¼¶£¬0-15 */
-	uint8_t 			ucSubPriority;	/* ÖĞ¶Ï×ÓÓÅÏÈ¼¶£¬0-15 */
-	uint8_t				ucAFMode;		/* ÖØÓ³ÉäÉèÖÃ²ÎÊı @ref ucAFMode_define*/
+	uint8_t				ucPriority;		/* ä¸­æ–­ä¼˜å…ˆçº§ï¼Œ0-15 */
+	uint8_t 			ucSubPriority;	/* ä¸­æ–­å­ä¼˜å…ˆçº§ï¼Œ0-15 */
+	uint8_t				ucAFMode;		/* é‡æ˜ å°„è®¾ç½®å‚æ•° @ref ucAFMode_define*/
 }tagGPIO_T;
 
 void Drv_GPIO_Set(tagGPIO_T *_tGPIO);

@@ -1,16 +1,16 @@
-/****************************************************************************
+﻿/****************************************************************************
 
-* Sigma�Ŷ�
+* Sigma团队
 
-* �ļ���: drv_hal_pwr.c
+* 文件名: drv_hal_pwr.c
 
-* ���ݼ�����PWR��Դ���������ļ�
+* 内容简述：PWR电源管理驱动文件
 
-* �ļ���ʷ��
+* 文件历史：
 
-* �汾��	����		����		˵��
+* 版本号	日期		作者		说明
 
-*  2.5   2023-06-03	  �����	�������ļ�
+*  2.5   2023-06-03	  鲍程璐	创建该文件
 
 ****************************************************************************/
 #include "drv_hal_conf.h"
@@ -18,9 +18,9 @@
 #ifdef DRV_HAL_PWR_ENABLE
 
 /**
- * @brief �ָ�HSEʱ�Ӻ���
+ * @brief 恢复HSE时钟函数
  * @param Null
- * @note ����ֹͣģʽ������ʱ���ָ���HSE����ʱ��
+ * @note 用于停止模式被唤醒时，恢复到HSE高速时钟
  * @retval Null 
 */
 static void S_PWR_RestoreHSEClk(void)
@@ -29,14 +29,14 @@ static void S_PWR_RestoreHSEClk(void)
     RCC_OscInitTypeDef RCC_OscInitStruct = {0};
     uint32_t pFLatency = 0;
 
-    /* ���õ�Դ����ʱ�� */
+    /* 启用电源控制时钟 */
     __HAL_RCC_PWR_CLK_ENABLE();
 
-    /* �����ڲ�RCC�Ĵ�����ȡ�������� */
+    /* 根据内部RCC寄存器获取振荡器配置 */
     HAL_RCC_GetOscConfig(&RCC_OscInitStruct);
 
-    /* ��ֹͣģʽ���Ѻ���������ϵͳʱ��:
-    ����HSE��PLL */
+    /* 从停止模式唤醒后重新配置系统时钟:
+    启用HSE和PLL */
     RCC_OscInitStruct.OscillatorType  = RCC_OSCILLATORTYPE_HSE;
     RCC_OscInitStruct.HSEState        = RCC_HSE_ON;
     RCC_OscInitStruct.PLL.PLLState    = RCC_PLL_ON;
@@ -45,10 +45,10 @@ static void S_PWR_RestoreHSEClk(void)
         Drv_HAL_Error(__FILE__, __LINE__);
     }
 
-    /* �����ڲ�RCC�Ĵ�����ȡʱ������ */
+    /* 根据内部RCC寄存器获取时钟配置 */
     HAL_RCC_GetClockConfig(&RCC_ClkInitStruct, &pFLatency);
 
-    /* ѡ�� PLL ��Ϊϵͳʱ��Դ, ������ HCLK��PCLK1 �� PCLK2ʱ�ӷ�Ƶϵ�� */
+    /* 选择 PLL 作为系统时钟源, 并配置 HCLK、PCLK1 和 PCLK2时钟分频系数 */
     RCC_ClkInitStruct.ClockType     = RCC_CLOCKTYPE_SYSCLK;
     RCC_ClkInitStruct.SYSCLKSource  = RCC_SYSCLKSOURCE_PLLCLK;
     if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, pFLatency) != HAL_OK)
@@ -56,82 +56,82 @@ static void S_PWR_RestoreHSEClk(void)
         Drv_HAL_Error(__FILE__, __LINE__);
     }
 
-    /* ����ʱ�ӼĴ�����ֵ����SystemCoreClock���� */
+    /* 根据时钟寄存器的值更新SystemCoreClock变量 */
     SystemCoreClockUpdate();
 }
 
 /**
- * @brief ����˯��ģʽ����
+ * @brief 进入睡眠模式函数
  * @param Null
- * @note ˯��ʱ:
- *       �ر��ں�ʱ�ӣ��ں�ֹͣ���������������У��������ϱ���Ϊ����ִ���µĴ��롣
- *       ���Ѻ�:
- *       ���������жϻ��ѣ��Ƚ����жϣ��˳��жϷ������󣬽���ִ��WFIָ���ĳ���
- *       �����¼����ѣ�ֱ�ӽ���ִ��WFE��ĳ���
+ * @note 睡眠时:
+ *       关闭内核时钟，内核停止，而外设正常运行，在软件上表现为不再执行新的代码。
+ *       唤醒后:
+ *       若由任意中断唤醒，先进入中断，退出中断服务程序后，接着执行WFI指令后的程序；
+ *       若由事件唤醒，直接接着执行WFE后的程序。
  * @retval Null 
 */
 void Drv_PWR_EnterSleepMode(void)
 {
-    /* ��ͣ�δ�ʱ�ӣ���ֹͨ���δ�ʱ���жϻ��� */
+    /* 暂停滴答时钟，防止通过滴答时钟中断唤醒 */
     HAL_SuspendTick();
 
-    /* ����˯��ģʽ�����뽫�ڴ˴���ͣ���ȴ����� */
+    /* 进入睡眠模式，代码将在此处暂停，等待唤醒 */
     HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON,PWR_SLEEPENTRY_WFI);
 
-    /* �ӵ͹���ģʽ���Ѻ�������ѱ�־λ */
+    /* 从低功耗模式唤醒后清除唤醒标志位 */
     __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
 
-    /* �����Ѻ󣬻ָ��δ�ʱ�� */
+    /* 被唤醒后，恢复滴答时钟 */
     HAL_ResumeTick();
 }
 
 /**
- * @brief ����ֹͣģʽ����
+ * @brief 进入停止模式函数
  * @param Null
- * @note ֹͣʱ:
- *       �ر��ں�ʱ�ӣ��ں�ֹͣ��Ƭ������Ҳֹͣ��
- *       ���Ѻ�:
- *       STM32��ʹ��HSI��Ϊϵͳʱ�ӡ�
- *       ����EXTI�жϻ��ѣ��Ƚ����жϣ��˳��жϷ������󣬽���ִ��WFIָ���ĳ���
- *       �����¼����ѣ�ֱ�ӽ���ִ��WFE��ĳ���
+ * @note 停止时:
+ *       关闭内核时钟，内核停止，片上外设也停止。
+ *       唤醒后:
+ *       STM32会使用HSI作为系统时钟。
+ *       若由EXTI中断唤醒，先进入中断，退出中断服务程序后，接着执行WFI指令后的程序；
+ *       若由事件唤醒，直接接着执行WFE后的程序。
  * @retval Null 
 */
 void Drv_PWR_EnterStopMode(void)
 {
-    /* ��ͣ�δ�ʱ�ӣ���ֹͨ���δ�ʱ���жϻ��� */
+    /* 暂停滴答时钟，防止通过滴答时钟中断唤醒 */
     HAL_SuspendTick();
 
-    /* ����ֹͣģʽ�����뽫�ڴ˴���ͣ���ȴ�����  */
+    /* 进入停止模式，代码将在此处暂停，等待唤醒  */
     HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON,PWR_STOPENTRY_WFI);
 
-    /* �ӵ͹���ģʽ���Ѻ�������ѱ�־λ */
+    /* 从低功耗模式唤醒后清除唤醒标志位 */
     __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
 
-    /* ����HSE����ʱ�� */
+    /* 重启HSE高速时钟 */
     S_PWR_RestoreHSEClk();
 
-    /* �����Ѻ󣬻ָ��δ�ʱ�� */
+    /* 被唤醒后，恢复滴答时钟 */
     HAL_ResumeTick();
 }
 
 /**
- * @brief �������ģʽ����
+ * @brief 进入待机模式函数
  * @param Null
- * @note ����ʱ:
- *       ȫ���رա�����λ���š�RTC_AF1���ż�WKUP���ţ�����I/O�ھ������ڸ���̬��
- *       ���Ѻ�:
- *       �൱��оƬ��λ���ڳ������Ϊ��ͷ��ʼִ�д��롣
+ * @note 待机时:
+ *       全部关闭。除复位引脚、RTC_AF1引脚及WKUP引脚，其它I/O口均工作在高阻态。
+ *       唤醒后:
+ *       相当于芯片复位，在程序表现为从头开始执行代码。
  * @retval Null 
 */
 void Drv_PWR_EnterStandByMode(void)
 {
-    /* ʹ��WKUP���ŵĻ��ѹ��� ��ʹ��PA0�������ش������� */
+    /* 使能WKUP引脚的唤醒功能 ，使能PA0，上升沿触发唤醒 */
     HAL_PWR_EnableWakeUpPin(PWR_WAKEUP_PIN1);
 
-    /* ��ͣ�δ�ʱ�ӣ���ֹͨ���δ�ʱ���жϻ��� */
+    /* 暂停滴答时钟，防止通过滴答时钟中断唤醒 */
     HAL_SuspendTick();
 
-    /* �������ģʽ�����Ѻ�оƬ���Ḵλ */
+    /* 进入待机模式，唤醒后芯片将会复位 */
     HAL_PWR_EnterSTANDBYMode();
 }
 

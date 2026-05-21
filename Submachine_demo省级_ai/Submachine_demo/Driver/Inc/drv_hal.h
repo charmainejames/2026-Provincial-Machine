@@ -1,4 +1,4 @@
-#ifndef __DRV_HAL_H_
+ï»¿#ifndef __DRV_HAL_H_
 #define __DRV_HAL_H_
 
 #ifdef USE_DEBUG
@@ -16,7 +16,7 @@
                                 }					    \
                                 while(0)
 
-/* Hal¿â°üº¬ */
+/* Halåº“åŒ…å« */
 #ifdef STM32F1_SGA_ENABLE
 	#include "stm32f1xx_hal.h"
 	

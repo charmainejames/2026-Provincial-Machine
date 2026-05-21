@@ -1,22 +1,22 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: ocd_rm3100.c
+* æ–‡ä»¶å: ocd_rm3100.c
 
-* ÄÚÈİ¼òÊö£ºrm3100Ä£¿éÎÄ¼ş
+* å†…å®¹ç®€è¿°ï¼šrm3100æ¨¡å—æ–‡ä»¶
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ		ÈÕÆÚ	  ×÷Õß		ËµÃ÷
-* 2.2.2		2023-04-09	±«³Ìè´	´úÂëÖØ¹¹£¬Í³Ò»API
+* ç‰ˆæœ¬å·		æ—¥æœŸ	  ä½œè€…		è¯´æ˜
+* 2.2.2		2023-04-09	é²ç¨‹ç’	ä»£ç é‡æ„ï¼Œç»Ÿä¸€API
 
-* 1.1.8		2022-10-25	ÀîºÀ	´´½¨¸ÃÎÄ¼ş
+* 1.1.8		2022-10-25	æè±ª	åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "ocd_rm3100.h"
 
-/* RM3100³õÊ¼»¯Êı¾İ */
+/* RM3100åˆå§‹åŒ–æ•°æ® */
 struct config tRM3100 = 
 {
     .ucCycle_Count  = 200,
@@ -26,9 +26,9 @@ struct config tRM3100 =
 };
 
 /**
- * @brief RM3100Æ¬Ñ¡(Ó²¼şSPI×¨ÓÃ)
- * @param _tRM3100-RM3100¾ä±úÖ¸Õë
- * @param _ucLevel-µçÆ½
+ * @brief RM3100ç‰‡é€‰(ç¡¬ä»¶SPIä¸“ç”¨)
+ * @param _tRM3100-RM3100å¥æŸ„æŒ‡é’ˆ
+ * @param _ucLevel-ç”µå¹³
  * @retval Null
 */
 static void S_RM3100_CS(tagRM3100_T *_tRM3100,uint8_t _ucLevel)
@@ -37,11 +37,11 @@ static void S_RM3100_CS(tagRM3100_T *_tRM3100,uint8_t _ucLevel)
 }
 
 /**
- * @brief RM3100µÄ¶à×Ö½ÚĞ´Èë
- * @param _tRM3100-RM3100¾ä±úÖ¸Õë
- * @param _ucReg_addr-¼Ä´æÆ÷µØÖ·
- * @param _ucpDataIn-Ğ´ÈëÊı¾İµÄµØÖ·
- * @param _ucLenth-Ğ´ÈëÊı¾İµÄ³¤¶È
+ * @brief RM3100çš„å¤šå­—èŠ‚å†™å…¥
+ * @param _tRM3100-RM3100å¥æŸ„æŒ‡é’ˆ
+ * @param _ucReg_addr-å¯„å­˜å™¨åœ°å€
+ * @param _ucpDataIn-å†™å…¥æ•°æ®çš„åœ°å€
+ * @param _ucLenth-å†™å…¥æ•°æ®çš„é•¿åº¦
  * @retval Null
 */
 static void S_RM3100_Write(tagRM3100_T *_tRM3100,uint8_t _ucReg_addr,uint8_t *_ucpDataIn,uint8_t _ucLenth)
@@ -83,11 +83,11 @@ static void S_RM3100_Write(tagRM3100_T *_tRM3100,uint8_t _ucReg_addr,uint8_t *_u
 }
 
 /**
- * @brief RM3100µÄ¶à×Ö½Ú¶ÁÈ¡
- * @param _tRM3100-RM3100¾ä±úÖ¸Õë
- * @param _ucReg_addr-¼Ä´æÆ÷µØÖ·
- * @param _ucpDataOut-¶Á³öÊı¾İµÄµØÖ·
- * @param _ucLenth-¶Á³öÊı¾İµÄ³¤¶È
+ * @brief RM3100çš„å¤šå­—èŠ‚è¯»å–
+ * @param _tRM3100-RM3100å¥æŸ„æŒ‡é’ˆ
+ * @param _ucReg_addr-å¯„å­˜å™¨åœ°å€
+ * @param _ucpDataOut-è¯»å‡ºæ•°æ®çš„åœ°å€
+ * @param _ucLenth-è¯»å‡ºæ•°æ®çš„é•¿åº¦
  * @retval Null
 */
 static void S_RM3100_Read(tagRM3100_T *_tRM3100,uint8_t _ucReg_addr,uint8_t *_ucpDataOut,uint8_t _ucLenth)
@@ -129,9 +129,9 @@ static void S_RM3100_Read(tagRM3100_T *_tRM3100,uint8_t _ucReg_addr,uint8_t *_uc
 }
 
 /**
- * @brief RM3100Êı¾İÊÇ·ñ×ª»»Íê±Ï
- * @param _tRM3100-RM3100¾ä±úÖ¸Õë
- * @retval uint8_t-×ª»»Íê±Ï-1  Î´×ª»»Íê-0
+ * @brief RM3100æ•°æ®æ˜¯å¦è½¬æ¢å®Œæ¯•
+ * @param _tRM3100-RM3100å¥æŸ„æŒ‡é’ˆ
+ * @retval uint8_t-è½¬æ¢å®Œæ¯•-1  æœªè½¬æ¢å®Œ-0
 */
 static uint8_t S_RM3100_GetDataReadyStatus(tagRM3100_T *_tRM3100) 
 {
@@ -142,10 +142,10 @@ static uint8_t S_RM3100_GetDataReadyStatus(tagRM3100_T *_tRM3100)
 }
 
 /**
- * @brief RM3100ÎªÁ¬Ğø²âÁ¿Ä£Ê½Ê±£¬ÉèÖÃÊı¾İÑ­»·´ÎÊı
- * @param _tRM3100-RM3100¾ä±úÖ¸Õë
- * @param _usValue-ÊıÁ¿
- * @retval uint8_t-³É¹¦-1  Ê§°Ü-0
+ * @brief RM3100ä¸ºè¿ç»­æµ‹é‡æ¨¡å¼æ—¶ï¼Œè®¾ç½®æ•°æ®å¾ªç¯æ¬¡æ•°
+ * @param _tRM3100-RM3100å¥æŸ„æŒ‡é’ˆ
+ * @param _usValue-æ•°é‡
+ * @retval uint8_t-æˆåŠŸ-1  å¤±è´¥-0
 */
 uint8_t OCD_RM3100_SetCycleCount(tagRM3100_T *_tRM3100,uint16_t _usValue) 
 {
@@ -173,10 +173,10 @@ uint8_t OCD_RM3100_SetCycleCount(tagRM3100_T *_tRM3100,uint16_t _usValue)
 }
 
 /**
- * @brief RM3100ÎªÁ¬Ğø²âÁ¿Ä£Ê½Ê±£¬ÉèÖÃÊı¾İ×ª»»ËÙÂÊ
- * @param _tRM3100-RM3100¾ä±úÖ¸Õë
- * @param _ucConf-ÃüÁî
- * @retval uint8_t-³É¹¦-1  Ê§°Ü-0
+ * @brief RM3100ä¸ºè¿ç»­æµ‹é‡æ¨¡å¼æ—¶ï¼Œè®¾ç½®æ•°æ®è½¬æ¢é€Ÿç‡
+ * @param _tRM3100-RM3100å¥æŸ„æŒ‡é’ˆ
+ * @param _ucConf-å‘½ä»¤
+ * @retval uint8_t-æˆåŠŸ-1  å¤±è´¥-0
 */
 uint8_t OCD_RM3100_SetCMM_DataRate(tagRM3100_T *_tRM3100,uint8_t _ucConf) 
 {
@@ -227,9 +227,9 @@ uint8_t OCD_RM3100_SetCMM_DataRate(tagRM3100_T *_tRM3100,uint8_t _ucConf)
 }
 
 /**
- * @brief RM3100ÉèÖÃÁ¬Ğø²âÁ¿Ä£Ê½
- * @param _tRM3100-RM3100¾ä±úÖ¸Õë
- * @param _ucConf-ÃüÁî
+ * @brief RM3100è®¾ç½®è¿ç»­æµ‹é‡æ¨¡å¼
+ * @param _tRM3100-RM3100å¥æŸ„æŒ‡é’ˆ
+ * @param _ucConf-å‘½ä»¤
  * @retval Null
 */
 void OCD_RM3100_ContinuousModeConfig(tagRM3100_T *_tRM3100,uint8_t _ucConf) 
@@ -241,9 +241,9 @@ void OCD_RM3100_ContinuousModeConfig(tagRM3100_T *_tRM3100,uint8_t _ucConf)
 }
 
 /**
- * @brief RM3100ÉèÖÃµ¥´Î²âÁ¿Ä£Ê½
- * @param _tRM3100-RM3100¾ä±úÖ¸Õë
- * @param _ucConf-ÃüÁî
+ * @brief RM3100è®¾ç½®å•æ¬¡æµ‹é‡æ¨¡å¼
+ * @param _tRM3100-RM3100å¥æŸ„æŒ‡é’ˆ
+ * @param _ucConf-å‘½ä»¤
  * @retval Null
 */
 void OCD_RM3100_SingleModeConfig(tagRM3100_T *_tRM3100,uint8_t _ucConf) 
@@ -255,24 +255,24 @@ void OCD_RM3100_SingleModeConfig(tagRM3100_T *_tRM3100,uint8_t _ucConf)
 }
 
 /**
- * @brief Éè¶¨RM3100²âÁ¿Ä£Ê½£¬Ã¿´Î¶ÁÍêÊı¾İºóĞèÔÙµ÷ÓÃ´Ëº¯Êı
- * @param _tRM3100-RM3100¾ä±úÖ¸Õë
+ * @brief è®¾å®šRM3100æµ‹é‡æ¨¡å¼ï¼Œæ¯æ¬¡è¯»å®Œæ•°æ®åéœ€å†è°ƒç”¨æ­¤å‡½æ•°
+ * @param _tRM3100-RM3100å¥æŸ„æŒ‡é’ˆ
  * @retval Null
 */
 void OCD_RM3100_ModeConfig(tagRM3100_T *_tRM3100)
 {
 #ifdef RM3100_SINGLE
-	OCD_RM3100_SingleModeConfig(_tRM3100,CMM_ALL_AXIS_ON);     /* µ¥²âÄ£Ê½ */
+	OCD_RM3100_SingleModeConfig(_tRM3100,CMM_ALL_AXIS_ON);     /* å•æµ‹æ¨¡å¼ */
 #else
-  	OCD_RM3100_ContinuousModeConfig(_tRM3100,CMM_ALL_AXIS_ON|DRDY_WHEN_ALL_AXIS_MEASURED|CM_START); 			/* ÉèÖÃ²âÊÔÖá,drdy ¿ªÆôÁ¬ĞøÄ£Ê½ */
+  	OCD_RM3100_ContinuousModeConfig(_tRM3100,CMM_ALL_AXIS_ON|DRDY_WHEN_ALL_AXIS_MEASURED|CM_START); 			/* è®¾ç½®æµ‹è¯•è½´,drdy å¼€å¯è¿ç»­æ¨¡å¼ */
   	OCD_RM3100_SetCycleCount(_tRM3100,200);												
   	OCD_RM3100_SetCMM_DataRate(_tRM3100,12);
 #endif
 }
 
 /**
- * @brief RM3100»ñÈ¡Êı¾İ£¬´æÈëtMagData³ÉÔ±ÖĞ
- * @param _tRM3100-RM3100¾ä±úÖ¸Õë
+ * @brief RM3100è·å–æ•°æ®ï¼Œå­˜å…¥tMagDataæˆå‘˜ä¸­
+ * @param _tRM3100-RM3100å¥æŸ„æŒ‡é’ˆ
  * @retval Null
 */
 void OCD_RM3100_GetData(tagRM3100_T *_tRM3100)
@@ -303,38 +303,38 @@ void OCD_RM3100_GetData(tagRM3100_T *_tRM3100)
 }
 
 /**
- * @brief RM3100³õÊ¼»¯º¯Êı
- * @param _tRM3100-RM3100¾ä±úÖ¸Õë
- * @param _ucNum-³õÊ¼»¯¸öÊı
+ * @brief RM3100åˆå§‹åŒ–å‡½æ•°
+ * @param _tRM3100-RM3100å¥æŸ„æŒ‡é’ˆ
+ * @param _ucNum-åˆå§‹åŒ–ä¸ªæ•°
  * @retval Null
 */
 void OCD_RM3100_Init(tagRM3100_T *_tRM3100,uint8_t _ucNum)
 {
 	uint8_t index;
 
-	/* ¸ù¾İÊ¹ÄÜ±êÖ¾ÒÀ´Î½øĞĞ³õÊ¼»¯ */
+	/* æ ¹æ®ä½¿èƒ½æ ‡å¿—ä¾æ¬¡è¿›è¡Œåˆå§‹åŒ– */
 	for(index = 0;index < _ucNum;index++)
 	{
-		/* Èç¹ûÊÇÓ²¼şSPIÇı¶¯ */
+		/* å¦‚æœæ˜¯ç¡¬ä»¶SPIé©±åŠ¨ */
 		if(_tRM3100[index].bSPIEnable == true)
 		{
 			Drv_SPI_Init(&_tRM3100[index].tSPI);
 		}
 
-		/* Èç¹ûÊÇÈí¼şSPIÇı¶¯ */
+		/* å¦‚æœæ˜¯è½¯ä»¶SPIé©±åŠ¨ */
 		else if(_tRM3100[index].bSPISoftEnable == true)
 		{
 			Drv_SPISoft_Init(&_tRM3100[index].tSoftSPI);
 		}
 
-		/* Á½Õß½Ô²»ÊÇ£¬±¨´í */
+		/* ä¸¤è€…çš†ä¸æ˜¯ï¼ŒæŠ¥é”™ */
 		else
 		{
 			Drv_HAL_Error(__FILE__, __LINE__);
 			while(1);
 		}
 
-		/* RM3100Ä£Ê½ÅäÖÃ */
+		/* RM3100æ¨¡å¼é…ç½® */
 		OCD_RM3100_ModeConfig(&_tRM3100[index]);
 	}
 }

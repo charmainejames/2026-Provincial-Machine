@@ -1,39 +1,39 @@
-#ifndef __DRV_CONF_H_
+ï»¿#ifndef __DRV_CONF_H_
 #define __DRV_CONF_H_
 
 #define DRIVER_VERSION	"2023/10/15 V2.8"
 
-/* RT-Thread¿ª¹Ø Ê¹ÓÃRTTÊ±Ğè½â³ı×¢ÊÍ£¬ÇÒÔÚ¹¤³ÌÖĞµ¼ÈëRTTÏà¹ØÄÚºË */ 
+/* RT-Threadå¼€å…³ ä½¿ç”¨RTTæ—¶éœ€è§£é™¤æ³¨é‡Šï¼Œä¸”åœ¨å·¥ç¨‹ä¸­å¯¼å…¥RTTç›¸å…³å†…æ ¸ */ 
 //#define RTT_ENABLE   
 
 #ifdef RTT_ENABLE
-#include <rtthread.h>		/* RTTÏà¹ØÍ·ÎÄ¼ş */
-#include "threadpool.h"		/* threadpoolÍ·ÎÄ¼ş */ 
+#include <rtthread.h>		/* RTTç›¸å…³å¤´æ–‡ä»¶ */
+#include "threadpool.h"		/* threadpoolå¤´æ–‡ä»¶ */ 
 #endif
 
-/* FreeRTOS¿ª¹Ø Ê¹ÓÃÊ±Ğè½â³ı×¢ÊÍ£¬ÇÒÔÚ¹¤³ÌÖĞµ¼ÈëFreeRTOSÏà¹ØÄÚºË */ 
+/* FreeRTOSå¼€å…³ ä½¿ç”¨æ—¶éœ€è§£é™¤æ³¨é‡Šï¼Œä¸”åœ¨å·¥ç¨‹ä¸­å¯¼å…¥FreeRTOSç›¸å…³å†…æ ¸ */ 
 //#define FREERTOS_ENABLE
 
 #ifdef FREERTOS_ENABLE
-#include "cmsis_os.h"		/* FreeRTOSÏà¹ØÍ·ÎÄ¼ş */
+#include "cmsis_os.h"		/* FreeRTOSç›¸å…³å¤´æ–‡ä»¶ */
 #include "croutine.h"
 #include "event_groups.h"
 #include "stream_buffer.h"
-#include "threadpool.h"		/* threadpoolÍ·ÎÄ¼ş */
+#include "threadpool.h"		/* threadpoolå¤´æ–‡ä»¶ */
 #endif
 
-#define PRINTF_UART	USART1				/* printfÊ¹ÓÃµÄ´®¿Ú */
+#define PRINTF_UART	USART1				/* printfä½¿ç”¨çš„ä¸²å£ */
 
-/* STM32Ğ¾Æ¬Ñ¡Ôñ */
+/* STM32èŠ¯ç‰‡é€‰æ‹© */
 #ifdef STM32F1_SGA_ENABLE
-	#define SYSTEM_CLOCK 	72			/* ÏµÍ³Ö÷ÆµÊ±ÖÓ£º72£¬µ¥Î»£ºM */
+	#define SYSTEM_CLOCK 	72			/* ç³»ç»Ÿä¸»é¢‘æ—¶é’Ÿï¼š72ï¼Œå•ä½ï¼šM */
 #endif
 
 #ifdef STM32L4_SGA_ENABLE
-	#define SYSTEM_CLOCK 	80			/* ÏµÍ³Ö÷ÆµÊ±ÖÓ£º80£¬µ¥Î»£ºM */
+	#define SYSTEM_CLOCK 	80			/* ç³»ç»Ÿä¸»é¢‘æ—¶é’Ÿï¼š80ï¼Œå•ä½ï¼šM */
 #endif
 
-/* Æô¶¯Ä£¿é */
+/* å¯åŠ¨æ¨¡å— */
 #define DRV_HAL_ENABLE
 #define DRV_HAL_GPIO_ENABLE
 #define DRV_HAL_DELAY_ENABLE
@@ -104,7 +104,7 @@
 #include "drv_hal_flash.h"
 #endif
 
-/* CÓïÑÔ±ê×¼¿â */
+/* Cè¯­è¨€æ ‡å‡†åº“ */
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdint.h>

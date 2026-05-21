@@ -1,6 +1,6 @@
-#ifndef __THREADPOOL_H_
+ï»¿#ifndef __THREADPOOL_H_
 #define __THREADPOOL_H_
 
-/* Ïß³ÌÈë¿Úº¯ÊıÉùÃ÷ */
+/* çº¿ç¨‹å…¥å£å‡½æ•°å£°æ˜ */
 
 #endif

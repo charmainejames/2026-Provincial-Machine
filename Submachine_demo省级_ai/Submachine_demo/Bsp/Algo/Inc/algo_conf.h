@@ -1,9 +1,10 @@
-#ifndef __ALGO_CONF_H_
+ï»¿#ifndef __ALGO_CONF_H_
 #define __ALGO_CONF_H_
 
 
-/* Algo²ãÍ·ÎÄ¼ş°üº¬Çø */
+/* Algoå±‚å¤´æ–‡ä»¶åŒ…å«åŒº */
 #include "algo_pid.h"
+#include "algo_geometry.h"
 
 
 #endif // !__ALGO_CONF_H_

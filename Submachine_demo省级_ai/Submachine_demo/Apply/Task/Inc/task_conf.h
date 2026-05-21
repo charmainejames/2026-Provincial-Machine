@@ -7,4 +7,5 @@
 #include "task_sysinit.h"
 #include "task_userinit.h"
 #include "task_thruster.h"
+#include "task_scan.h"
 #endif

@@ -1,30 +1,30 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: algo_func.c
+* æ–‡ä»¶å: algo_func.c
 
-* ÄÚÈİ¼òÊö£ºSGA¿âÖĞ¶îÍâ³£ÓÃº¯ÊıÎÄ¼ş
+* å†…å®¹ç®€è¿°ï¼šSGAåº“ä¸­é¢å¤–å¸¸ç”¨å‡½æ•°æ–‡ä»¶
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ		ÈÕÆÚ	  ×÷Õß				ËµÃ÷
-*  2.1   	2023-03-22	±«³Ìè´		±ä¸üÎÄ¼şÎ»ÖÃ
+* ç‰ˆæœ¬å·		æ—¥æœŸ	  ä½œè€…				è¯´æ˜
+*  2.1   	2023-03-22	é²ç¨‹ç’		å˜æ›´æ–‡ä»¶ä½ç½®
 
-* 1.1.6 	2022-09-24	±«³Ìè´		Ôö¼ÓHexÖÁDecµÄ×ª»»º¯Êı
+* 1.1.6 	2022-09-24	é²ç¨‹ç’		å¢åŠ Hexè‡³Decçš„è½¬æ¢å‡½æ•°
 
-* 1.0.1a 	2020-03-15	Àî»·Óî		ĞÂÔöSGA_StringToHexº¯Êı
-									ĞŞ¸ÄSGA_Function_Query_SubÖ´ĞĞÂß¼­¡¢²ÎÊıºÍ·µ»ØÖµ
+* 1.0.1a 	2020-03-15	æç¯å®‡		æ–°å¢SGA_StringToHexå‡½æ•°
+									ä¿®æ”¹SGA_Function_Query_Subæ‰§è¡Œé€»è¾‘ã€å‚æ•°å’Œè¿”å›å€¼
 
-* 1.0.0a 	2020-02-22	Àî»·Óî		´´½¨¸ÃÎÄ¼ş
+* 1.0.0a 	2020-02-22	æç¯å®‡		åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "algo_func.h"
 
 /**
- * @brief ²éÑ¯Ò»¸ö×Ö·û´®aÖĞÊÇ·ñ´æÔÚÁíÒ»¸ö×Ö·û´®b
- * @param _ucpStrA-×Ö·û´®aµØÖ·Ö¸Õë
- * @param _ucpStrB-×Ö·û´®bµØÖ·Ö¸Õë
+ * @brief æŸ¥è¯¢ä¸€ä¸ªå­—ç¬¦ä¸²aä¸­æ˜¯å¦å­˜åœ¨å¦ä¸€ä¸ªå­—ç¬¦ä¸²b
+ * @param _ucpStrA-å­—ç¬¦ä¸²aåœ°å€æŒ‡é’ˆ
+ * @param _ucpStrB-å­—ç¬¦ä¸²båœ°å€æŒ‡é’ˆ
  * @retval tag_StringInfo
 */
 tag_StringInfo Algo_Function_Query_Sub(uint8_t *_ucpStrA, uint8_t *_ucpStrB)
@@ -38,17 +38,17 @@ tag_StringInfo Algo_Function_Query_Sub(uint8_t *_ucpStrA, uint8_t *_ucpStrB)
 	{
 	   return pos;
 	}
-	/* ±éÀúsrc×Ö·û´® */
+	/* éå†srcå­—ç¬¦ä¸² */
 	while(*_ucpStrA)
 	{ 
-		/* ÓÃÀ´±éÀú×Ó´® */
+		/* ç”¨æ¥éå†å­ä¸² */
 		ucpSrc = _ucpStrA;
 		ucpSub = _ucpStrB;
 		pos.ulIndex++;
 		while(*ucpSrc++ == *ucpSub++)
 		{
 			usNum += 1;
-			if(*ucpSub == ':')	/* µ½ÁËsubµÄ½áÊøÎ»ÖÃ£¬·µ»ØsrcÎ»ÖÃ */
+			if(*ucpSub == ':')	/* åˆ°äº†subçš„ç»“æŸä½ç½®ï¼Œè¿”å›srcä½ç½® */
 			{
 				pos.ucpAddr = ucpSrc + 2;
 				pos.ulIndex += usNum;
@@ -65,10 +65,10 @@ tag_StringInfo Algo_Function_Query_Sub(uint8_t *_ucpStrA, uint8_t *_ucpStrB)
 #define SGA_INSERT_LENGTH	30
 static char ucpInsertBuffer[SGA_INSERT_LENGTH] = {0};
 /**
- * @brief Ïò×Ö·û´®1ÖĞµÄÖ¸¶¨Î»ÖÃ²åÈë×Ö·û´®2(×¢Òâ³¤¶È)
- * @param _ucpStrA-×Ö·û´®1µØÖ·Ö¸Õë
- * @param _ucpStrB-×Ö·û´®2µØÖ·Ö¸Õë
- * @param _usOffset-Æ«ÒÆÁ¿
+ * @brief å‘å­—ç¬¦ä¸²1ä¸­çš„æŒ‡å®šä½ç½®æ’å…¥å­—ç¬¦ä¸²2(æ³¨æ„é•¿åº¦)
+ * @param _ucpStrA-å­—ç¬¦ä¸²1åœ°å€æŒ‡é’ˆ
+ * @param _ucpStrB-å­—ç¬¦ä¸²2åœ°å€æŒ‡é’ˆ
+ * @param _usOffset-åç§»é‡
  * @retval Null
 */
 void Algo_Function_Insert_Sub(uint8_t *_ucpStrA, uint8_t *_ucpStrB, uint16_t _usOffset)
@@ -94,9 +94,9 @@ void Algo_Function_Insert_Sub(uint8_t *_ucpStrA, uint8_t *_ucpStrB, uint16_t _us
 }
 
 /**
- * @brief ×ª»»µ½uint8_t
- * @param _ucpBuffer-×Ö·û´®1µØÖ·Ö¸Õë
- * @param _ucpSrcBuffer-×Ö·û´®2µØÖ·Ö¸Õë
+ * @brief è½¬æ¢åˆ°uint8_t
+ * @param _ucpBuffer-å­—ç¬¦ä¸²1åœ°å€æŒ‡é’ˆ
+ * @param _ucpSrcBuffer-å­—ç¬¦ä¸²2åœ°å€æŒ‡é’ˆ
  * @retval Null
 */
 static void S_SGA_Function_InvertUint8(uint8_t *_ucpBuffer, uint8_t *_ucpSrcBuffer)  
@@ -114,9 +114,9 @@ static void S_SGA_Function_InvertUint8(uint8_t *_ucpBuffer, uint8_t *_ucpSrcBuff
 }  
 
 /**
- * @brief ×ª»»µ½uint16_t
- * @param _ucpBuffer-×Ö·û´®1µØÖ·Ö¸Õë
- * @param _ucpSrcBuffer-×Ö·û´®2µØÖ·Ö¸Õë
+ * @brief è½¬æ¢åˆ°uint16_t
+ * @param _ucpBuffer-å­—ç¬¦ä¸²1åœ°å€æŒ‡é’ˆ
+ * @param _ucpSrcBuffer-å­—ç¬¦ä¸²2åœ°å€æŒ‡é’ˆ
  * @retval Null
 */
 static void S_SGA_Function_InvertUint16(uint16_t *_ucpBuffer, uint16_t *_ucpSrcBuffer)  
@@ -134,10 +134,10 @@ static void S_SGA_Function_InvertUint16(uint16_t *_ucpBuffer, uint16_t *_ucpSrcB
 } 
 
 /**
- * @brief Crc16Î»Ğ£Ñé£¨modbus£©
- * @param _ucpMsg-ĞèÒªĞ£ÑéµÄÊı¾İÊı×éµØÖ·Ö¸Õë
- * @param _usDataLen-ĞèÒªĞ£ÑéµÄÊı¾İÊı×é³¤¶È
- * @retval uint16_t-2×Ö½ÚCRCĞ£Ñé½á¹û
+ * @brief Crc16ä½æ ¡éªŒï¼ˆmodbusï¼‰
+ * @param _ucpMsg-éœ€è¦æ ¡éªŒçš„æ•°æ®æ•°ç»„åœ°å€æŒ‡é’ˆ
+ * @param _usDataLen-éœ€è¦æ ¡éªŒçš„æ•°æ®æ•°ç»„é•¿åº¦
+ * @retval uint16_t-2å­—èŠ‚CRCæ ¡éªŒç»“æœ
 */
 uint16_t Algo_Function_Crc16_Modbus(uint8_t *_ucpMsg, uint16_t _usDataLen)
 {
@@ -166,10 +166,10 @@ uint16_t Algo_Function_Crc16_Modbus(uint8_t *_ucpMsg, uint16_t _usDataLen)
 }
 
 /**
- * @brief ×Ö·û´®×ªHex
- * @param _ucpStrA-ĞèÒª×ª»»µÄ×Ö·û´®
- * @param _ucLen-×ª»»³¤¶È
- * @retval uint32_t-×ª»»ºóµÄ½á¹û
+ * @brief å­—ç¬¦ä¸²è½¬Hex
+ * @param _ucpStrA-éœ€è¦è½¬æ¢çš„å­—ç¬¦ä¸²
+ * @param _ucLen-è½¬æ¢é•¿åº¦
+ * @retval uint32_t-è½¬æ¢åçš„ç»“æœ
 */
 uint32_t Algo_StringToHex(uint8_t *_ucpStrA, uint8_t _ucLen)
 {
@@ -183,9 +183,9 @@ uint32_t Algo_StringToHex(uint8_t *_ucpStrA, uint8_t _ucLen)
 }
 
 /**
- * @brief Ê®½øÖÆ×ªHexÏÔÊ¾£¨Èç23×ª»»Îª0x23£©
- * @param _ucDec-ĞèÒª×ª»»µÄÊ®½øÖÆÊı
- * @retval uint8_t-×ª»»ºóµÄÊ®Áù½øÖÆÊı
+ * @brief åè¿›åˆ¶è½¬Hexæ˜¾ç¤ºï¼ˆå¦‚23è½¬æ¢ä¸º0x23ï¼‰
+ * @param _ucDec-éœ€è¦è½¬æ¢çš„åè¿›åˆ¶æ•°
+ * @retval uint8_t-è½¬æ¢åçš„åå…­è¿›åˆ¶æ•°
 */
 uint8_t Algo_DecToHex(uint8_t _ucDec)
 {
@@ -196,9 +196,9 @@ uint8_t Algo_DecToHex(uint8_t _ucDec)
 }
 
 /**
- * @brief Ê®Áù½øÖÆ×ªDecÏÔÊ¾£¨Èç0x37×ª»»Îª55£©
- * @param _ucHex-ĞèÒª×ª»»µÄÊ®Áù½øÖÆÊı
- * @retval uint8_t-×ª»»ºóµÄÊ®½øÖÆÊı
+ * @brief åå…­è¿›åˆ¶è½¬Decæ˜¾ç¤ºï¼ˆå¦‚0x37è½¬æ¢ä¸º55ï¼‰
+ * @param _ucHex-éœ€è¦è½¬æ¢çš„åå…­è¿›åˆ¶æ•°
+ * @retval uint8_t-è½¬æ¢åçš„åè¿›åˆ¶æ•°
 */
 uint8_t Algo_HexToDec(uint8_t _ucHex)
 {

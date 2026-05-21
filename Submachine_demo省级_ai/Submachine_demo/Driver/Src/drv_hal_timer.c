@@ -1,17 +1,17 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: drv_hal_timer.c
+* æ–‡ä»¶å: drv_hal_timer.c
 
-* ÄÚÈİ¼òÊö£º¶¨Ê±Æ÷TimerÇı¶¯ÎÄ¼ş
+* å†…å®¹ç®€è¿°ï¼šå®šæ—¶å™¨Timeré©±åŠ¨æ–‡ä»¶
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ		ÈÕÆÚ		×÷Õß		ËµÃ÷
-*  2.8	 	2023-09-04	  ±«³Ìè´	¶¨Ê±Æ÷Éè¶¨¼ÆÊ±¼ò»¯
+* ç‰ˆæœ¬å·		æ—¥æœŸ		ä½œè€…		è¯´æ˜
+*  2.8	 	2023-09-04	  é²ç¨‹ç’	å®šæ—¶å™¨è®¾å®šè®¡æ—¶ç®€åŒ–
 
-* 1.0.0a 	2020-02-22	  Àî»·Óî	´´½¨¸ÃÎÄ¼ş
+* 1.0.0a 	2020-02-22	  æç¯å®‡	åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "drv_hal_conf.h"
@@ -19,8 +19,8 @@
 #ifdef DRV_HAL_TIMER_ENABLE
 
 /**
- * @brief ¶¨Ê±Æ÷Ê±ÖÓÊ¹ÄÜ
- * @param _tTimer-Timer½á¹¹ÌåÖ¸Õë
+ * @brief å®šæ—¶å™¨æ—¶é’Ÿä½¿èƒ½
+ * @param _tTimer-Timerç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_TIM_CLKEnable(tagTIM_T *_tTimer) 
@@ -60,8 +60,8 @@ static void S_TIM_CLKEnable(tagTIM_T *_tTimer)
 }
 
 /**
- * @brief ¶¨Ê±Æ÷ÖĞ¶ÏÅäÖÃ
- * @param _tTimer-Timer½á¹¹ÌåÖ¸Õë
+ * @brief å®šæ—¶å™¨ä¸­æ–­é…ç½®
+ * @param _tTimer-Timerç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_TIM_NVICConfig(tagTIM_T *_tTimer)
@@ -99,8 +99,8 @@ static void S_TIM_NVICConfig(tagTIM_T *_tTimer)
 }
 
 /**
- * @brief ¶¨Ê±Æ÷²ÎÊıÆ¥Åäº¯Êı
- * @param _tTimer-Timer½á¹¹ÌåÖ¸Õë
+ * @brief å®šæ—¶å™¨å‚æ•°åŒ¹é…å‡½æ•°
+ * @param _tTimer-Timerç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_TIM_ParamMatch(tagTIM_T *_tTimer)
@@ -110,15 +110,15 @@ static void S_TIM_ParamMatch(tagTIM_T *_tTimer)
 	DEFAULT(_tTimer->ucPriority,2);
 	DEFAULT(_tTimer->ucSubPriority,2);
 
-	/* Èç¹ûÓÃ»§Ö¸¶¨ÁË·ÖÆµÏµÊıºÍÖØÔØÖµ£¬ÔòÍË³öº¯Êı */
+	/* å¦‚æœç”¨æˆ·æŒ‡å®šäº†åˆ†é¢‘ç³»æ•°å’Œé‡è½½å€¼ï¼Œåˆ™é€€å‡ºå‡½æ•° */
 	if((_tTimer->tTimerHandle.Init.Period != 0) && (_tTimer->tTimerHandle.Init.Prescaler != 0))
 		return;
 
-	/* fTimingLengthÏŞ·ù */
+	/* fTimingLengthé™å¹… */
 	if(_tTimer->fTimingLength < 0)	_tTimer->fTimingLength = 0;
 	else if(_tTimer->fTimingLength > 59650.503125)	_tTimer->fTimingLength = 59650.503125;
 
-	/* ¸ù¾İfTimingLengthÆ¥Åä·ÖÆµÏµÊıºÍÖØÔØÖµ */
+	/* æ ¹æ®fTimingLengthåŒ¹é…åˆ†é¢‘ç³»æ•°å’Œé‡è½½å€¼ */
 	if(_tTimer->fTimingLength > 52428)
 	{
 		_tTimer->tTimerHandle.Init.Prescaler = 65535-1;
@@ -142,8 +142,8 @@ static void S_TIM_ParamMatch(tagTIM_T *_tTimer)
 }
 
 /**
- * @brief ¶¨Ê±Æ÷ÅäÖÃ
- * @param _tTimer-Timer½á¹¹ÌåÖ¸Õë
+ * @brief å®šæ—¶å™¨é…ç½®
+ * @param _tTimer-Timerç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_TIM_PramConfig(tagTIM_T *_tTimer)
@@ -157,8 +157,8 @@ static void S_TIM_PramConfig(tagTIM_T *_tTimer)
 }
 
 /**
- * @brief ¶¨Ê±Æ÷ÖØÖÃ
- * @param _tTimer-Timer½á¹¹ÌåÖ¸Õë
+ * @brief å®šæ—¶å™¨é‡ç½®
+ * @param _tTimer-Timerç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 void Drv_Timer_Reset(tagTIM_T *_tTimer)
@@ -167,8 +167,8 @@ void Drv_Timer_Reset(tagTIM_T *_tTimer)
 }
 
 /**
- * @brief ¶¨Ê±Æ÷Ê¹ÄÜ
- * @param _tTimer-Timer½á¹¹ÌåÖ¸Õë
+ * @brief å®šæ—¶å™¨ä½¿èƒ½
+ * @param _tTimer-Timerç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 void Drv_Timer_Enable(tagTIM_T *_tTimer)
@@ -177,8 +177,8 @@ void Drv_Timer_Enable(tagTIM_T *_tTimer)
 }
 
 /**
- * @brief ¶¨Ê±Æ÷Ê§ÄÜ
- * @param _tTimer-Timer½á¹¹ÌåÖ¸Õë
+ * @brief å®šæ—¶å™¨å¤±èƒ½
+ * @param _tTimer-Timerç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 void Drv_Timer_Disable(tagTIM_T *_tTimer)
@@ -187,21 +187,21 @@ void Drv_Timer_Disable(tagTIM_T *_tTimer)
 }
 
 /**
- * @brief ¶¨Ê±Æ÷³õÊ¼»¯
- * @param _tTimer-Timer½á¹¹ÌåÖ¸Õë
- * @param _num-¶¨Ê±Æ÷ÊıÁ¿
+ * @brief å®šæ—¶å™¨åˆå§‹åŒ–
+ * @param _tTimer-Timerç»“æ„ä½“æŒ‡é’ˆ
+ * @param _num-å®šæ—¶å™¨æ•°é‡
  * @retval Null
 */
 void Drv_Timer_Init(tagTIM_T *_tTimer)
 {
-	S_TIM_CLKEnable(_tTimer);		/* Ê¹ÄÜTIMÊ±ÖÓ */	
+	S_TIM_CLKEnable(_tTimer);		/* ä½¿èƒ½TIMæ—¶é’Ÿ */	
 	S_TIM_ParamMatch(_tTimer);	
 	S_TIM_PramConfig(_tTimer);
 }
 
 /**
- * @brief ¶¨Ê±Æ÷ÖĞ¶Ï
- * @param _tTimer-Timer½á¹¹ÌåÖ¸Õë
+ * @brief å®šæ—¶å™¨ä¸­æ–­
+ * @param _tTimer-Timerç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 void Drv_Timer_IRQHandler(tagTIM_T *_tTimer)

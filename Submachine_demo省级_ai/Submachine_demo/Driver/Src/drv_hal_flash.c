@@ -1,15 +1,15 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: drv_hal_flash.c
+* æ–‡ä»¶å: drv_hal_flash.c
 
-* ÄÚÈİ¼òÊö£ºFlashÇı¶¯ÎÄ¼ş
+* å†…å®¹ç®€è¿°ï¼šFlashé©±åŠ¨æ–‡ä»¶
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ	   ÈÕÆÚ		  ×÷Õß		  ËµÃ÷
-*  2.8	 	2023-09-22	±«³Ìè´		´´½¨¸ÃÎÄ¼ş
+* ç‰ˆæœ¬å·	   æ—¥æœŸ		  ä½œè€…		  è¯´æ˜
+*  2.8	 	2023-09-22	é²ç¨‹ç’		åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "drv_hal_conf.h"
@@ -19,33 +19,33 @@
 #ifdef STM32F1_SGA_ENABLE
 
 /**
- * @brief Flash²Á³ıÒ³£¨F1ÏµÁĞ£©
+ * @brief Flashæ“¦é™¤é¡µï¼ˆF1ç³»åˆ—ï¼‰
  * 
- * @param _ulPageAddr ÆğÊ¼µØÖ·
- * @param _ulNum ²Á³ıµÄÒ³Êı
- * @return int 0 ³É¹¦ -1 Ê§°Ü
+ * @param _ulPageAddr èµ·å§‹åœ°å€
+ * @param _ulNum æ“¦é™¤çš„é¡µæ•°
+ * @return int 0 æˆåŠŸ -1 å¤±è´¥
  */
 int Drv_Flash_Erase_Page(uint32_t _ulPageAddr,uint32_t _ulNum)
 {
-    /* ½âËøFlash */
+    /* è§£é”Flash */
 	HAL_FLASH_Unlock();
 
-    /* ²Á³ıFlash*/
+    /* æ“¦é™¤Flash*/
 	FLASH_EraseInitTypeDef FlashSet;
 	FlashSet.TypeErase = FLASH_TYPEERASE_PAGES;
 	FlashSet.PageAddress = _ulPageAddr;
 	FlashSet.NbPages = _ulNum;
 
-    /*ÉèÖÃPageError£¬µ÷ÓÃ²Á³ıº¯Êı*/
+    /*è®¾ç½®PageErrorï¼Œè°ƒç”¨æ“¦é™¤å‡½æ•°*/
 	uint32_t PageError = 0;
 	if(HAL_FLASHEx_Erase(&FlashSet, &PageError) == HAL_ERROR)
     {
-        /* Ëø¶¨flash */
+        /* é”å®šflash */
 	    HAL_FLASH_Lock();
         return -1;
     }
 
-    /* Ëø¶¨flash */
+    /* é”å®šflash */
 	HAL_FLASH_Lock();
 
     return 0;
@@ -55,9 +55,9 @@ int Drv_Flash_Erase_Page(uint32_t _ulPageAddr,uint32_t _ulNum)
 #ifdef STM32F4_SGA_ENABLE
 
 /**
- * @brief »ñÈ¡µØÖ·ËùÔÚµÄsector
- * @param _ulAddress  ÆğÊ¼µØÖ·	
- * @return uint32_t ulSector ÉÈÇøºÅ
+ * @brief è·å–åœ°å€æ‰€åœ¨çš„sector
+ * @param _ulAddress  èµ·å§‹åœ°å€	
+ * @return uint32_t ulSector æ‰‡åŒºå·
  */
 static uint32_t S_Flash_Get_Sector(uint32_t _ulAddress)
 {
@@ -80,10 +80,10 @@ static uint32_t S_Flash_Get_Sector(uint32_t _ulAddress)
 }
 
 /**
- * @brief Flash²Á³ıSector£¨F4ÏµÁĞ£©
- * @param _ulStart_Addr  ÆğÊ¼µØÖ·	
- * @param _ulEnd_Addr    ½áÊøµØÖ·
- * @return 0 ³É¹¦ -1 Ê§°Ü
+ * @brief Flashæ“¦é™¤Sectorï¼ˆF4ç³»åˆ—ï¼‰
+ * @param _ulStart_Addr  èµ·å§‹åœ°å€	
+ * @param _ulEnd_Addr    ç»“æŸåœ°å€
+ * @return 0 æˆåŠŸ -1 å¤±è´¥
  */
 int Drv_Flash_Erase_Sector(uint32_t _ulStart_Addr, uint32_t _ulEnd_Addr)
 {
@@ -91,10 +91,10 @@ int Drv_Flash_Erase_Sector(uint32_t _ulStart_Addr, uint32_t _ulEnd_Addr)
 	uint32_t SectorError = 0;
 	FLASH_EraseInitTypeDef FlashSet;
 
-	/* ½âËøflash */
+	/* è§£é”flash */
 	HAL_FLASH_Unlock();
 	
-	/* »ñÈ¡ÆğÊ¼µØÖ·µÄÉÈÇø£¬²Á³ıFLASH*/
+	/* è·å–èµ·å§‹åœ°å€çš„æ‰‡åŒºï¼Œæ“¦é™¤FLASH*/
 	UserStartSector = S_Flash_Get_Sector(_ulStart_Addr);
 
 	FlashSet.TypeErase = TYPEERASE_SECTORS;
@@ -102,15 +102,15 @@ int Drv_Flash_Erase_Sector(uint32_t _ulStart_Addr, uint32_t _ulEnd_Addr)
 	FlashSet.NbSectors = S_Flash_Get_Sector(_ulEnd_Addr) - UserStartSector;
 	FlashSet.VoltageRange = VOLTAGE_RANGE_3;
     
-	/*µ÷ÓÃ²Á³ıº¯Êı*/
+	/*è°ƒç”¨æ“¦é™¤å‡½æ•°*/
 	if(HAL_FLASHEx_Erase(&FlashSet, &SectorError) == HAL_ERROR)
     {
-        /* Ëø¶¨Flash */
+        /* é”å®šFlash */
 	    HAL_FLASH_Lock();
         return -1;
     }
 	
-	/* Ëø¶¨Flash */
+	/* é”å®šFlash */
 	HAL_FLASH_Lock();
 	return 0;
 }
@@ -118,32 +118,32 @@ int Drv_Flash_Erase_Sector(uint32_t _ulStart_Addr, uint32_t _ulEnd_Addr)
 #endif
 
 /**
- * @brief FlashĞ´Èô¸É¸öÊı¾İ(word)
- * @param _ulAddr      Ğ´ÈëµÄµØÖ·
- * @param _ulpBuf      Ğ´ÈëÊı¾İµÄÆğÊ¼µØÖ·
- * @param _ulWordSize  ³¤¶È
+ * @brief Flashå†™è‹¥å¹²ä¸ªæ•°æ®(word)
+ * @param _ulAddr      å†™å…¥çš„åœ°å€
+ * @param _ulpBuf      å†™å…¥æ•°æ®çš„èµ·å§‹åœ°å€
+ * @param _ulWordSize  é•¿åº¦
  * @return NULL
  */
 void Drv_Flash_Write(uint32_t _ulAddr,uint32_t *_ulpBuf,uint32_t _ulWordSize)
 {
-	/* ½âËøFlash */
+	/* è§£é”Flash */
 	HAL_FLASH_Unlock();
 
-	/* ÉÕĞ´µ½Ö¸¶¨µØÖ· */
+	/* çƒ§å†™åˆ°æŒ‡å®šåœ°å€ */
 	for(uint32_t i = 0;i < _ulWordSize;i++)
 		HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD,_ulAddr + 4*i,_ulpBuf[i]);
 
-	/* Ëø¶¨Flash */
+	/* é”å®šFlash */
 	HAL_FLASH_Lock();
     
     return;
 }
 
 /**
- * @brief Flash¶ÁÈô¸É¸öÊı¾İ(word)
- * @param _ulAddr      ¶ÁÊı¾İµÄµØÖ·
- * @param _ulpBuf      ¶Á³öÊı¾İµÄÊı×éÖ¸Õë
- * @param _ulWordSize  ³¤¶È
+ * @brief Flashè¯»è‹¥å¹²ä¸ªæ•°æ®(word)
+ * @param _ulAddr      è¯»æ•°æ®çš„åœ°å€
+ * @param _ulpBuf      è¯»å‡ºæ•°æ®çš„æ•°ç»„æŒ‡é’ˆ
+ * @param _ulWordSize  é•¿åº¦
  * @return NULL
  */
 void Drv_Flash_Read(uint32_t _ulAddr, uint32_t *_ulpBuf,uint32_t _ulWordSize)

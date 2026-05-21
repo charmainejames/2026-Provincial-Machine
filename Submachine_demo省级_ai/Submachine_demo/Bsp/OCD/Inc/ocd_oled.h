@@ -1,4 +1,4 @@
-#ifndef __OCD_OLED_H_
+ï»¿#ifndef __OCD_OLED_H_
 #define __OCD_OLED_H_
 
 #include "drv_hal_conf.h"
@@ -11,9 +11,9 @@ typedef struct
 #define OLED_CMD    0
 #define OLED_DATA   1
 
-#define OLED_ADDR                       0x78    /* OLEDÉè±¸µØÖ· */
-#define DEACTIVATE_SCROLL			    0x2E	/* ¹Ø±Õ¹ö¶¯ÏÔÊ¾¹¦ÄÜ */
-#define SET_VERTICAL_SCROLL_AREA		0xA3	/* ÉèÖÃ´¹Ö±¹ö¶¯·¶Î§ÃüÁî */
+#define OLED_ADDR                       0x78    /* OLEDè®¾å¤‡åœ°å€ */
+#define DEACTIVATE_SCROLL			    0x2E	/* å…³é—­æ»šåŠ¨æ˜¾ç¤ºåŠŸèƒ½ */
+#define SET_VERTICAL_SCROLL_AREA		0xA3	/* è®¾ç½®å‚ç›´æ»šåŠ¨èŒƒå›´å‘½ä»¤ */
 #define MAX_COLUMN                      128
 
 void OCD_OLED_DisplayON(tagOLED_T *_tOLED);

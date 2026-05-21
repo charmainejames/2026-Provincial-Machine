@@ -1,16 +1,16 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: drv_hal_adc.c
+* æ–‡ä»¶å: drv_hal_adc.c
 
-* ÄÚÈİ¼òÊö£ºADCÇı¶¯ÎÄ¼ş
+* å†…å®¹ç®€è¿°ï¼šADCé©±åŠ¨æ–‡ä»¶
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ	ÈÕÆÚ		×÷Õß		ËµÃ÷
+* ç‰ˆæœ¬å·	æ—¥æœŸ		ä½œè€…		è¯´æ˜
 
-* 1.0.0a 	2020-02-22	Àî»·Óî		´´½¨¸ÃÎÄ¼ş
+* 1.0.0a 	2020-02-22	æç¯å®‡		åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "drv_hal_conf.h"
@@ -18,7 +18,7 @@
 #ifdef DRV_HAL_ADC_ENABLE
 
 /**
- * @brief ADCÊ±ÖÓÅäÖÃº¯Êı
+ * @brief ADCæ—¶é’Ÿé…ç½®å‡½æ•°
  * @param Null
  * @retval Null
 */
@@ -37,8 +37,8 @@ static void S_ADC_CLKConfig(void)
 }
 
 /**
- * @brief ADCÊ±ÖÓÊ¹ÄÜº¯Êı
- * @param _tADC-ADC½á¹¹ÌåÖ¸Õë
+ * @brief ADCæ—¶é’Ÿä½¿èƒ½å‡½æ•°
+ * @param _tADC-ADCç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_ADC_CLKEnable(tagADC_T *_tADC)
@@ -62,8 +62,8 @@ static void S_ADC_CLKEnable(tagADC_T *_tADC)
 }
 
 /**
- * @brief ADC²ÎÊıÅäÖÃº¯Êı
- * @param _tADC-ADC½á¹¹ÌåÖ¸Õë
+ * @brief ADCå‚æ•°é…ç½®å‡½æ•°
+ * @param _tADC-ADCç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_ADC_GPIOConfig(tagADC_T *_tADC)
@@ -72,8 +72,8 @@ static void S_ADC_GPIOConfig(tagADC_T *_tADC)
 }
 
 /**
- * @brief ADC²ÎÊıÅäÖÃº¯Êı
- * @param _tADC-ADC½á¹¹ÌåÖ¸Õë
+ * @brief ADCå‚æ•°é…ç½®å‡½æ•°
+ * @param _tADC-ADCç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_ADC_ParamConfig(tagADC_T *_tADC)
@@ -84,7 +84,7 @@ static void S_ADC_ParamConfig(tagADC_T *_tADC)
 	}
 
 #ifdef STM32F1_SGA_ENABLE	
-	HAL_ADCEx_Calibration_Start(&_tADC->tADCHandle);				  /* Ğ£×¼ADC */
+	HAL_ADCEx_Calibration_Start(&_tADC->tADCHandle);				  /* æ ¡å‡†ADC */
 #endif
 	
 	if (HAL_ADC_ConfigChannel(&_tADC->tADCHandle, &_tADC->tADCChannel) != HAL_OK)
@@ -94,9 +94,9 @@ static void S_ADC_ParamConfig(tagADC_T *_tADC)
 }
 
 /**
- * @brief ADC³õÊ¼»¯º¯Êı
- * @param _tADC-ADC½á¹¹ÌåÖ¸Õë
- * @param _ucNum-³õÊ¼»¯ADC¸öÊı
+ * @brief ADCåˆå§‹åŒ–å‡½æ•°
+ * @param _tADC-ADCç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucNum-åˆå§‹åŒ–ADCä¸ªæ•°
  * @retval Null
 */
 void Drv_ADC_Init(tagADC_T *_tADC, uint8_t _ucNum)
@@ -105,24 +105,24 @@ void Drv_ADC_Init(tagADC_T *_tADC, uint8_t _ucNum)
 	
 	for(index = 0; index < _ucNum; index++)
 	{
-		S_ADC_CLKConfig();					/* adcÊ±ÖÓÊ÷ÅäÖÃ */
-		S_ADC_CLKEnable(&_tADC[index]);		/* adcÊ±ÖÓÊ¹ÄÜ */
-		S_ADC_GPIOConfig(&_tADC[index]);	/* adcµÄGPIOÅäÖÃ */
-		S_ADC_ParamConfig(&_tADC[index]);	/* adc²ÎÊıÅäÖÃ */
+		S_ADC_CLKConfig();					/* adcæ—¶é’Ÿæ ‘é…ç½® */
+		S_ADC_CLKEnable(&_tADC[index]);		/* adcæ—¶é’Ÿä½¿èƒ½ */
+		S_ADC_GPIOConfig(&_tADC[index]);	/* adcçš„GPIOé…ç½® */
+		S_ADC_ParamConfig(&_tADC[index]);	/* adcå‚æ•°é…ç½® */
 	}
 }
 
 /**
- * @brief ADCÂÖÑ¯¶ÁÈ¡º¯Êı
- * @param _tADC-ADC½á¹¹ÌåÖ¸Õë
- * @retval uint16_t-¶ÁÈ¡µ½µÄADCÖ±½ÓÖµ
+ * @brief ADCè½®è¯¢è¯»å–å‡½æ•°
+ * @param _tADC-ADCç»“æ„ä½“æŒ‡é’ˆ
+ * @retval uint16_t-è¯»å–åˆ°çš„ADCç›´æ¥å€¼
 */
 uint16_t Drv_ADC_PollGetData(tagADC_T *_tADC)
 {
-	HAL_ADC_ConfigChannel(&_tADC->tADCHandle, &_tADC->tADCChannel);	/* Í¨µÀÅäÖÃ */
+	HAL_ADC_ConfigChannel(&_tADC->tADCHandle, &_tADC->tADCChannel);	/* é€šé“é…ç½® */
 		
-	HAL_ADC_Start(&_tADC->tADCHandle);								/* ¿ªÆôADC */
-	HAL_ADC_PollForConversion(&_tADC->tADCHandle, POLL_NUM);		/* ÂÖÑ¯×ª»» */
+	HAL_ADC_Start(&_tADC->tADCHandle);								/* å¼€å¯ADC */
+	HAL_ADC_PollForConversion(&_tADC->tADCHandle, POLL_NUM);		/* è½®è¯¢è½¬æ¢ */
 	
 	if(HAL_IS_BIT_SET(HAL_ADC_GetState(&_tADC->tADCHandle),HAL_ADC_STATE_REG_EOC))
 		return (uint16_t)HAL_ADC_GetValue(&_tADC->tADCHandle);
@@ -131,9 +131,9 @@ uint16_t Drv_ADC_PollGetData(tagADC_T *_tADC)
 }
 
 /**
- * @brief ADCÂÖÑ¯¶ÁÈ¡º¯Êı
- * @param _tADC-ADC½á¹¹ÌåÖ¸Õë
- * @retval float-¶ÁÈ¡µ½µÄADC×ª»»ºóµÄÊµ¼ÊÖµ
+ * @brief ADCè½®è¯¢è¯»å–å‡½æ•°
+ * @param _tADC-ADCç»“æ„ä½“æŒ‡é’ˆ
+ * @retval float-è¯»å–åˆ°çš„ADCè½¬æ¢åçš„å®é™…å€¼
 */
 float Drv_ADC_PollGetValue(tagADC_T *_tADC)
 {
@@ -141,15 +141,15 @@ float Drv_ADC_PollGetValue(tagADC_T *_tADC)
 	uint8_t ucNum;
 	float fADCVal;
 	
-	/* Ñ­»·¶ÁÈ¡£¬È¡Æ½¾ùÖµ */
+	/* å¾ªç¯è¯»å–ï¼Œå–å¹³å‡å€¼ */
 	for(ucNum = 0;ucNum < _tADC->ucAverageNum;ucNum++)
 	{
-		ulADCData += Drv_ADC_PollGetData(_tADC);		/* ·µ»Ø×î½üÒ»´ÎADC1¹æÔò×éµÄ×ª»»½á¹û */
+		ulADCData += Drv_ADC_PollGetData(_tADC);		/* è¿”å›æœ€è¿‘ä¸€æ¬¡ADC1è§„åˆ™ç»„çš„è½¬æ¢ç»“æœ */
 		Drv_Delay_Ms(5);
 	}
 	
-	ulADCData /= _tADC->ucAverageNum;			/* È¡Æ½¾ùÖµ */
-	fADCVal = (float)ulADCData * (3.3 / 4096);	/* ËãÊ½»»Ëã */
+	ulADCData /= _tADC->ucAverageNum;			/* å–å¹³å‡å€¼ */
+	fADCVal = (float)ulADCData * (3.3 / 4096);	/* ç®—å¼æ¢ç®— */
 	
 	return fADCVal;
 }

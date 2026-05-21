@@ -1,10 +1,11 @@
-#ifndef __OCD_CONF_H_
+ï»¿#ifndef __OCD_CONF_H_
 #define __OCD_CONF_H_
 
 #include "drv_hal.h"
 
-/* OCD²ãÍ·ÎÄ¼ş°üº¬Çø */
+/* OCDå±‚å¤´æ–‡ä»¶åŒ…å«åŒº */
 #include "ocd_jy901.h"
+#include "ocd_dyp_l08.h"
 
 #endif
 

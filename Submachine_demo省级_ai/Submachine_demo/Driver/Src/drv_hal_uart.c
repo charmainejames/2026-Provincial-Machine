@@ -1,31 +1,31 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼þÃû: drv_hal_uart.c
+* æ–‡ä»¶å: drv_hal_uart.c
 
-* ÄÚÈÝ¼òÊö£º´®¿ÚÇý¶¯ÎÄ¼þ
+* å†…å®¹ç®€è¿°ï¼šä¸²å£é©±åŠ¨æ–‡ä»¶
 
-* ÎÄ¼þÀúÊ·£º
+* æ–‡ä»¶åŽ†å²ï¼š
 
-* °æ±¾ºÅ	  ÈÕÆÚ		  ×÷Õß				ËµÃ÷
-*  2.8 		2023-10-15   ±«³Ìè´		ÐÞ¸´´®¿ÚDMA·¢ËÍµÄÎÊÌâ
+* ç‰ˆæœ¬å·	  æ—¥æœŸ		  ä½œè€…				è¯´æ˜Ž
+*  2.8 		2023-10-15   é²ç¨‹ç’		ä¿®å¤ä¸²å£DMAå‘é€çš„é—®é¢˜
 
-*  2.7		2023-07-06   ±«³Ìè´		´®¿Ú³õÊ¼»¯½á¹¹ÌåÔö¼ÓÄ¬ÈÏÖµ£¬´®¿ÚÖÐ¶Ï½ÓÊÕ´¦Àí×Óº¯ÊýÔö¼Ó½áÎ²·û¼ì²â²ÎÊý
+*  2.7		2023-07-06   é²ç¨‹ç’		ä¸²å£åˆå§‹åŒ–ç»“æž„ä½“å¢žåŠ é»˜è®¤å€¼ï¼Œä¸²å£ä¸­æ–­æŽ¥æ”¶å¤„ç†å­å‡½æ•°å¢žåŠ ç»“å°¾ç¬¦æ£€æµ‹å‚æ•°
 
-*  2.4		2023-05-12   ±«³Ìè´		ÐÂÔö´®¿ÚÖÐ¶Ï½ÓÊÕÏà¹Øº¯Êý£¬¸ñÊ½ÓÅ»¯
+*  2.4		2023-05-12   é²ç¨‹ç’		æ–°å¢žä¸²å£ä¸­æ–­æŽ¥æ”¶ç›¸å…³å‡½æ•°ï¼Œæ ¼å¼ä¼˜åŒ–
 
-* 2.2.1		2023-04-03   ±«³Ìè´		´®¿ÚÐÅÏ¢½á¹¹Ìå³ÉÔ±¸ü¸Ä£¬ÐÂÔö´®¿ÚDMAÊý¾Ý½ÓÊÕº¯Êý
+* 2.2.1		2023-04-03   é²ç¨‹ç’		ä¸²å£ä¿¡æ¯ç»“æž„ä½“æˆå‘˜æ›´æ”¹ï¼Œæ–°å¢žä¸²å£DMAæ•°æ®æŽ¥æ”¶å‡½æ•°
 
-*  1.2		2023-02-26   ±«³Ìè´		ÐÂÔö´®¿ÚDMA·¢ËÍÏà¹Øº¯Êý£¬ÓÅ»¯×¢ÊÍ
+*  1.2		2023-02-26   é²ç¨‹ç’		æ–°å¢žä¸²å£DMAå‘é€ç›¸å…³å‡½æ•°ï¼Œä¼˜åŒ–æ³¨é‡Š
 
-* 1.1.7 	2022-10-11   ±«³Ìè´		ÐÂÔö´®¿ÚDMA½ÓÊÕÏà¹Øº¯Êý
+* 1.1.7 	2022-10-11   é²ç¨‹ç’		æ–°å¢žä¸²å£DMAæŽ¥æ”¶ç›¸å…³å‡½æ•°
 
-* 1.1.4 	2022-09-03   ±«³Ìè´		ÐÂÔö´®¿ÚÒý½ÅÖØÓ³Éä´úÂë
+* 1.1.4 	2022-09-03   é²ç¨‹ç’		æ–°å¢žä¸²å£å¼•è„šé‡æ˜ å°„ä»£ç 
 
-* 1.1.1 	2022-08-04   ±«³Ìè´		ÐÞ¸´ÁË´®¿ÚÊä³ö²»ÕýÈ·µÄÎÊÌâ
+* 1.1.1 	2022-08-04   é²ç¨‹ç’		ä¿®å¤äº†ä¸²å£è¾“å‡ºä¸æ­£ç¡®çš„é—®é¢˜
 
-* 1.0.0a 	2020-02-22	 Àî»·Óî		´´½¨¸ÃÎÄ¼þ
+* 1.0.0a 	2020-02-22	 æŽçŽ¯å®‡		åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "drv_hal_conf.h"
@@ -33,8 +33,8 @@
 #ifdef DRV_HAL_UART_ENABLE
 
 /**
- * @brief ´®¿ÚÖÐ¶ÏÅäÖÃº¯Êý
- * @param _tUART-´®¿ÚÊµÀýÖ¸Õë
+ * @brief ä¸²å£ä¸­æ–­é…ç½®å‡½æ•°
+ * @param _tUART-ä¸²å£å®žä¾‹æŒ‡é’ˆ
  * @retval Null 
 */
 static void S_Uart_NVICConfig(tagUART_T *_tUART)
@@ -67,13 +67,13 @@ static void S_Uart_NVICConfig(tagUART_T *_tUART)
 }
 
 /**
- * @brief ´®¿ÚDMAÖÐ¶ÏÅäÖÃº¯Êý
- * @param _tUART-´®¿ÚÊµÀýÖ¸Õë
+ * @brief ä¸²å£DMAä¸­æ–­é…ç½®å‡½æ•°
+ * @param _tUART-ä¸²å£å®žä¾‹æŒ‡é’ˆ
  * @retval Null 
 */
 static void S_Uart_DMA_NVICConfig(tagUART_T *_tUART)
 {
-	/* DMA½ÓÊÕÊ¹ÄÜ */
+	/* DMAæŽ¥æ”¶ä½¿èƒ½ */
 	if(_tUART->tUartDMA.bRxEnable == true)
 	{
 		if(_tUART->tUARTHandle.Instance == USART1)
@@ -102,7 +102,7 @@ static void S_Uart_DMA_NVICConfig(tagUART_T *_tUART)
 		}
 	}
 	
-	/* DMA·¢ËÍÊ¹ÄÜ */
+	/* DMAå‘é€ä½¿èƒ½ */
 	if(_tUART->tUartDMA.bTxEnable == true)
 	{
 		if(_tUART->tUARTHandle.Instance == USART1)
@@ -133,13 +133,13 @@ static void S_Uart_DMA_NVICConfig(tagUART_T *_tUART)
 }
 
 /**
- * @brief ´®¿Ú²ÎÊýÅäÖÃº¯Êý
- * @param _tUART-´®¿ÚÊµÀýÖ¸Õë
+ * @brief ä¸²å£å‚æ•°é…ç½®å‡½æ•°
+ * @param _tUART-ä¸²å£å®žä¾‹æŒ‡é’ˆ
  * @retval Null
 */
 static void S_Uart_ParamConfig(tagUART_T *_tUART)
 {
-	/* µ÷ÓÃ´®¿Ú³õÊ¼»¯º¯Êý */
+	/* è°ƒç”¨ä¸²å£åˆå§‹åŒ–å‡½æ•° */
 	if (HAL_UART_Init(&_tUART->tUARTHandle) != HAL_OK)
 	{
 		Drv_HAL_Error(__FILE__, __LINE__);
@@ -147,19 +147,19 @@ static void S_Uart_ParamConfig(tagUART_T *_tUART)
 }
 
 /**
- * @brief ´®¿ÚDMA²ÎÊýÅäÖÃº¯Êý
- * @param _tUART-´®¿ÚÊµÀýÖ¸Õë
+ * @brief ä¸²å£DMAå‚æ•°é…ç½®å‡½æ•°
+ * @param _tUART-ä¸²å£å®žä¾‹æŒ‡é’ˆ
  * @retval Null
 */
 static void S_Uart_DMAParamConfig(tagUART_T *_tUART)
 {
-	/* Èç¹ûÊ¹ÄÜDMA½ÓÊÕ */
+	/* å¦‚æžœä½¿èƒ½DMAæŽ¥æ”¶ */
 	if(_tUART->tUartDMA.bRxEnable == true)
 	{
 		if(HAL_DMA_Init(&_tUART->tUartDMA.tDMARx) != HAL_OK)	Drv_HAL_Error(__FILE__,__LINE__);
 	}
 
-	/* Èç¹ûÊ¹ÄÜDMA·¢ËÍ */
+	/* å¦‚æžœä½¿èƒ½DMAå‘é€ */
 	if(_tUART->tUartDMA.bTxEnable == true)
 	{
 		if(HAL_DMA_Init(&_tUART->tUartDMA.tDMATx) != HAL_OK)	Drv_HAL_Error(__FILE__,__LINE__);
@@ -167,7 +167,7 @@ static void S_Uart_DMAParamConfig(tagUART_T *_tUART)
 }
 
 /**
- * @brief ´®¿ÚÊ±ÖÓ³õÊ¼»¯º¯Êý---L4Ê¹ÓÃ
+ * @brief ä¸²å£æ—¶é’Ÿåˆå§‹åŒ–å‡½æ•°---L4ä½¿ç”¨
  * @param Null
  * @retval Null
 */
@@ -198,8 +198,8 @@ static void S_Uart_CLKConfig(void)
 }
 
 /**
- * @brief ´®¿ÚÊ±ÖÓÊ¹ÄÜº¯Êý
- * @param _tUART-´®¿Ú½á¹¹ÌåÖ¸Õë
+ * @brief ä¸²å£æ—¶é’Ÿä½¿èƒ½å‡½æ•°
+ * @param _tUART-ä¸²å£ç»“æž„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_Uart_CLKEnable(tagUART_T *_tUART)
@@ -227,8 +227,8 @@ static void S_Uart_CLKEnable(tagUART_T *_tUART)
 }
 
 /**
- * @brief DMAÊ±ÖÓÊ¹ÄÜº¯Êý
- * @param _tUART-´®¿Ú½á¹¹ÌåÖ¸Õë
+ * @brief DMAæ—¶é’Ÿä½¿èƒ½å‡½æ•°
+ * @param _tUART-ä¸²å£ç»“æž„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_Uart_DMA_CLKEnable(tagUART_T *_tUART)
@@ -239,23 +239,23 @@ static void S_Uart_DMA_CLKEnable(tagUART_T *_tUART)
 	else if(_tUART->tUARTHandle.Instance == UART4)		__HAL_RCC_DMA2_CLK_ENABLE();
 	else if(_tUART->tUARTHandle.Instance == UART5)
 	{
-		/* Uart5²»ÄÜÊ¹ÓÃDMA */
+		/* Uart5ä¸èƒ½ä½¿ç”¨DMA */
 		Drv_HAL_Error(__FILE__,__LINE__);
 		while(1);
 	}
 }
 
 /**
- * @brief UARTµÄGPIO²ÎÊýÅäÖÃº¯Êý
- * @param _tUART-´®¿Ú¾ä±úÖ¸Õë
+ * @brief UARTçš„GPIOå‚æ•°é…ç½®å‡½æ•°
+ * @param _tUART-ä¸²å£å¥æŸ„æŒ‡é’ˆ
  * @retval Null
 */
 static void S_Uart_GPIOConfig(tagUART_T *_tUART)
 {
-	/* ¿ªÆô¸´ÓÃÄ£Ê½Ê±ÖÓ */
+	/* å¼€å¯å¤ç”¨æ¨¡å¼æ—¶é’Ÿ */
 	__HAL_RCC_AFIO_CLK_ENABLE();
 
-	/* ¸ù¾Ý²»Í¬´®¿ÚµÄucAFMode¿ªÆô¶ÔÓ¦µÄÖØÓ³Éä£¬ÖØÓ³Éä±íÔÚdrv_hal_uart.hÖÐ */
+	/* æ ¹æ®ä¸åŒä¸²å£çš„ucAFModeå¼€å¯å¯¹åº”çš„é‡æ˜ å°„ï¼Œé‡æ˜ å°„è¡¨åœ¨drv_hal_uart.hä¸­ */
 	if(_tUART->tUARTHandle.Instance == USART1)
 	{
 		if(_tUART->tGPIO->ucAFMode == NO_REMAP)		    	__HAL_AFIO_REMAP_USART1_DISABLE();
@@ -278,18 +278,18 @@ static void S_Uart_GPIOConfig(tagUART_T *_tUART)
 		else if(_tUART->tGPIO->ucAFMode == FULL_REMAP)		__HAL_AFIO_REMAP_USART3_ENABLE();
 	}
 	
-	Drv_GPIO_Init(_tUART->tGPIO, 2); 	/* GPIO³õÊ¼»¯ */
+	Drv_GPIO_Init(_tUART->tGPIO, 2); 	/* GPIOåˆå§‹åŒ– */
 }
 
 /**
- * @brief UART²ÎÊýÆ¥Åäº¯Êý
- * @param _tUART-´®¿Ú¾ä±úÖ¸Õë
- * @note Èç¹ûÃ»ÓÐÖ¸¶¨²ÎÊý¾ÍÉèÖÃÎªÄ¬ÈÏ£¨´®¿Ú1,115200,8,1,N£©
+ * @brief UARTå‚æ•°åŒ¹é…å‡½æ•°
+ * @param _tUART-ä¸²å£å¥æŸ„æŒ‡é’ˆ
+ * @note å¦‚æžœæ²¡æœ‰æŒ‡å®šå‚æ•°å°±è®¾ç½®ä¸ºé»˜è®¤ï¼ˆä¸²å£1,115200,8,1,Nï¼‰
  * @retval Null
 */
 static void S_Uart_ParamMatch(tagUART_T *_tUART)
 {
-	/* ´®¿Ú²ÎÊý */
+	/* ä¸²å£å‚æ•° */
 	DEFAULT(_tUART->tUARTHandle.Instance,USART1);
 	DEFAULT(_tUART->tUARTHandle.Init.BaudRate,115200);
 	DEFAULT(_tUART->tUARTHandle.Init.Mode,UART_MODE_TX_RX);
@@ -299,10 +299,10 @@ static void S_Uart_ParamMatch(tagUART_T *_tUART)
 	DEFAULT(_tUART->ucPriority,1);
 	DEFAULT(_tUART->ucSubPriority,3);
 
-	/* ´®¿ÚDMA²ÎÊý */
+	/* ä¸²å£DMAå‚æ•° */
 	if(_tUART->tUartDMA.bTxEnable == true)
 	{
-		/* ¸ù¾Ý´®¿ÚºÅÑ¡ÔñDMAÍ¨µÀ */
+		/* æ ¹æ®ä¸²å£å·é€‰æ‹©DMAé€šé“ */
 		if(_tUART->tUARTHandle.Instance == USART1)
 			_tUART->tUartDMA.tDMATx.Instance = DMA1_Channel4;
 		else if(_tUART->tUARTHandle.Instance == USART2)
@@ -312,7 +312,7 @@ static void S_Uart_ParamMatch(tagUART_T *_tUART)
 		else if(_tUART->tUARTHandle.Instance == UART4)
 			_tUART->tUartDMA.tDMATx.Instance = DMA2_Channel5;
 
-		/* DMA¹¤×÷Ä£Ê½ */
+		/* DMAå·¥ä½œæ¨¡å¼ */
 		DEFAULT(_tUART->tUartDMA.tDMATx.Init.Direction,DMA_MEMORY_TO_PERIPH);
 		DEFAULT(_tUART->tUartDMA.tDMATx.Init.PeriphInc,DMA_PINC_DISABLE);
 		DEFAULT(_tUART->tUartDMA.tDMATx.Init.MemInc,DMA_MINC_ENABLE);
@@ -321,17 +321,17 @@ static void S_Uart_ParamMatch(tagUART_T *_tUART)
 		DEFAULT(_tUART->tUartDMA.tDMATx.Init.Mode,DMA_NORMAL);
 		DEFAULT(_tUART->tUartDMA.tDMATx.Init.Priority,DMA_PRIORITY_LOW);
 
-		/* DMAÖÐ¶ÏÓÅÏÈ¼¶ */
+		/* DMAä¸­æ–­ä¼˜å…ˆçº§ */
 		DEFAULT(_tUART->tUartDMA.ucDMATxPriority,1);
 		DEFAULT(_tUART->tUartDMA.ucDMATxSubPriority,1);
 
-		/* DMA·¢ËÍ»º³åÇø´óÐ¡ */
+		/* DMAå‘é€ç¼“å†²åŒºå¤§å° */
 		DEFAULT(_tUART->tTxInfo.usDMATxMAXSize, 100);
 	}
 
 	if(_tUART->tUartDMA.bRxEnable == true)
 	{
-		/* ¸ù¾Ý´®¿ÚºÅÑ¡ÔñDMAÍ¨µÀ */
+		/* æ ¹æ®ä¸²å£å·é€‰æ‹©DMAé€šé“ */
 		if(_tUART->tUARTHandle.Instance == USART1)
 			_tUART->tUartDMA.tDMARx.Instance = DMA1_Channel5;
 		else if(_tUART->tUARTHandle.Instance == USART2)
@@ -341,7 +341,7 @@ static void S_Uart_ParamMatch(tagUART_T *_tUART)
 		else if(_tUART->tUARTHandle.Instance == UART4)
 			_tUART->tUartDMA.tDMARx.Instance = DMA2_Channel3;
 
-		/* DMA¹¤×÷Ä£Ê½ */
+		/* DMAå·¥ä½œæ¨¡å¼ */
 		DEFAULT(_tUART->tUartDMA.tDMARx.Init.Direction,DMA_PERIPH_TO_MEMORY);
 		DEFAULT(_tUART->tUartDMA.tDMARx.Init.PeriphInc,DMA_PINC_DISABLE);
 		DEFAULT(_tUART->tUartDMA.tDMARx.Init.MemInc,DMA_MINC_ENABLE);
@@ -350,20 +350,20 @@ static void S_Uart_ParamMatch(tagUART_T *_tUART)
 		DEFAULT(_tUART->tUartDMA.tDMARx.Init.Mode,DMA_CIRCULAR);
 		DEFAULT(_tUART->tUartDMA.tDMARx.Init.Priority,DMA_PRIORITY_LOW);
 		
-		/* DMAÖÐ¶ÏÓÅÏÈ¼¶ */
+		/* DMAä¸­æ–­ä¼˜å…ˆçº§ */
 		DEFAULT(_tUART->tUartDMA.ucDMARxPriority,1);
 		DEFAULT(_tUART->tUartDMA.ucDMARxSubPriority,1);
 
-		/* DMA½ÓÊÕ»º³åÇø´óÐ¡ */
+		/* DMAæŽ¥æ”¶ç¼“å†²åŒºå¤§å° */
 		DEFAULT(_tUART->tRxInfo.usDMARxMAXSize, 100);
 	}
 
-	/* ´®¿ÚI/OÉèÖÃ [0]TX [1]RX */
-	/* Èç¹û¸´ÓÃI/OÔòÍË³öº¯Êý */
+	/* ä¸²å£I/Oè®¾ç½® [0]TX [1]RX */
+	/* å¦‚æžœå¤ç”¨I/Oåˆ™é€€å‡ºå‡½æ•° */
 	if(_tUART->tGPIO[0].tGPIOInit.Pin != 0 && _tUART->tGPIO[1].tGPIOInit.Pin != 0)
 		return;
 
-	/* ¸ù¾ÝÊ¹ÓÃµÄ´®¿ÚÑ¡ÔñÏà¶ÔÓ¦µÄÄ¬ÈÏI/O */
+	/* æ ¹æ®ä½¿ç”¨çš„ä¸²å£é€‰æ‹©ç›¸å¯¹åº”çš„é»˜è®¤I/O */
 	if(_tUART->tUARTHandle.Instance == USART1)
 	{
 		_tUART->tGPIO[0].tGPIOInit.Pin 	= GPIO_PIN_9;
@@ -414,10 +414,10 @@ static void S_Uart_ParamMatch(tagUART_T *_tUART)
 }
 
 /**
- * @brief ´®¿Ú·¢ËÍÊý¾Ýº¯Êý
- * @param _tUART-´®¿ÚÊµÀýÖ¸Õë
- * @param _ucpTxData-·¢ËÍÊý¾ÝµØÖ·Ö¸Õë
- * @param _usSize-·¢ËÍÊý¾Ý´óÐ¡
+ * @brief ä¸²å£å‘é€æ•°æ®å‡½æ•°
+ * @param _tUART-ä¸²å£å®žä¾‹æŒ‡é’ˆ
+ * @param _ucpTxData-å‘é€æ•°æ®åœ°å€æŒ‡é’ˆ
+ * @param _usSize-å‘é€æ•°æ®å¤§å°
  * @retval Null
 */
 void Drv_Uart_Transmit(tagUART_T *_tUART, uint8_t *_ucpTxData, uint16_t _usSize)
@@ -426,10 +426,10 @@ void Drv_Uart_Transmit(tagUART_T *_tUART, uint8_t *_ucpTxData, uint16_t _usSize)
 }
 
 /**
- * @brief ´®¿ÚÖÐ¶Ï·¢ËÍÊý¾Ýº¯Êý
- * @param _tUART-´®¿ÚÊµÀýÖ¸Õë
- * @param _ucpTxData-·¢ËÍÊý¾ÝµØÖ·Ö¸Õë
- * @param _usSize-·¢ËÍÊý¾Ý´óÐ¡
+ * @brief ä¸²å£ä¸­æ–­å‘é€æ•°æ®å‡½æ•°
+ * @param _tUART-ä¸²å£å®žä¾‹æŒ‡é’ˆ
+ * @param _ucpTxData-å‘é€æ•°æ®åœ°å€æŒ‡é’ˆ
+ * @param _usSize-å‘é€æ•°æ®å¤§å°
  * @retval Null
 */
 void Drv_Uart_Transmit_IT(tagUART_T *_tUART, uint8_t *_ucpTxData, uint16_t _usSize)
@@ -438,37 +438,37 @@ void Drv_Uart_Transmit_IT(tagUART_T *_tUART, uint8_t *_ucpTxData, uint16_t _usSi
 }
 
 /**
- * @brief ´®¿ÚDMA·¢ËÍÊý¾Ýº¯Êý
- * @param _tUART-´®¿ÚÊµÀýÖ¸Õë
- * @param _ucpTxData-·¢ËÍÊý¾ÝµØÖ·Ö¸Õë
- * @param _usSize-·¢ËÍÊý¾Ý´óÐ¡
+ * @brief ä¸²å£DMAå‘é€æ•°æ®å‡½æ•°
+ * @param _tUART-ä¸²å£å®žä¾‹æŒ‡é’ˆ
+ * @param _ucpTxData-å‘é€æ•°æ®åœ°å€æŒ‡é’ˆ
+ * @param _usSize-å‘é€æ•°æ®å¤§å°
  * @retval Null
 */
 void Drv_Uart_Transmit_DMA(tagUART_T *_tUART, uint8_t *_ucpTxData, uint16_t _usSize)
 {
-	/* »ñÈ¡DMA×´Ì¬ */
+	/* èŽ·å–DMAçŠ¶æ€ */
 	while(HAL_DMA_GetState(&_tUART->tUartDMA.tDMATx) != HAL_DMA_STATE_READY);
 
 	_tUART->tTxInfo.usDMATxLength = _usSize;
 
-	/* ×¼±¸×´Ì¬¼´¿É·¢ËÍ */
+	/* å‡†å¤‡çŠ¶æ€å³å¯å‘é€ */
 	HAL_UART_Transmit_DMA(&_tUART->tUARTHandle, _ucpTxData, _tUART->tTxInfo.usDMATxLength);
 }
 
 /**
- * @brief ´®¿ÚÖÐ¶Ï½ÓÊÕÊý¾Ýº¯Êý
- * @param _tUART-´®¿ÚÊµÀýÖ¸Õë
- * @param _ucpRxData-½ÓÊÕÊý¾ÝµØÖ·Ö¸Õë
- * @retval uint16_t ½ÓÊÕµ½µÄ³¤¶È
+ * @brief ä¸²å£ä¸­æ–­æŽ¥æ”¶æ•°æ®å‡½æ•°
+ * @param _tUART-ä¸²å£å®žä¾‹æŒ‡é’ˆ
+ * @param _ucpRxData-æŽ¥æ”¶æ•°æ®åœ°å€æŒ‡é’ˆ
+ * @retval uint16_t æŽ¥æ”¶åˆ°çš„é•¿åº¦
 */
 uint16_t Drv_Uart_Receive_IT(tagUART_T *_tUART, uint8_t *_ucpRxData)
 {
 	if(_tUART->tRxInfo.ucRxCplt)
 	{
-		/* Êý¾Ý¿½±´ */
+		/* æ•°æ®æ‹·è´ */
 		memcpy(_ucpRxData,_tUART->tRxInfo.ucpITRxCache,_tUART->tRxInfo.usRxLength);
 
-		/* ±êÖ¾Î»ÇåÁã */
+		/* æ ‡å¿—ä½æ¸…é›¶ */
 		_tUART->tRxInfo.ucRxCplt = 0;
 
 		return _tUART->tRxInfo.usRxLength;
@@ -478,32 +478,32 @@ uint16_t Drv_Uart_Receive_IT(tagUART_T *_tUART, uint8_t *_ucpRxData)
 }
 
 /**
- * @brief ´®¿ÚDMA½ÓÊÕÊý¾Ýº¯Êý
- * @param _tUART-´®¿ÚÊµÀýÖ¸Õë
- * @param _ucpRxData-½ÓÊÕÊý¾ÝµØÖ·Ö¸Õë
- * @retval uint16_t usRxNum ½ÓÊÕµ½µÄ³¤¶È
+ * @brief ä¸²å£DMAæŽ¥æ”¶æ•°æ®å‡½æ•°
+ * @param _tUART-ä¸²å£å®žä¾‹æŒ‡é’ˆ
+ * @param _ucpRxData-æŽ¥æ”¶æ•°æ®åœ°å€æŒ‡é’ˆ
+ * @retval uint16_t usRxNum æŽ¥æ”¶åˆ°çš„é•¿åº¦
 */
 uint16_t Drv_Uart_Receive_DMA(tagUART_T *_tUART, uint8_t *_ucpRxData)
 {
 	uint16_t usRxNum;
     
-	/* ÅÐ¶ÏÊÇ·ñ½ÓÊÕÍê³É */
+	/* åˆ¤æ–­æ˜¯å¦æŽ¥æ”¶å®Œæˆ */
 	if(_tUART->tRxInfo.ucDMARxCplt != 1)
 	{
 		return 0;
 	}
 	else
 	{
-		/* ½«½ÓÊÕÊý¾ÝµÄ³¤¶È±£´æ */
+		/* å°†æŽ¥æ”¶æ•°æ®çš„é•¿åº¦ä¿å­˜ */
 		usRxNum = _tUART->tRxInfo.usDMARxLength;
 
-		/* Çå¿Õ½ÓÊÕÊý¾ÝµØÖ·Ö¸Õë */
+		/* æ¸…ç©ºæŽ¥æ”¶æ•°æ®åœ°å€æŒ‡é’ˆ */
         memset(_ucpRxData,0,usRxNum+1);
 
-		/* Êý¾Ý¿½±´ */
+		/* æ•°æ®æ‹·è´ */
 		memcpy(_ucpRxData,_tUART->tRxInfo.ucpDMARxCache,usRxNum);
 
-		/* ÇåÀí±êÖ¾Î» */
+		/* æ¸…ç†æ ‡å¿—ä½ */
 		_tUART->tRxInfo.ucDMARxCplt = 0;
 
 		return usRxNum;
@@ -511,10 +511,10 @@ uint16_t Drv_Uart_Receive_DMA(tagUART_T *_tUART, uint8_t *_ucpRxData)
 }
 
 /**
- * @brief ´®¿Ú½ÓÊÕÖÐ¶ÏÖØÖÃº¯Êý
- * @param _tUART-´®¿ÚÊµÀýÖ¸Õë
- * @param _ucpRxData-½ÓÊÕÊý¾ÝÖ¸Õë
- * @param _usSize-½ÓÊÕÊý¾Ý´óÐ¡
+ * @brief ä¸²å£æŽ¥æ”¶ä¸­æ–­é‡ç½®å‡½æ•°
+ * @param _tUART-ä¸²å£å®žä¾‹æŒ‡é’ˆ
+ * @param _ucpRxData-æŽ¥æ”¶æ•°æ®æŒ‡é’ˆ
+ * @param _usSize-æŽ¥æ”¶æ•°æ®å¤§å°
  * @retval Null 
 */
 void Drv_Uart_ReceIT_Enable(tagUART_T *_tUART, uint8_t *_ucpRxData, uint16_t _usSize)
@@ -523,8 +523,8 @@ void Drv_Uart_ReceIT_Enable(tagUART_T *_tUART, uint8_t *_ucpRxData, uint16_t _us
 }
 
 /**
- * @brief ´®¿ÚÆÕÍ¨ÖÐ¶ÏÄ£Ê½³õÊ¼»¯º¯Êý
- * @param _tUART-´®¿Ú½á¹¹ÌåÖ¸Õë
+ * @brief ä¸²å£æ™®é€šä¸­æ–­æ¨¡å¼åˆå§‹åŒ–å‡½æ•°
+ * @param _tUART-ä¸²å£ç»“æž„ä½“æŒ‡é’ˆ
  * @retval Null 
 */
 void Drv_Uart_ITInit(tagUART_T *_tUART)
@@ -533,70 +533,70 @@ void Drv_Uart_ITInit(tagUART_T *_tUART)
 	S_Uart_ParamMatch(_tUART);
 	S_Uart_CLKEnable(_tUART);
 	S_Uart_GPIOConfig(_tUART);
-	S_Uart_ParamConfig(_tUART);		/* ÉèÖÃ´®¿Ú²ÎÊý */
-	S_Uart_NVICConfig(_tUART);		/* ÉèÖÃÖÐ¶ÏÓÅÏÈ¼¶ */
+	S_Uart_ParamConfig(_tUART);		/* è®¾ç½®ä¸²å£å‚æ•° */
+	S_Uart_NVICConfig(_tUART);		/* è®¾ç½®ä¸­æ–­ä¼˜å…ˆçº§ */
 
-	/* ÎªcacheÉêÇëÒ»¶Î³¤¶ÈµÄ¶¯Ì¬ÄÚ´æ */
+	/* ä¸ºcacheç”³è¯·ä¸€æ®µé•¿åº¦çš„åŠ¨æ€å†…å­˜ */
 	_tUART->tRxInfo.ucpITRxCache = (uint8_t *)malloc(UART_IT_RX_CACHE_SIZE);
 
-	/* ÍùÒ»¼¶»º³åÇøÖÐ½ÓÊÕÒ»¸ö×Ö·û */
+	/* å¾€ä¸€çº§ç¼“å†²åŒºä¸­æŽ¥æ”¶ä¸€ä¸ªå­—ç¬¦ */
 	HAL_UART_Receive_IT(&_tUART->tUARTHandle, _tUART->tRxInfo.ucpRxBuffer, 1);
 }
 
 /**
- * @brief ´®¿ÚDMAÄ£Ê½³õÊ¼»¯º¯Êý
- * @param _tUART-´®¿Ú½á¹¹ÌåÖ¸Õë
+ * @brief ä¸²å£DMAæ¨¡å¼åˆå§‹åŒ–å‡½æ•°
+ * @param _tUART-ä¸²å£ç»“æž„ä½“æŒ‡é’ˆ
  * @retval Null 
 */
 void Drv_Uart_DMAInit(tagUART_T *_tUART)
 {
-	S_Uart_CLKConfig();				/* L4ËùÐè */
+	S_Uart_CLKConfig();				/* L4æ‰€éœ€ */
 	
-	/* ²ÎÊýÆ¥Åä */
+	/* å‚æ•°åŒ¹é… */
 	S_Uart_ParamMatch(_tUART);
 
-	/* DMAÅäÖÃ */
+	/* DMAé…ç½® */
 	S_Uart_DMA_CLKEnable(_tUART);
-	S_Uart_DMA_NVICConfig(_tUART);	/* DMAÖÐ¶ÏÅäÖÃ */
-	S_Uart_DMAParamConfig(_tUART);	/* ÉèÖÃDMA²ÎÊý */
+	S_Uart_DMA_NVICConfig(_tUART);	/* DMAä¸­æ–­é…ç½® */
+	S_Uart_DMAParamConfig(_tUART);	/* è®¾ç½®DMAå‚æ•° */
 
-	/* ´®¿ÚÅäÖÃ */
+	/* ä¸²å£é…ç½® */
 	S_Uart_CLKEnable(_tUART);
 	S_Uart_GPIOConfig(_tUART);
-	S_Uart_NVICConfig(_tUART);		/* ´®¿ÚÖÐ¶ÏÅäÖÃ */
-	S_Uart_ParamConfig(_tUART);		/* ÉèÖÃ´®¿Ú²ÎÊý */
+	S_Uart_NVICConfig(_tUART);		/* ä¸²å£ä¸­æ–­é…ç½® */
+	S_Uart_ParamConfig(_tUART);		/* è®¾ç½®ä¸²å£å‚æ•° */
 
-	/* Èç¹ûÊ¹ÄÜDMA½ÓÊÕ */
+	/* å¦‚æžœä½¿èƒ½DMAæŽ¥æ”¶ */
 	if(_tUART->tUartDMA.bRxEnable == true)
 	{
-		/* ¹ØÁª´®¿ÚºÍDMA½ÓÊÕ */
+		/* å…³è”ä¸²å£å’ŒDMAæŽ¥æ”¶ */
 		__HAL_LINKDMA(&_tUART->tUARTHandle,hdmarx,_tUART->tUartDMA.tDMARx);
 
-		/* ÎªcacheÉêÇëÒ»¶Î³¤¶ÈµÄ¶¯Ì¬ÄÚ´æ */
+		/* ä¸ºcacheç”³è¯·ä¸€æ®µé•¿åº¦çš„åŠ¨æ€å†…å­˜ */
 		_tUART->tRxInfo.ucpDMARxCache = (uint8_t *)malloc(_tUART->tRxInfo.usDMARxMAXSize);
 
-		/*	´ò¿ª¿ÕÏÐÖÐ¶Ï */
+		/*	æ‰“å¼€ç©ºé—²ä¸­æ–­ */
 		__HAL_UART_ENABLE_IT(&_tUART->tUARTHandle,UART_IT_IDLE);
 
-		/* ¿ªÆôDMA½ÓÊÕ */
+		/* å¼€å¯DMAæŽ¥æ”¶ */
 		HAL_UART_Receive_DMA(&_tUART->tUARTHandle,_tUART->tRxInfo.ucpDMARxCache,_tUART->tRxInfo.usDMARxMAXSize);
 	}
 
-	/* Èç¹ûÊ¹ÄÜDMA·¢ËÍ */
+	/* å¦‚æžœä½¿èƒ½DMAå‘é€ */
 	if(_tUART->tUartDMA.bTxEnable == true)
 	{
-		/* ¹ØÁª´®¿ÚºÍDMA·¢ËÍ */
+		/* å…³è”ä¸²å£å’ŒDMAå‘é€ */
 		__HAL_LINKDMA(&_tUART->tUARTHandle,hdmatx,_tUART->tUartDMA.tDMATx);
 
-		/* ÎªcacheÉêÇëÒ»¶Î³¤¶ÈµÄ¶¯Ì¬ÄÚ´æ */
+		/* ä¸ºcacheç”³è¯·ä¸€æ®µé•¿åº¦çš„åŠ¨æ€å†…å­˜ */
 		_tUART->tTxInfo.ucpDMATxCache = (uint8_t *)malloc(_tUART->tTxInfo.usDMATxMAXSize);
 	}
 }
 
 /**
- * @brief ´®¿ÚÖÐ¶ÏÃ±×Óº¯Êý(ÓÃÓÚ´®¿ÚÖÐ¶Ï´¦Àíº¯ÊýÖÐ)
- * @note ÔÚÀàËÆvoid USART1_IRQHandler(void)º¯ÊýÖÐµ÷ÓÃ£¬¸ù¾ÝÊ¹ÓÃµÄ´®¿ÚºÅ½øÐÐ¸ü¸Ä
- * @param _tUART-´®¿Ú½á¹¹ÌåÖ¸Õë
+ * @brief ä¸²å£ä¸­æ–­å¸½å­å‡½æ•°(ç”¨äºŽä¸²å£ä¸­æ–­å¤„ç†å‡½æ•°ä¸­)
+ * @note åœ¨ç±»ä¼¼void USART1_IRQHandler(void)å‡½æ•°ä¸­è°ƒç”¨ï¼Œæ ¹æ®ä½¿ç”¨çš„ä¸²å£å·è¿›è¡Œæ›´æ”¹
+ * @param _tUART-ä¸²å£ç»“æž„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 void Drv_Uart_IRQHandler(tagUART_T *_tUART)
@@ -605,126 +605,126 @@ void Drv_Uart_IRQHandler(tagUART_T *_tUART)
 }
 
 /**
- * @brief ´®¿ÚÖÐ¶Ï½ÓÊÕ´¦Àí×Óº¯Êý(ÓÃÓÚ´®¿Ú½ÓÊÕÍê³É»Øµ÷º¯ÊýÖÐ)
- * @note ÔÚº¯ÊýÃûÎªvoid HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)ÖÐµ÷ÓÃ
- * @param _tUART-´®¿Ú½á¹¹ÌåÖ¸Õë
- * @param _ucEndChar ÐèÒª¼ì²âµÄ½áÎ²·û
- * @note Êý¾Ý±£´æµÄÆðÊ¼µØÖ·ÎªucpITRxCache,½ÓÊÕµ½µÄ³¤¶ÈÎªusRxLength
+ * @brief ä¸²å£ä¸­æ–­æŽ¥æ”¶å¤„ç†å­å‡½æ•°(ç”¨äºŽä¸²å£æŽ¥æ”¶å®Œæˆå›žè°ƒå‡½æ•°ä¸­)
+ * @note åœ¨å‡½æ•°åä¸ºvoid HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)ä¸­è°ƒç”¨
+ * @param _tUART-ä¸²å£ç»“æž„ä½“æŒ‡é’ˆ
+ * @param _ucEndChar éœ€è¦æ£€æµ‹çš„ç»“å°¾ç¬¦
+ * @note æ•°æ®ä¿å­˜çš„èµ·å§‹åœ°å€ä¸ºucpITRxCache,æŽ¥æ”¶åˆ°çš„é•¿åº¦ä¸ºusRxLength
  * @retval Null
 */
 void Drv_Uart_IT_RxHandler(tagUART_T *_tUART, uint8_t _ucEndChar)
 {
-	/* ¼ì²âµ½½áÎ²·ûucEndChar´ú±í½ÓÊÕ½áÊø */
+	/* æ£€æµ‹åˆ°ç»“å°¾ç¬¦ucEndCharä»£è¡¨æŽ¥æ”¶ç»“æŸ */
 	if(_tUART->tRxInfo.ucpRxBuffer[0] == _ucEndChar)
 	{
-		/* Ìæ»»Îª'\0'±íÊ¾×Ö·û´®½áÎ² */
+		/* æ›¿æ¢ä¸º'\0'è¡¨ç¤ºå­—ç¬¦ä¸²ç»“å°¾ */
 		_tUART->tRxInfo.ucpITRxCache[_tUART->tRxInfo.usRxCnt] = '\0';
 
-		/* ±£´æ½ÓÊÕµ½µÄ³¤¶È */
+		/* ä¿å­˜æŽ¥æ”¶åˆ°çš„é•¿åº¦ */
 		_tUART->tRxInfo.usRxLength = _tUART->tRxInfo.usRxCnt;
 
-		/* ½ÓÊÕ¼ÆÊýÆ÷ÇåÁã */
+		/* æŽ¥æ”¶è®¡æ•°å™¨æ¸…é›¶ */
 		_tUART->tRxInfo.usRxCnt = 0;
 
-		/* ½ÓÊÕÍê³É±êÖ¾Î»ÖÃ1 */
+		/* æŽ¥æ”¶å®Œæˆæ ‡å¿—ä½ç½®1 */
 		_tUART->tRxInfo.ucRxCplt = 1;
 	}
 
-	/* Î´µ½½áÎ²¼ÌÐø½ÓÊÕ */
+	/* æœªåˆ°ç»“å°¾ç»§ç»­æŽ¥æ”¶ */
 	else
 	{
-		/* Î´µ½½ÓÊÕÊýÁ¿ÉÏÏÞ¼ÌÐø½ÓÊÕ */
+		/* æœªåˆ°æŽ¥æ”¶æ•°é‡ä¸Šé™ç»§ç»­æŽ¥æ”¶ */
 		if(_tUART->tRxInfo.usRxCnt < UART_IT_RX_CACHE_SIZE)
 		{
-			/* ´æ´¢1×Ö½ÚÊý¾Ý£¬Í¬Ê±½ÓÊÕ¼ÆÊýÆ÷¼ÓÒ» */
+			/* å­˜å‚¨1å­—èŠ‚æ•°æ®ï¼ŒåŒæ—¶æŽ¥æ”¶è®¡æ•°å™¨åŠ ä¸€ */
 			_tUART->tRxInfo.ucpITRxCache[_tUART->tRxInfo.usRxCnt] = _tUART->tRxInfo.ucpRxBuffer[0];
 			_tUART->tRxInfo.usRxCnt++;
 		}
-		else	/* Èô³¬¹ýcache´óÐ¡Á¢¼´¸æÖª½ÓÊÕÍê³É£¬¼ÆÊýÆ÷¹éÁã½ÓÊÕ¶àÓà×Ö½Ú */
+		else	/* è‹¥è¶…è¿‡cacheå¤§å°ç«‹å³å‘ŠçŸ¥æŽ¥æ”¶å®Œæˆï¼Œè®¡æ•°å™¨å½’é›¶æŽ¥æ”¶å¤šä½™å­—èŠ‚ */
 		{
-			/* ±£´æ½ÓÊÕµ½µÄ³¤¶È */
+			/* ä¿å­˜æŽ¥æ”¶åˆ°çš„é•¿åº¦ */
 			_tUART->tRxInfo.usRxLength = UART_IT_RX_CACHE_SIZE;
 
-			/* ½ÓÊÕ¼ÆÊýÆ÷ÇåÁã */
+			/* æŽ¥æ”¶è®¡æ•°å™¨æ¸…é›¶ */
 			_tUART->tRxInfo.usRxCnt = 0;
 
-			/* ½ÓÊÕÍê³É±êÖ¾Î»ÖÃ1 */
+			/* æŽ¥æ”¶å®Œæˆæ ‡å¿—ä½ç½®1 */
 			_tUART->tRxInfo.ucRxCplt = 1;			
 		}
 	}
 
-	/* µÈ´ýÏÂÒ»¸ö×Ö½Ú½ÓÊÕÍê³É */
+	/* ç­‰å¾…ä¸‹ä¸€ä¸ªå­—èŠ‚æŽ¥æ”¶å®Œæˆ */
 	while(HAL_UART_Receive_IT(&_tUART->tUARTHandle,_tUART->tRxInfo.ucpRxBuffer,1) != HAL_OK);
 }
 
 /**
- * @brief ´®¿ÚDMAÖÐ¶Ï½ÓÊÕ´¦Àí×Óº¯Êý(ÓÃÓÚ´®¿ÚÖÐ¶Ï´¦Àíº¯ÊýÖÐ)
- * @note ÔÚÀàËÆvoid USART1_IRQHandler(void)º¯ÊýÖÐµ÷ÓÃ£¬¸ù¾ÝÊ¹ÓÃµÄ´®¿ÚºÅ½øÐÐ¸ü¸Ä
- * @param _tUART-´®¿Ú½á¹¹ÌåÖ¸Õë
- * @note Êý¾Ý±£´æµÄÆðÊ¼µØÖ·ÎªucpDMARxCache£¬½ÓÊÕµ½µÄ³¤¶ÈÎªusDMARxLength
+ * @brief ä¸²å£DMAä¸­æ–­æŽ¥æ”¶å¤„ç†å­å‡½æ•°(ç”¨äºŽä¸²å£ä¸­æ–­å¤„ç†å‡½æ•°ä¸­)
+ * @note åœ¨ç±»ä¼¼void USART1_IRQHandler(void)å‡½æ•°ä¸­è°ƒç”¨ï¼Œæ ¹æ®ä½¿ç”¨çš„ä¸²å£å·è¿›è¡Œæ›´æ”¹
+ * @param _tUART-ä¸²å£ç»“æž„ä½“æŒ‡é’ˆ
+ * @note æ•°æ®ä¿å­˜çš„èµ·å§‹åœ°å€ä¸ºucpDMARxCacheï¼ŒæŽ¥æ”¶åˆ°çš„é•¿åº¦ä¸ºusDMARxLength
  * @retval Null
 */
 void Drv_Uart_DMA_RxHandler(tagUART_T *_tUART)
 {
-	/* ¿ÕÏÐÖÐ¶Ï±ê¼Ç±»ÖÃÎ» */
+	/* ç©ºé—²ä¸­æ–­æ ‡è®°è¢«ç½®ä½ */
 	if(__HAL_UART_GET_FLAG(&_tUART->tUARTHandle,UART_FLAG_IDLE) != RESET) 
 	{
-		/* Çå³ýÖÐ¶Ï±ê¼Ç */
+		/* æ¸…é™¤ä¸­æ–­æ ‡è®° */
 		__HAL_UART_CLEAR_IDLEFLAG(&_tUART->tUARTHandle);
 
-		/* Í£Ö¹DMA½ÓÊÕ */
+		/* åœæ­¢DMAæŽ¥æ”¶ */
 		HAL_UART_DMAStop(&_tUART->tUARTHandle);
 
-		/* ×ÜÊý¾ÝÁ¿¼õÈ¥Î´½ÓÊÕµ½µÄÊý¾ÝÁ¿ÎªÒÑ¾­½ÓÊÕµ½µÄÊý¾ÝÁ¿ */
+		/* æ€»æ•°æ®é‡å‡åŽ»æœªæŽ¥æ”¶åˆ°çš„æ•°æ®é‡ä¸ºå·²ç»æŽ¥æ”¶åˆ°çš„æ•°æ®é‡ */
 		_tUART->tRxInfo.usDMARxLength = _tUART->tRxInfo.usDMARxMAXSize - __HAL_DMA_GET_COUNTER(_tUART->tUARTHandle.hdmarx);
 
-		/* ½ÓÊÕ±êÖ¾Î»ÖÃ1 */
+		/* æŽ¥æ”¶æ ‡å¿—ä½ç½®1 */
         _tUART->tRxInfo.ucDMARxCplt = 1;
 	}
 
-	/* ÖØÐÂÆô¶¯DMA½ÓÊÕ */
+	/* é‡æ–°å¯åŠ¨DMAæŽ¥æ”¶ */
     while(HAL_UART_Receive_DMA(&_tUART->tUARTHandle,_tUART->tRxInfo.ucpDMARxCache,_tUART->tRxInfo.usDMARxMAXSize) != HAL_OK);
 }
 
 /**
- * @brief ´®¿ÚDMAÖÐ¶Ï·¢ËÍ´¦Àí×Óº¯Êý(ÓÃÓÚ´®¿Ú·¢ËÍÍê³É»Øµ÷º¯ÊýÖÐ)
- * @note ÔÚº¯ÊýÃûÎªvoid HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)ÖÐµ÷ÓÃ
- * @param _tUART-´®¿Ú½á¹¹ÌåÖ¸Õë
+ * @brief ä¸²å£DMAä¸­æ–­å‘é€å¤„ç†å­å‡½æ•°(ç”¨äºŽä¸²å£å‘é€å®Œæˆå›žè°ƒå‡½æ•°ä¸­)
+ * @note åœ¨å‡½æ•°åä¸ºvoid HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)ä¸­è°ƒç”¨
+ * @param _tUART-ä¸²å£ç»“æž„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 void Drv_Uart_DMA_TxHandler(tagUART_T *_tUART)
 {
 	uint32_t ulDMAFlag;
 
-	/* UART1·¢ËÍÍ¨µÀ */
+	/* UART1å‘é€é€šé“ */
 	if(_tUART->tUartDMA.tDMATx.Instance == DMA1_Channel4)		ulDMAFlag = DMA_FLAG_TC4;
 
-	/* UART2·¢ËÍÍ¨µÀ */
+	/* UART2å‘é€é€šé“ */
 	else if(_tUART->tUartDMA.tDMATx.Instance == DMA1_Channel7)	ulDMAFlag = DMA_FLAG_TC7;
 
-	/* UART3·¢ËÍÍ¨µÀ */
+	/* UART3å‘é€é€šé“ */
 	else if(_tUART->tUartDMA.tDMATx.Instance == DMA1_Channel2) 	ulDMAFlag = DMA_FLAG_TC2;
 
-	/* UART4·¢ËÍÍ¨µÀ */
+	/* UART4å‘é€é€šé“ */
 	else if(_tUART->tUartDMA.tDMATx.Instance == DMA2_Channel5)	ulDMAFlag = DMA_FLAG_TC5;
 
-	/* ÅÐ¶Ï¶ÔÓ¦Í¨µÀÊÇ·ñÍê³É·¢ËÍ */
+	/* åˆ¤æ–­å¯¹åº”é€šé“æ˜¯å¦å®Œæˆå‘é€ */
 	if(__HAL_DMA_GET_TC_FLAG_INDEX(&_tUART->tUartDMA.tDMATx) == ulDMAFlag)
 	{
-		/* ¹Ø±Õ´®¿ÚDMA */
+		/* å…³é—­ä¸²å£DMA */
 		HAL_UART_DMAStop(&_tUART->tUARTHandle);
 
-		/* Çå³ý·¢ËÍÍê³É±êÖ¾Î» */
+		/* æ¸…é™¤å‘é€å®Œæˆæ ‡å¿—ä½ */
 		__HAL_DMA_CLEAR_FLAG(&_tUART->tUartDMA.tDMATx,ulDMAFlag);
 
-		/* ÖØÔØCNDTR¼Ä´æÆ÷£¬ÊýÁ¿Îª´«µÝÊý×é´óÐ¡ */
+		/* é‡è½½CNDTRå¯„å­˜å™¨ï¼Œæ•°é‡ä¸ºä¼ é€’æ•°ç»„å¤§å° */
 		_tUART->tUartDMA.tDMATx.Instance->CNDTR = _tUART->tTxInfo.usDMATxLength;
 		_tUART->tTxInfo.usDMATxLength = 0;
         
-		/* ·¢ËÍÍê³É±êÖ¾Î»ÖÃ1 */
+		/* å‘é€å®Œæˆæ ‡å¿—ä½ç½®1 */
         _tUART->tTxInfo.ucDMATxCplt = 1;
 
-		/* ¿ªÆôDMA·¢ËÍ */
+		/* å¼€å¯DMAå‘é€ */
 		__HAL_DMA_ENABLE(&_tUART->tUartDMA.tDMATx);
 	}
 }

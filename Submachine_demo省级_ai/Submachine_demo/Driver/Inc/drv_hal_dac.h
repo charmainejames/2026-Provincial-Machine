@@ -1,14 +1,14 @@
-#ifndef __DRV_DAC_H_
+ï»¿#ifndef __DRV_DAC_H_
 #define __DRV_DAC_H_
 
 #include "drv_hal_conf.h"
 
 typedef struct
 {
-    DAC_HandleTypeDef       tDACHandle;         /* DAC¾ä±ú */
-    DAC_ChannelConfTypeDef  tDACChannel;        /* DACÍ¨µÀÅäÖÃ */
-    tagGPIO_T				tGPIO;              /* GPIOÅäÖÃ */
-    uint32_t                ulDACChannelSelect; /* DACÍ¨µÀÑ¡Ôñ */
+    DAC_HandleTypeDef       tDACHandle;         /* DACå¥æŸ„ */
+    DAC_ChannelConfTypeDef  tDACChannel;        /* DACé€šé“é…ç½® */
+    tagGPIO_T				tGPIO;              /* GPIOé…ç½® */
+    uint32_t                ulDACChannelSelect; /* DACé€šé“é€‰æ‹© */
     
 }tagDAC_T;
 

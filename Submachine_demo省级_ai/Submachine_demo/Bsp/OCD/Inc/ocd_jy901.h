@@ -1,4 +1,4 @@
-#ifndef __OCD_JY901_H_
+ï»¿#ifndef __OCD_JY901_H_
 #define __OCD_JY901_H_
 
 #include "drv_hal_conf.h"
@@ -30,17 +30,17 @@
 /** @defgroup RxTypeConfig _ucType
   * @{
   */
-#define JY901_OUTPUT_TIME			0x0100	/* Ê±¼ä */
-#define JY901_OUTPUT_ACCEL			0x0200	/* ¼ÓËÙ¶È */
-#define JY901_OUTPUT_GYRO			0x0400	/* ½ÇËÙ¶È */
-#define JY901_OUTPUT_ANGLE			0x0800	/* ½Ç¶È */
-#define	JY901_OUTPUT_MAG			0x1000	/* ´Å³¡ */	
-#define	JY901_OUTPUT_PORT 			0x2000	/* ¶Ë¿Ú×´Ì¬ */
-#define	JY901_OUTPUT_PRESS 			0x4000	/* ÆøÑ¹ºÍ¸ß¶È */
-#define	JY901_OUTPUT_GPS 			0x8000	/* ¾­Î³¶È */
-#define	JY901_OUTPUT_VELOCITY 		0x0001	/* µØËÙ */
-#define	JY901_OUTPUT_QUATER 		0x0002	/* ËÄÔªËØ */
-#define	JY901_OUTPUT_GSA 			0x0004	/* ÎÀĞÇ¶¨Î»¾«¶È */
+#define JY901_OUTPUT_TIME			0x0100	/* æ—¶é—´ */
+#define JY901_OUTPUT_ACCEL			0x0200	/* åŠ é€Ÿåº¦ */
+#define JY901_OUTPUT_GYRO			0x0400	/* è§’é€Ÿåº¦ */
+#define JY901_OUTPUT_ANGLE			0x0800	/* è§’åº¦ */
+#define	JY901_OUTPUT_MAG			0x1000	/* ç£åœº */	
+#define	JY901_OUTPUT_PORT 			0x2000	/* ç«¯å£çŠ¶æ€ */
+#define	JY901_OUTPUT_PRESS 			0x4000	/* æ°”å‹å’Œé«˜åº¦ */
+#define	JY901_OUTPUT_GPS 			0x8000	/* ç»çº¬åº¦ */
+#define	JY901_OUTPUT_VELOCITY 		0x0001	/* åœ°é€Ÿ */
+#define	JY901_OUTPUT_QUATER 		0x0002	/* å››å…ƒç´  */
+#define	JY901_OUTPUT_GSA 			0x0004	/* å«æ˜Ÿå®šä½ç²¾åº¦ */
 /**
   * @}
   */
@@ -48,13 +48,13 @@
 /** @defgroup Correct _ucMode
   * @{
   */
-#define JY901_CALSW_NORMAL			0x00 	/* Õı³£¹¤×÷Ä£Ê½ */
-#define	JY901_CALSW_ACCEL			0x01	/* ×Ô¶¯¼Ó¼ÆĞ£×¼Ä£Ê½ */
-#define	JY901_CALSW_HIGH			0x03	/* ¸ß¶ÈÇåÁãÄ£Ê½ */
-#define	JY901_CALSW_YAW				0x04	/* º½Ïò½ÇÇåÁãÄ£Ê½ */
-#define	JY901_CALSW_MAG_SPHERE		0x07	/* ´Å³¡Ğ£×¼£¨ÇòĞÍÄâºÏ·¨£© */
-#define	JY901_CALSW_ANGLE			0x08	/* ÉèÖÃ½Ç¶È²Î¿¼ */
-#define	JY901_CALSW_MAG_BIPLANE		0x09	/* ´Å³¡Ğ£×¼£¨Ë«Æ½ÃæÄ£Ê½£© */
+#define JY901_CALSW_NORMAL			0x00 	/* æ­£å¸¸å·¥ä½œæ¨¡å¼ */
+#define	JY901_CALSW_ACCEL			0x01	/* è‡ªåŠ¨åŠ è®¡æ ¡å‡†æ¨¡å¼ */
+#define	JY901_CALSW_HIGH			0x03	/* é«˜åº¦æ¸…é›¶æ¨¡å¼ */
+#define	JY901_CALSW_YAW				0x04	/* èˆªå‘è§’æ¸…é›¶æ¨¡å¼ */
+#define	JY901_CALSW_MAG_SPHERE		0x07	/* ç£åœºæ ¡å‡†ï¼ˆçƒå‹æ‹Ÿåˆæ³•ï¼‰ */
+#define	JY901_CALSW_ANGLE			0x08	/* è®¾ç½®è§’åº¦å‚è€ƒ */
+#define	JY901_CALSW_MAG_BIPLANE		0x09	/* ç£åœºæ ¡å‡†ï¼ˆåŒå¹³é¢æ¨¡å¼ï¼‰ */
 /**
   * @}
   */
@@ -113,10 +113,10 @@
   * @}
   */
 
-/* Ê±¼äÊı¾İ½á¹¹Ìå */
+/* æ—¶é—´æ•°æ®ç»“æ„ä½“ */
 typedef struct 
 {
-	/* Ô­Ê¼Êı¾İ */
+	/* åŸå§‹æ•°æ® */
 	uint8_t Year;
 	uint8_t Month;
 	uint8_t Day;
@@ -126,91 +126,91 @@ typedef struct
 	short	mSec;
 }tagJY901Time;
 
-/* ¼ÓËÙ¶ÈÊı¾İ½á¹¹Ìå */
+/* åŠ é€Ÿåº¦æ•°æ®ç»“æ„ä½“ */
 typedef struct 
 {
-	/* Ô­Ê¼Êı¾İ */
+	/* åŸå§‹æ•°æ® */
 	short AccX;
 	short AccY;
 	short AccZ;
 	short T;
 
-	/* ×ª»»ºóµÄÊı¾İ */
+	/* è½¬æ¢åçš„æ•°æ® */
 	float ConAccX;
 	float ConAccY;
 	float ConAccZ;
 }tagJY901Acc;
 
-/* ½ÇËÙ¶ÈÊı¾İ½á¹¹Ìå */
+/* è§’é€Ÿåº¦æ•°æ®ç»“æ„ä½“ */
 typedef struct 
 {
-	/* Ô­Ê¼Êı¾İ */
+	/* åŸå§‹æ•°æ® */
 	short GyroX;
 	short GyroY;
 	short GyroZ;
 	
-	/* ×ª»»ºóµÄÊı¾İ */
+	/* è½¬æ¢åçš„æ•°æ® */
 	float ConGyroX;
 	float ConGyroY;
 	float ConGyroZ;
 }tagJY901Gyro;
 
-/* Å·À­½ÇÊı¾İ½á¹¹Ìå */
+/* æ¬§æ‹‰è§’æ•°æ®ç»“æ„ä½“ */
 typedef struct 
 {
-	/* Ô­Ê¼Êı¾İ */
+	/* åŸå§‹æ•°æ® */
 	short Roll;
 	short Pitch;
 	short Yaw;
 
-	/* ×ª»»ºóµÄÊı¾İ */
+	/* è½¬æ¢åçš„æ•°æ® */
 	float ConRoll;
 	float ConPitch;
 	float ConYaw;
 }tagJY901Angle;
 
-/* ´Å³¡Êı¾İ½á¹¹Ìå */
+/* ç£åœºæ•°æ®ç»“æ„ä½“ */
 typedef struct 
 {
-	/* Ô­Ê¼Êı¾İ */
+	/* åŸå§‹æ•°æ® */
 	short MagX;
 	short MagY;
 	short MagZ;
 	short T;
 
-	/* ×ª»»ºóµÄÊı¾İ */
+	/* è½¬æ¢åçš„æ•°æ® */
 	float ConMagX;
 	float ConMagY;
 	float ConMagZ;
 }tagJY901Mag;
 
-/* ËÄÔªÊıÊı¾İ½á¹¹Ìå */
+/* å››å…ƒæ•°æ•°æ®ç»“æ„ä½“ */
 typedef struct 
 {
-	/* Ô­Ê¼Êı¾İ */
+	/* åŸå§‹æ•°æ® */
 	short q0;
 	short q1;
 	short q2;
 	short q3;
 
-	/* ×ª»»ºóµÄÊı¾İ */
+	/* è½¬æ¢åçš„æ•°æ® */
 	float Conq0;
 	float Conq1;
 	float Conq2;
 	float Conq3;
 }tagJY901Quater;
 
-/* JY901²ÎÊıÅäÖÃ½á¹¹Ìå */
+/* JY901å‚æ•°é…ç½®ç»“æ„ä½“ */
 typedef struct 
 {
-	uint8_t 	ucBaud;		/* ²¨ÌØÂÊÉèÖÃ */
-	uint8_t 	ucRate;		/* ËÙÂÊÉèÖÃ */
-	uint16_t 	usType; 	/* Êä³öÀàĞÍÉèÖÃ */
-	uint8_t		ucOrient;	/* °²×°·½ÏòÉèÖÃ */
-	uint8_t		ucAxis;		/* ½âËãËã·¨ÉèÖÃ */
+	uint8_t 	ucBaud;		/* æ³¢ç‰¹ç‡è®¾ç½® */
+	uint8_t 	ucRate;		/* é€Ÿç‡è®¾ç½® */
+	uint16_t 	usType; 	/* è¾“å‡ºç±»å‹è®¾ç½® */
+	uint8_t		ucOrient;	/* å®‰è£…æ–¹å‘è®¾ç½® */
+	uint8_t		ucAxis;		/* è§£ç®—ç®—æ³•è®¾ç½® */
 }tagJY901config;
 
-/* JY901½á¹¹Ìå */
+/* JY901ç»“æ„ä½“ */
 typedef struct
 {
 	tagUART_T 			tUART;

@@ -1,23 +1,23 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: ocd_ads1256.c
+* æ–‡ä»¶å: ocd_ads1256.c
 
-* ÄÚÈİ¼òÊö£ºads1256Ä£¿éÎÄ¼ş
+* å†…å®¹ç®€è¿°ï¼šads1256æ¨¡å—æ–‡ä»¶
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ	ÈÕÆÚ		×÷Õß		ËµÃ÷
+* ç‰ˆæœ¬å·	æ—¥æœŸ		ä½œè€…		è¯´æ˜
 
-* 1.0.0a 	2020-02-22	Àî»·Óî		´´½¨¸ÃÎÄ¼ş
+* 1.0.0a 	2020-02-22	æç¯å®‡		åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "ocd_ads1256.h"
 
 /**
- * @brief ADS1256I/O³õÊ¼»¯º¯Êı
- * @param _tADS1256-ADS1256½á¹¹ÌåÖ¸Õë
+ * @brief ADS1256I/Oåˆå§‹åŒ–å‡½æ•°
+ * @param _tADS1256-ADS1256ç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_ADS1256_DRDY_Init(tagADS1256_T *_tADS1256)
@@ -26,9 +26,9 @@ static void S_ADS1256_DRDY_Init(tagADS1256_T *_tADS1256)
 }
 
 /**
- * @brief ADS1256ÉèÖÃÃüÁîº¯Êı
- * @param _tADS1256-ADS1256½á¹¹ÌåÖ¸Õë
- * @param _ucCmd-ÉèÖÃµÄÃüÁî
+ * @brief ADS1256è®¾ç½®å‘½ä»¤å‡½æ•°
+ * @param _tADS1256-ADS1256ç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucCmd-è®¾ç½®çš„å‘½ä»¤
  * @retval Null
 */
 static void S_ADS1256_SetCommand(tagADS1256_T *_tADS1256, uint8_t _ucCmd)
@@ -37,8 +37,8 @@ static void S_ADS1256_SetCommand(tagADS1256_T *_tADS1256, uint8_t _ucCmd)
 }
 
 /**
- * @brief ADS1256ÑÓÊ±º¯Êı
- * @param _ulUs ÑÓÊ±Î¢Ãë
+ * @brief ADS1256å»¶æ—¶å‡½æ•°
+ * @param _ulUs å»¶æ—¶å¾®ç§’
  * @retval Null
 */
 static void S_ADS1256_DelayUs(uint32_t _ulUs)
@@ -50,8 +50,8 @@ static void S_ADS1256_DelayUs(uint32_t _ulUs)
 }
 
 /**
- * @brief ADS1256ÉèÖÃĞ£×¼ÃüÁîº¯Êı
- * @param _tADS1256-ADS1256½á¹¹ÌåÖ¸Õë
+ * @brief ADS1256è®¾ç½®æ ¡å‡†å‘½ä»¤å‡½æ•°
+ * @param _tADS1256-ADS1256ç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_ADS1256_SetCalibrationCommand(tagADS1256_T *_tADS1256)
@@ -66,15 +66,15 @@ static void S_ADS1256_SetCalibrationCommand(tagADS1256_T *_tADS1256)
 }
 
 /**
- * @brief ADS1256Ğ´¼Ä´æÆ÷º¯Êı
- * @param _tADS1256-ADS1256½á¹¹ÌåÖ¸Õë
- * @param _ucRegAddr-¼Ä´æÆ÷µØÖ·
- * @param _ucRegValue-¼Ä´æÆ÷ÊıÖµ
+ * @brief ADS1256å†™å¯„å­˜å™¨å‡½æ•°
+ * @param _tADS1256-ADS1256ç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucRegAddr-å¯„å­˜å™¨åœ°å€
+ * @param _ucRegValue-å¯„å­˜å™¨æ•°å€¼
  * @retval Null
 */
 static void S_ADS1256_WriteReg(tagADS1256_T *_tADS1256, uint8_t _ucRegAddr, uint8_t _ucRegValue)
 {
-	while(Drv_GPIO_Read(&_tADS1256->tDrdyGPIO));	/* DRYÎªµÍÊ±²ÅÄÜĞ´¼Ä´æÆ÷ */
+	while(Drv_GPIO_Read(&_tADS1256->tDrdyGPIO));	/* DRYä¸ºä½æ—¶æ‰èƒ½å†™å¯„å­˜å™¨ */
 	
 	/*1st Command Byte: 0101 rrrr where rrrr is the address to the first register to be written.*/
 	Drv_SPI_Transmit(&_tADS1256->tSPI, ADS1256_CMD_WREG | _ucRegAddr );
@@ -89,9 +89,9 @@ static void S_ADS1256_WriteReg(tagADS1256_T *_tADS1256, uint8_t _ucRegAddr, uint
 }
 
 /**
- * @brief ADS1256ÉèÖÃµ¥Í¨µÀº¯Êı
- * @param _tADS1256-ADS1256½á¹¹ÌåÖ¸Õë
- * @param _ucChanel-Í¨µÀºÅ
+ * @brief ADS1256è®¾ç½®å•é€šé“å‡½æ•°
+ * @param _tADS1256-ADS1256ç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucChanel-é€šé“å·
  * @retval Null
 */
 static void S_ADS1256_SetSingleChannel(tagADS1256_T *_tADS1256, uint8_t _ucChanel)
@@ -107,8 +107,8 @@ static void S_ADS1256_SetSingleChannel(tagADS1256_T *_tADS1256, uint8_t _ucChane
 }
 
 /**
- * @brief ADS1256ÉèÖÃÍ¬²½ÃüÁîº¯Êı
- * @param _tADS1256-ADS1256½á¹¹ÌåÖ¸Õë
+ * @brief ADS1256è®¾ç½®åŒæ­¥å‘½ä»¤å‡½æ•°
+ * @param _tADS1256-ADS1256ç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_ADS1256_SetSynCommand(tagADS1256_T *_tADS1256)
@@ -119,8 +119,8 @@ static void S_ADS1256_SetSynCommand(tagADS1256_T *_tADS1256)
 }
 
 /**
- * @brief ADS1256¼ì²éº¯Êı
- * @param _tADS1256-ADS1256½á¹¹ÌåÖ¸Õë
+ * @brief ADS1256æ£€æŸ¥å‡½æ•°
+ * @param _tADS1256-ADS1256ç»“æ„ä½“æŒ‡é’ˆ
  * @retval uint8_t
 */
 uint8_t OCD_ADS1256_Check(tagADS1256_T *_tADS1256)
@@ -132,7 +132,7 @@ uint8_t OCD_ADS1256_Check(tagADS1256_T *_tADS1256)
 	/* 1st Command Byte: 0001 rrrr where rrrr is the address of the first register to ucRxData */
 	Drv_SPI_TransmitReceive(&_tADS1256->tSPI, ADS1256_CMD_RREG | FIRST_REG_ADDR);
 	
-	/* 2nd Command Byte: 0000 nnnn where nnnn is the number of bytes to ucRxData ¨C 1 */
+	/* 2nd Command Byte: 0000 nnnn where nnnn is the number of bytes to ucRxData â€“ 1 */
 	Drv_SPI_TransmitReceive(&_tADS1256->tSPI,0x03);	/* here nnnn is  3 = 4-1 ,ucRxData 4 register */
 	
 	/* notice the timing definition of T6 */
@@ -149,9 +149,9 @@ uint8_t OCD_ADS1256_Check(tagADS1256_T *_tADS1256)
 }
 
 /**
- * @brief ADS1256¶ÁÈ¡×´Ì¬º¯Êı
- * @param _tADS1256-ADS1256½á¹¹ÌåÖ¸Õë
- * @param _pAddr-¶ÁÈ¡µÄµØÖ·
+ * @brief ADS1256è¯»å–çŠ¶æ€å‡½æ•°
+ * @param _tADS1256-ADS1256ç»“æ„ä½“æŒ‡é’ˆ
+ * @param _pAddr-è¯»å–çš„åœ°å€
  * @retval uint8_t
 */
 uint8_t OCD_ADS1256_ReadStatus(tagADS1256_T *_tADS1256, tagADS1256Status_T *_pAddr)
@@ -163,7 +163,7 @@ uint8_t OCD_ADS1256_ReadStatus(tagADS1256_T *_tADS1256, tagADS1256Status_T *_pAd
 	/* 1st Command Byte: 0001 rrrr where rrrr is the address of the first register to ucRxData */
 	Drv_SPI_TransmitReceive(&_tADS1256->tSPI, ADS1256_CMD_RREG | FIRST_REG_ADDR);
 	
-	/* 2nd Command Byte: 0000 nnnn where nnnn is the number of bytes to ucRxData ¨C 1 */
+	/* 2nd Command Byte: 0000 nnnn where nnnn is the number of bytes to ucRxData â€“ 1 */
 	Drv_SPI_TransmitReceive(&_tADS1256->tSPI,0x03);	/* here nnnn is  3 = 4-1 ,ucRxData 4 register */
 	
 	/* notice the timing definition of T6 */
@@ -190,9 +190,9 @@ uint8_t OCD_ADS1256_ReadStatus(tagADS1256_T *_tADS1256, tagADS1256Status_T *_pAd
 }
 
 /**
- * @brief ADS1256¶ÁÈ¡Ò»¸öÍ¨µÀµçÑ¹º¯Êı
- * @param _tADS1256-ADS1256½á¹¹ÌåÖ¸Õë
- * @param _ucChannel-¶ÁÈ¡µÄÍ¨µÀ
+ * @brief ADS1256è¯»å–ä¸€ä¸ªé€šé“ç”µå‹å‡½æ•°
+ * @param _tADS1256-ADS1256ç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucChannel-è¯»å–çš„é€šé“
  * @retval float
 */
 float OCD_ADS1256_ReadOneChannelVoltage(tagADS1256_T *_tADS1256, uint8_t _ucChannel)
@@ -223,12 +223,12 @@ float OCD_ADS1256_ReadOneChannelVoltage(tagADS1256_T *_tADS1256, uint8_t _ucChan
 		
 	if((ulDigitValue&0x800000)==0x800000)
 	{
-		/* ¸ºÊıÇé¿ö */
+		/* è´Ÿæ•°æƒ…å†µ */
 		fResVoltage = (0x7fffff-(ulDigitValue-0x800000)+1)*0.00000059032;	
 	}
 	else
 	{
-		/* ÕıÊıÇé¿ö */
+		/* æ­£æ•°æƒ…å†µ */
 		fResVoltage = (ulDigitValue)*0.00000059032;
 	}
 		
@@ -236,8 +236,8 @@ float OCD_ADS1256_ReadOneChannelVoltage(tagADS1256_T *_tADS1256, uint8_t _ucChan
 }
 
 /**
- * @brief ADS1256³õÊ¼»¯º¯Êı
- * @param _tADS1256-ADS1256½á¹¹ÌåÖ¸Õë
+ * @brief ADS1256åˆå§‹åŒ–å‡½æ•°
+ * @param _tADS1256-ADS1256ç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 void OCD_ADS1256_Init(tagADS1256_T *_tADS1256)
@@ -247,7 +247,7 @@ void OCD_ADS1256_Init(tagADS1256_T *_tADS1256)
 	Drv_SPI_Init(&_tADS1256->tSPI); 
 	
 	S_ADS1256_SetCommand(_tADS1256, ADS1256_CMD_RESET);
-	S_ADS1256_DelayUs(100000);	/* µÈ´ıÖØÆô */
+	S_ADS1256_DelayUs(100000);	/* ç­‰å¾…é‡å¯ */
 	
 	/* it is strongly recommended to perform an additional self-calibration by issuing 
 	the SELFCAL command after the power supplies and voltage reference have had time

@@ -1,9 +1,9 @@
-#include "task_conf.h"
+ï»¿#include "task_conf.h"
 
 #include "config.h"
 
-/* SGA¿â³õÊ¼»¯º¯Êı */
+/* SGAåº“åˆå§‹åŒ–å‡½æ•° */
 void Task_Sys_Init(void)
 {
-	Drv_HAL_Init();		/* SGA¿âÆô¶¯±ØĞè */
+	Drv_HAL_Init();		/* SGAåº“å¯åŠ¨å¿…éœ€ */
 }

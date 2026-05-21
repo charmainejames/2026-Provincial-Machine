@@ -1,14 +1,14 @@
-#include "usercode.h"		/* usercodeÍ·ÎÄ¼ş */
-#include "threadpool.h"		/* threadpoolÍ·ÎÄ¼ş */
-#include "drv_hal_conf.h"   /* SGA¿âÍ·ÎÄ¼şÅäÖÃ */
-#include "task_conf.h"      /* task²ãÍ·ÎÄ¼şÅäÖÃ */
-#include "ocd_conf.h"       /* OCD²ãÍ·ÎÄ¼şÅäÖÃ */
-#include "dev_conf.h"		/* Dev²ãÍ·ÎÄ¼şÅäÖÃ */
-#include "algo_conf.h"		/* Algo²ãÍ·ÎÄ¼şÅäÖÃ */
-#include "config.h"			/* I/OÅäÖÃÍ·ÎÄ¼şÅäÖÃ */
+ï»¿#include "usercode.h"		/* usercodeå¤´æ–‡ä»¶ */
+#include "threadpool.h"		/* threadpoolå¤´æ–‡ä»¶ */
+#include "drv_hal_conf.h"   /* SGAåº“å¤´æ–‡ä»¶é…ç½® */
+#include "task_conf.h"      /* taskå±‚å¤´æ–‡ä»¶é…ç½® */
+#include "ocd_conf.h"       /* OCDå±‚å¤´æ–‡ä»¶é…ç½® */
+#include "dev_conf.h"		/* Devå±‚å¤´æ–‡ä»¶é…ç½® */
+#include "algo_conf.h"		/* Algoå±‚å¤´æ–‡ä»¶é…ç½® */
+#include "config.h"			/* I/Oé…ç½®å¤´æ–‡ä»¶é…ç½® */
 
 
-/* Ïß³ÌÈë¿Úº¯Êı£¨Ê¹ÓÃÂã»úºöÂÔ´ËÎÄ¼ş£© */
+/* çº¿ç¨‹å…¥å£å‡½æ•°ï¼ˆä½¿ç”¨è£¸æœºå¿½ç•¥æ­¤æ–‡ä»¶ï¼‰ */
 
 
 

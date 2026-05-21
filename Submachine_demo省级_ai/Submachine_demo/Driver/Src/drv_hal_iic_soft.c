@@ -1,17 +1,17 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: drv_hal_iic_soft.c
+* æ–‡ä»¶å: drv_hal_iic_soft.c
 
-* ÄÚÈİ¼òÊö£ºÈí¼şiicÄ£ÄâÇı¶¯ÎÄ¼ş
+* å†…å®¹ç®€è¿°ï¼šè½¯ä»¶iicæ¨¡æ‹Ÿé©±åŠ¨æ–‡ä»¶
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ	ÈÕÆÚ		×÷Õß		ËµÃ÷
+* ç‰ˆæœ¬å·	æ—¥æœŸ		ä½œè€…		è¯´æ˜
 
-* 1.0.0a 	2020-02-22	Àî»·Óî		´´½¨¸ÃÎÄ¼ş
-* 1.0.1a 	2020-02-22	Àî»·Óî		ĞŞ¸´Drv_IICSoft_ReadByteº¯ÊıÖĞACKºÍNACK´íÎóµÄÎÊÌâ
+* 1.0.0a 	2020-02-22	æç¯å®‡		åˆ›å»ºè¯¥æ–‡ä»¶
+* 1.0.1a 	2020-02-22	æç¯å®‡		ä¿®å¤Drv_IICSoft_ReadByteå‡½æ•°ä¸­ACKå’ŒNACKé”™è¯¯çš„é—®é¢˜
 
 ****************************************************************************/
 #include "drv_hal_conf.h"
@@ -19,8 +19,8 @@
 #ifdef DRV_HAL_IIC_SOFT_ENABLE
 
 /**
- * @brief IICµÄÎ¢ÃëÑÓÊ±º¯Êı
- * @param _ucUs ĞèÒªÑÓÊ±µÄÊıÖµ
+ * @brief IICçš„å¾®ç§’å»¶æ—¶å‡½æ•°
+ * @param _ucUs éœ€è¦å»¶æ—¶çš„æ•°å€¼
  * @retval Null
 */
 static void S_IICSoft_DelayUs(uint8_t _ucUs)
@@ -29,8 +29,8 @@ static void S_IICSoft_DelayUs(uint8_t _ucUs)
 }
 
 /**
- * @brief IICµÄSCLÏßÀ­¸ß
- * @param _tIIC-IIC½á¹¹ÌåÖ¸Õë
+ * @brief IICçš„SCLçº¿æ‹‰é«˜
+ * @param _tIIC-IICç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_IICSoft_SCL_H(tagIICSoft_T *_tIIC)
@@ -39,8 +39,8 @@ static void S_IICSoft_SCL_H(tagIICSoft_T *_tIIC)
 }
 
 /**
- * @brief IICµÄSCLÏßÀ­µÍ
- * @param _tIIC-IIC½á¹¹ÌåÖ¸Õë
+ * @brief IICçš„SCLçº¿æ‹‰ä½
+ * @param _tIIC-IICç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_IICSoft_SCL_L(tagIICSoft_T *_tIIC)
@@ -49,8 +49,8 @@ static void S_IICSoft_SCL_L(tagIICSoft_T *_tIIC)
 }
 
 /**
- * @brief IICµÄSDAÏßÀ­¸ß
- * @param _tIIC-IIC½á¹¹ÌåÖ¸Õë
+ * @brief IICçš„SDAçº¿æ‹‰é«˜
+ * @param _tIIC-IICç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_IICSoft_SDA_H(tagIICSoft_T *_tIIC)
@@ -59,8 +59,8 @@ static void S_IICSoft_SDA_H(tagIICSoft_T *_tIIC)
 }
 
 /**
- * @brief IICµÄSDAÏßÀ­µÍ
- * @param _tIIC-IIC½á¹¹ÌåÖ¸Õë
+ * @brief IICçš„SDAçº¿æ‹‰ä½
+ * @param _tIIC-IICç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_IICSoft_SDA_L(tagIICSoft_T *_tIIC)
@@ -69,8 +69,8 @@ static void S_IICSoft_SDA_L(tagIICSoft_T *_tIIC)
 }
 
 /**
- * @brief IICµÄSDAÏß¶ÁÈ¡
- * @param _tIIC-IIC½á¹¹ÌåÖ¸Õë
+ * @brief IICçš„SDAçº¿è¯»å–
+ * @param _tIIC-IICç»“æ„ä½“æŒ‡é’ˆ
  * @retval GPIO_PinState
 */
 static GPIO_PinState S_IICSoft_READ_SDA(tagIICSoft_T *_tIIC)
@@ -79,8 +79,8 @@ static GPIO_PinState S_IICSoft_READ_SDA(tagIICSoft_T *_tIIC)
 }
 
 /**
- * @brief IICµÄSDAÏßÊä³öÄ£Ê½
- * @param _tIIC-IIC½á¹¹ÌåÖ¸Õë
+ * @brief IICçš„SDAçº¿è¾“å‡ºæ¨¡å¼
+ * @param _tIIC-IICç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_IICSoft_SDA_OutputMode(tagIICSoft_T *_tIIC)
@@ -95,8 +95,8 @@ static void S_IICSoft_SDA_OutputMode(tagIICSoft_T *_tIIC)
 }
 
 /**
- * @brief IICµÄSDAÏßÊäÈëÄ£Ê½
- * @param _tIIC-IIC½á¹¹ÌåÖ¸Õë
+ * @brief IICçš„SDAçº¿è¾“å…¥æ¨¡å¼
+ * @param _tIIC-IICç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_IICSoft_SDA_InputMode(tagIICSoft_T *_tIIC)
@@ -111,8 +111,8 @@ static void S_IICSoft_SDA_InputMode(tagIICSoft_T *_tIIC)
 }
 
 /**
- * @brief Ä£ÄâIIC²úÉúÓ¦´ğ
- * @param _tIIC-IIC½á¹¹ÌåÖ¸Õë
+ * @brief æ¨¡æ‹ŸIICäº§ç”Ÿåº”ç­”
+ * @param _tIIC-IICç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null 
 */
 static void S_IICSoft_SendAck(tagIICSoft_T *_tIIC)
@@ -131,8 +131,8 @@ static void S_IICSoft_SendAck(tagIICSoft_T *_tIIC)
 }
 
 /**
- * @brief Ä£ÄâIIC²»²úÉúÓ¦´ğ
- * @param _tIIC-IIC½á¹¹ÌåÖ¸Õë
+ * @brief æ¨¡æ‹ŸIICä¸äº§ç”Ÿåº”ç­”
+ * @param _tIIC-IICç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null 
 */
 static void S_IICSoft_SendNAck(tagIICSoft_T *_tIIC)
@@ -151,13 +151,13 @@ static void S_IICSoft_SendNAck(tagIICSoft_T *_tIIC)
 }	
 
 /**
- * @brief Ä£ÄâIIC²úÉúÆğÊ¼ĞÅºÅ
- * @param _tIIC-IIC½á¹¹ÌåÖ¸Õë
+ * @brief æ¨¡æ‹ŸIICäº§ç”Ÿèµ·å§‹ä¿¡å·
+ * @param _tIIC-IICç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null 
 */
 void Drv_IICSoft_Start(tagIICSoft_T *_tIIC)
 {
-	S_IICSoft_SDA_OutputMode(_tIIC);	/* sdaÏßÊä³ö */
+	S_IICSoft_SDA_OutputMode(_tIIC);	/* sdaçº¿è¾“å‡º */
 	
 	S_IICSoft_SDA_H(_tIIC);	  	  
 	S_IICSoft_SCL_H(_tIIC);
@@ -169,8 +169,8 @@ void Drv_IICSoft_Start(tagIICSoft_T *_tIIC)
 }	
 
 /**
- * @brief Ä£ÄâIIC²úÉúÍ£Ö¹ĞÅºÅ
- * @param _tIIC-IIC½á¹¹ÌåÖ¸Õë
+ * @brief æ¨¡æ‹ŸIICäº§ç”Ÿåœæ­¢ä¿¡å·
+ * @param _tIIC-IICç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null 
 */
 void Drv_IICSoft_Stop(tagIICSoft_T *_tIIC)
@@ -187,20 +187,20 @@ void Drv_IICSoft_Stop(tagIICSoft_T *_tIIC)
 }
 
 /**
- * @brief Ä£ÄâIICµÈ´ıÓ¦´ğ
- * @param _tIIC-IIC½á¹¹ÌåÖ¸Õë
+ * @brief æ¨¡æ‹ŸIICç­‰å¾…åº”ç­”
+ * @param _tIIC-IICç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null 
 */
 uint8_t Drv_IICSoft_WaitAck(tagIICSoft_T *_tIIC)
 {
 	uint8_t ucErrTime=0;
 
-	S_IICSoft_SDA_InputMode(_tIIC);   /* SDAÉèÖÃÎªÊäÈë */  
+	S_IICSoft_SDA_InputMode(_tIIC);   /* SDAè®¾ç½®ä¸ºè¾“å…¥ */  
 	
 	S_IICSoft_SDA_H(_tIIC);
 	S_IICSoft_DelayUs(1);	
 	S_IICSoft_SCL_H(_tIIC);
-	S_IICSoft_DelayUs(1);	 			/*SCLÎª¸ß ½øĞĞ¶ÁÈ¡²Ù×÷ */  
+	S_IICSoft_DelayUs(1);	 			/*SCLä¸ºé«˜ è¿›è¡Œè¯»å–æ“ä½œ */  
 
 	while(S_IICSoft_READ_SDA(_tIIC))
 	{
@@ -212,14 +212,14 @@ uint8_t Drv_IICSoft_WaitAck(tagIICSoft_T *_tIIC)
 		}
 	}
 
-	S_IICSoft_SCL_L(_tIIC);			/* Ê±ÖÓÊä³ö0 */ 	  	
+	S_IICSoft_SCL_L(_tIIC);			/* æ—¶é’Ÿè¾“å‡º0 */ 	  	
 	return 0;  
 } 				 				     
 
 /**
- * @brief Ä£ÄâIIC·¢ËÍÒ»¸ö×Ö½Ú
- * @param _tIIC-IIC½á¹¹ÌåÖ¸Õë
- * @param _ucTxData-·¢ËÍµÃµ½×Ö½ÚÊı¾İ
+ * @brief æ¨¡æ‹ŸIICå‘é€ä¸€ä¸ªå­—èŠ‚
+ * @param _tIIC-IICç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucTxData-å‘é€å¾—åˆ°å­—èŠ‚æ•°æ®
  * @retval Null 
 */
 void Drv_IICSoft_SendByte(tagIICSoft_T *_tIIC, uint8_t _ucTxData)
@@ -228,7 +228,7 @@ void Drv_IICSoft_SendByte(tagIICSoft_T *_tIIC, uint8_t _ucTxData)
 
 	S_IICSoft_SDA_OutputMode(_tIIC); 	
 
-    S_IICSoft_SCL_L(_tIIC);/* À­µÍÊ±ÖÓ¿ªÊ¼Êı¾İ´«Êä */
+    S_IICSoft_SCL_L(_tIIC);/* æ‹‰ä½æ—¶é’Ÿå¼€å§‹æ•°æ®ä¼ è¾“ */
 	
     for(index = 0;index < TYPE_NUM;index++)
     {     
@@ -239,7 +239,7 @@ void Drv_IICSoft_SendByte(tagIICSoft_T *_tIIC, uint8_t _ucTxData)
 			
 		_ucTxData <<= 1;
 
-		/* ¶ÔTEA5767ÕâÈı¸öÑÓÊ±¶¼ÊÇ±ØĞëµÄ */
+		/* å¯¹TEA5767è¿™ä¸‰ä¸ªå»¶æ—¶éƒ½æ˜¯å¿…é¡»çš„ */
 		S_IICSoft_DelayUs(2);   
 		S_IICSoft_SCL_H(_tIIC);
 		S_IICSoft_DelayUs(2); 
@@ -249,16 +249,16 @@ void Drv_IICSoft_SendByte(tagIICSoft_T *_tIIC, uint8_t _ucTxData)
 } 	    
 
 /**
- * @brief Ä£ÄâIIC¶ÁÈ¡Ò»¸ö×Ö½Ú
- * @param _tIIC-IIC½á¹¹ÌåÖ¸Õë
- * @param _ucAck-ack=1Ê±£¬·¢ËÍNACK£¬ack=0£¬·¢ËÍACK
+ * @brief æ¨¡æ‹ŸIICè¯»å–ä¸€ä¸ªå­—èŠ‚
+ * @param _tIIC-IICç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucAck-ack=1æ—¶ï¼Œå‘é€NACKï¼Œack=0ï¼Œå‘é€ACK
  * @retval Null 
 */
 uint8_t Drv_IICSoft_ReadByte(tagIICSoft_T *_tIIC, uint8_t _ucAck)
 {
 	uint8_t index,ucRxData=0;
 
-	S_IICSoft_SDA_InputMode(_tIIC);		/* SDAÉèÖÃÎªÊäÈë */
+	S_IICSoft_SDA_InputMode(_tIIC);		/* SDAè®¾ç½®ä¸ºè¾“å…¥ */
    
 	for(index = 0;index < TYPE_NUM;index++ )
 	{
@@ -277,16 +277,16 @@ uint8_t Drv_IICSoft_ReadByte(tagIICSoft_T *_tIIC, uint8_t _ucAck)
     }	
 
     if (_ucAck)
-        S_IICSoft_SendAck(_tIIC); 		/* ·¢ËÍACK */
+        S_IICSoft_SendAck(_tIIC); 		/* å‘é€ACK */
     else
-		S_IICSoft_SendNAck(_tIIC);		/* ·¢ËÍnACK */
+		S_IICSoft_SendNAck(_tIIC);		/* å‘é€nACK */
 
     return ucRxData;
 }
 
 /**
- * @brief Ä£ÄâIIC³õÊ¼»¯
- * @param _tIIC-IIC½á¹¹ÌåÖ¸Õë
+ * @brief æ¨¡æ‹ŸIICåˆå§‹åŒ–
+ * @param _tIIC-IICç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null 
 */
 void Drv_IICSoft_Init(tagIICSoft_T *_tIIC)

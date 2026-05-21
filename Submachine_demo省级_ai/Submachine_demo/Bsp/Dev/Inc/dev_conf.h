@@ -1,8 +1,9 @@
-#ifndef __DEV_CONF_H_
+ï»¿#ifndef __DEV_CONF_H_
 #define __DEV_CONF_H_
 
 
-/* Dev²ãÍ·ÎÄ¼ş°üº¬Çø */
+/* Devå±‚å¤´æ–‡ä»¶åŒ…å«åŒº */
+#include "dev_servo.h"
 
 
 

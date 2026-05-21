@@ -1,23 +1,23 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: drv_hal_gpio.c
+* æ–‡ä»¶å: drv_hal_gpio.c
 
-* ÄÚÈİ¼òÊö£ºGPIOÇı¶¯ÎÄ¼ş
+* å†…å®¹ç®€è¿°ï¼šGPIOé©±åŠ¨æ–‡ä»¶
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ	   ÈÕÆÚ		  ×÷Õß		  ËµÃ÷
-*  2.6	 	2023-06-15	±«³Ìè´		ĞÂÔöGPIO×´Ì¬·­×ªº¯Êı
+* ç‰ˆæœ¬å·	   æ—¥æœŸ		  ä½œè€…		  è¯´æ˜
+*  2.6	 	2023-06-15	é²ç¨‹ç’		æ–°å¢GPIOçŠ¶æ€ç¿»è½¬å‡½æ•°
 
-*  2.5	 	2023-05-29	±«³Ìè´		ĞŞ¸´Íâ²¿ÖĞ¶Ï5-15ÎŞ·¨Ê¹ÓÃµÄÎÊÌâ
+*  2.5	 	2023-05-29	é²ç¨‹ç’		ä¿®å¤å¤–éƒ¨ä¸­æ–­5-15æ— æ³•ä½¿ç”¨çš„é—®é¢˜
 
-*  2.0	 	2023-03-03	±«³Ìè´		IO³õÊ¼»¯ÖĞÔö¼Ó¶ÔÍâ²¿ÖĞ¶ÏµÄÖ§³Ö£¬¼õÉÙÇ¶Ì×
+*  2.0	 	2023-03-03	é²ç¨‹ç’		IOåˆå§‹åŒ–ä¸­å¢åŠ å¯¹å¤–éƒ¨ä¸­æ–­çš„æ”¯æŒï¼Œå‡å°‘åµŒå¥—
 
-* 1.0.0a 	2020-02-22	Àî»·Óî		´´½¨¸ÃÎÄ¼ş
+* 1.0.0a 	2020-02-22	æç¯å®‡		åˆ›å»ºè¯¥æ–‡ä»¶
 
-* 1.0.1a 	2020-03-16	Àî»·Óî		ĞÂÔöDrv_GPIO_NVICDisableº¯Êı
+* 1.0.1a 	2020-03-16	æç¯å®‡		æ–°å¢Drv_GPIO_NVICDisableå‡½æ•°
 
 ****************************************************************************/
 #include "drv_hal_conf.h"
@@ -25,8 +25,8 @@
 #ifdef DRV_HAL_GPIO_ENABLE
 
 /**
- * @brief GPIOÊ±ÖÓ³õÊ¼»¯º¯Êı
- * @param _tGPIO-GPIO¾ä±ú
+ * @brief GPIOæ—¶é’Ÿåˆå§‹åŒ–å‡½æ•°
+ * @param _tGPIO-GPIOå¥æŸ„
  * @retval Null 
 */
 static void S_GPIO_CLKEnable(tagGPIO_T *_tGPIO) 
@@ -54,8 +54,8 @@ static void S_GPIO_CLKEnable(tagGPIO_T *_tGPIO)
 }
 
 /**
- * @brief GPIO²ÎÊıÅäÖÃº¯Êı
- * @param _tGPIO-GPIO¾ä±ú
+ * @brief GPIOå‚æ•°é…ç½®å‡½æ•°
+ * @param _tGPIO-GPIOå¥æŸ„
  * @retval Null
 */
 static void S_GPIO_ParamConfig(tagGPIO_T *_tGPIO)
@@ -64,9 +64,9 @@ static void S_GPIO_ParamConfig(tagGPIO_T *_tGPIO)
 }
 
 /**
- * @brief GPIOÖĞ¶ÏÏßÑ¡Ôñº¯Êı
- * @param _tGPIO-GPIO¾ä±ú
- * @retval uint8_t-IO¶ÔÓ¦µÄÖĞ¶ÏÏß
+ * @brief GPIOä¸­æ–­çº¿é€‰æ‹©å‡½æ•°
+ * @param _tGPIO-GPIOå¥æŸ„
+ * @retval uint8_t-IOå¯¹åº”çš„ä¸­æ–­çº¿
 */
 static uint8_t S_GPIO_NVICIRQnSelect(tagGPIO_T *_tGPIO)
 {
@@ -104,8 +104,8 @@ static uint8_t S_GPIO_NVICIRQnSelect(tagGPIO_T *_tGPIO)
 }
 
 /**
- * @brief GPIOÖĞ¶Ï²ÎÊıÉèÖÃ
- * @param _tGPIO-GPIO¾ä±ú
+ * @brief GPIOä¸­æ–­å‚æ•°è®¾ç½®
+ * @param _tGPIO-GPIOå¥æŸ„
  * @retval Null
 */
 static void S_GPIO_NVICParamConfig(tagGPIO_T *_tGPIO)
@@ -157,9 +157,9 @@ static void S_GPIO_NVICParamConfig(tagGPIO_T *_tGPIO)
 }
 
 /**
- * @brief Ğ´ÈëGPIO×´Ì¬
- * @param _tGPIO-GPIO¾ä±ú
- * @param _PinStatus-Ğ´Èë×´Ì¬
+ * @brief å†™å…¥GPIOçŠ¶æ€
+ * @param _tGPIO-GPIOå¥æŸ„
+ * @param _PinStatus-å†™å…¥çŠ¶æ€
  * @retval Null
 */
 void Drv_GPIO_Write(tagGPIO_T *_tGPIO, GPIO_PinState _PinStatus)
@@ -168,8 +168,8 @@ void Drv_GPIO_Write(tagGPIO_T *_tGPIO, GPIO_PinState _PinStatus)
 }
 
 /**
- * @brief GPIOÀ­¸ß
- * @param _tGPIO-GPIO¾ä±ú
+ * @brief GPIOæ‹‰é«˜
+ * @param _tGPIO-GPIOå¥æŸ„
  * @retval Null
 */
 void Drv_GPIO_Set(tagGPIO_T *_tGPIO)
@@ -178,8 +178,8 @@ void Drv_GPIO_Set(tagGPIO_T *_tGPIO)
 }
 
 /**
- * @brief GPIOÀ­µÍ
- * @param _tGPIO-GPIO¾ä±ú
+ * @brief GPIOæ‹‰ä½
+ * @param _tGPIO-GPIOå¥æŸ„
  * @retval Null
 */
 void Drv_GPIO_Reset(tagGPIO_T *_tGPIO)
@@ -188,8 +188,8 @@ void Drv_GPIO_Reset(tagGPIO_T *_tGPIO)
 }
 
 /**
- * @brief ¶ÁÈ¡GPIO×´Ì¬
- * @param _tGPIO-GPIO¾ä±ú
+ * @brief è¯»å–GPIOçŠ¶æ€
+ * @param _tGPIO-GPIOå¥æŸ„
  * @retval Null
 */
 GPIO_PinState Drv_GPIO_Read(tagGPIO_T *_tGPIO)
@@ -198,8 +198,8 @@ GPIO_PinState Drv_GPIO_Read(tagGPIO_T *_tGPIO)
 }
 
 /**
- * @brief GPIO×´Ì¬·­×ª
- * @param _tGPIO-GPIO¾ä±ú
+ * @brief GPIOçŠ¶æ€ç¿»è½¬
+ * @param _tGPIO-GPIOå¥æŸ„
  * @retval Null
 */
 void Drv_GPIO_Toggle(tagGPIO_T *_tGPIO)
@@ -208,8 +208,8 @@ void Drv_GPIO_Toggle(tagGPIO_T *_tGPIO)
 }
 
 /**
- * @brief GPIOÖĞ¶ÏÊ§ÄÜº¯Êı
- * @param _tGPIO-GPIO¾ä±ú
+ * @brief GPIOä¸­æ–­å¤±èƒ½å‡½æ•°
+ * @param _tGPIO-GPIOå¥æŸ„
  * @retval Null
 */
 void Drv_GPIO_NVICDisable(tagGPIO_T *_tGPIO)
@@ -219,8 +219,8 @@ void Drv_GPIO_NVICDisable(tagGPIO_T *_tGPIO)
 }
 
 /**
- * @brief GPIOÖĞ¶Ï³õÊ¼»¯º¯Êı
- * @param _tGPIO-GPIO¾ä±ú
+ * @brief GPIOä¸­æ–­åˆå§‹åŒ–å‡½æ•°
+ * @param _tGPIO-GPIOå¥æŸ„
  * @retval Null
 */
 void Drv_GPIO_NVICConfig(tagGPIO_T *_tGPIO)
@@ -229,9 +229,9 @@ void Drv_GPIO_NVICConfig(tagGPIO_T *_tGPIO)
 }
 
 /**
- * @brief GPIO³õÊ¼»¯º¯Êı
- * @param _tGPIO-GPIO¾ä±ú
- * @param _ucNum-³õÊ¼»¯IO¸öÊı
+ * @brief GPIOåˆå§‹åŒ–å‡½æ•°
+ * @param _tGPIO-GPIOå¥æŸ„
+ * @param _ucNum-åˆå§‹åŒ–IOä¸ªæ•°
  * @retval Null
 */
 void Drv_GPIO_Init(tagGPIO_T *_tGPIO, uint8_t _ucNum)
@@ -243,7 +243,7 @@ void Drv_GPIO_Init(tagGPIO_T *_tGPIO, uint8_t _ucNum)
 		S_GPIO_CLKEnable(&_tGPIO[index]);
 		S_GPIO_ParamConfig(&_tGPIO[index]);
 		
-		/* Èç¹ûIOÅäÖÃÎªÖĞ¶ÏÄ£Ê½ */
+		/* å¦‚æœIOé…ç½®ä¸ºä¸­æ–­æ¨¡å¼ */
 		if((_tGPIO[index].tGPIOInit.Mode == GPIO_MODE_IT_FALLING)
 		 ||(_tGPIO[index].tGPIOInit.Mode == GPIO_MODE_IT_RISING)
 		 ||(_tGPIO[index].tGPIOInit.Mode == GPIO_MODE_IT_RISING_FALLING))
@@ -252,8 +252,8 @@ void Drv_GPIO_Init(tagGPIO_T *_tGPIO, uint8_t _ucNum)
 }
 
 /**
- * @brief GPIOÄ¬ÈÏÖØÖÃº¯Êı
- * @param _tGPIO-GPIO¾ä±ú
+ * @brief GPIOé»˜è®¤é‡ç½®å‡½æ•°
+ * @param _tGPIO-GPIOå¥æŸ„
  * @retval Null
 */
 void Drv_GPIO_DeInit(tagGPIO_T *_tGPIO)
@@ -262,8 +262,8 @@ void Drv_GPIO_DeInit(tagGPIO_T *_tGPIO)
 }
 
 /**
- * @brief GPIOÖĞ¶Ïº¯Êı
- * @param _tGPIO-GPIO¾ä±ú
+ * @brief GPIOä¸­æ–­å‡½æ•°
+ * @param _tGPIO-GPIOå¥æŸ„
  * @retval Null
 */
 void Drv_GPIO_EXTI_IRQHandler(tagGPIO_T *_tGPIO)

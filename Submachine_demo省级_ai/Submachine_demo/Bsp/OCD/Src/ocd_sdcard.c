@@ -1,24 +1,24 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: ocd_sdcard.c
+* æ–‡ä»¶å: ocd_sdcard.c
 
-* ÄÚÈİ¼òÊö£ºSD¿¨Ä£¿éÎÄ¼ş
+* å†…å®¹ç®€è¿°ï¼šSDå¡æ¨¡å—æ–‡ä»¶
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ	ÈÕÆÚ		×÷Õß		ËµÃ÷
+* ç‰ˆæœ¬å·	æ—¥æœŸ		ä½œè€…		è¯´æ˜
 
-* 1.0.0a 	2020-02-22	Àî»·Óî		´´½¨¸ÃÎÄ¼ş
+* 1.0.0a 	2020-02-22	æç¯å®‡		åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "ocd_sdcard.h"
 
-#include "diskio.h"			/* ²»Ê¹ÓÃFATFSÊ±×¢ÊÍµô */
+#include "diskio.h"			/* ä¸ä½¿ç”¨FATFSæ—¶æ³¨é‡Šæ‰ */
 
 /**
- * @brief SD¿¨·¢ËÍµÈ´ıÖÕÖ¹ĞÅºÅ
+ * @brief SDå¡å‘é€ç­‰å¾…ç»ˆæ­¢ä¿¡å·
  * @param NULL
  * @retval Null
 */
@@ -28,14 +28,14 @@ static void S_SDCard_WaitStop(void)
 }
 
 /**
- * @brief SD¿¨·¢ËÍµÈ´ı¾ÍĞ÷ĞÅºÅ
+ * @brief SDå¡å‘é€ç­‰å¾…å°±ç»ªä¿¡å·
  * @param NULL
- * @retval uint8_t-1,¾ÍĞ÷£»0-´íÎó
+ * @retval uint8_t-1,å°±ç»ªï¼›0-é”™è¯¯
 */
 static uint8_t S_SDCard_WaitReady(void)
 {
 	uint8_t res = 0;
-	uint32_t ulTxNum = 0;	/* ·¢ËÍ´ÎÊı */
+	uint32_t ulTxNum = 0;	/* å‘é€æ¬¡æ•° */
 	
 	do
 	{		
@@ -50,9 +50,9 @@ static uint8_t S_SDCard_WaitReady(void)
 }
 
 /**
- * @brief SD¿¨µÈ´ı
+ * @brief SDå¡ç­‰å¾…
  * @param NULL
- * @retval uint8_t-0,¾ÍĞ÷£»0-´íÎó
+ * @retval uint8_t-0,å°±ç»ªï¼›0-é”™è¯¯
 */
 static uint8_t S_SDCard_Wait(void)
 {
@@ -68,11 +68,11 @@ static uint8_t S_SDCard_Wait(void)
 }
 
 /**
- * @brief SD¿¨·¢ËÍÃüÁî
- * @param _ucCmd-ÃüÁî
+ * @brief SDå¡å‘é€å‘½ä»¤
+ * @param _ucCmd-å‘½ä»¤
  * @param _ulArg-
- * @param _ucCrc-CRCĞ£Ñé
- * @retval uint8_t-0xff,´íÎó£»ÆäËü-·µ»ØµÄÒ»¸ö×Ö½ÚÊı¾İ
+ * @param _ucCrc-CRCæ ¡éªŒ
+ * @retval uint8_t-0xff,é”™è¯¯ï¼›å…¶å®ƒ-è¿”å›çš„ä¸€ä¸ªå­—èŠ‚æ•°æ®
 */
 static uint8_t S_SDCard_SendCMD(uint8_t _ucCmd, uint32_t _ulArg, uint8_t _ucCrc)
 {
@@ -93,7 +93,7 @@ static uint8_t S_SDCard_SendCMD(uint8_t _ucCmd, uint32_t _ulArg, uint8_t _ucCrc)
 	if(_ucCmd == CMD12)
 		Drv_SPI_TransmitReceive( &s_tSPI, 0xFF);
 	
-	ucReTryNum = 0x1F;	/* ÖØ·¢´ÎÊı */
+	ucReTryNum = 0x1F;	/* é‡å‘æ¬¡æ•° */
 	do
 	{
 		ucRx = Drv_SPI_TransmitReceive(&s_tSPI, 0xFF);
@@ -103,7 +103,7 @@ static uint8_t S_SDCard_SendCMD(uint8_t _ucCmd, uint32_t _ulArg, uint8_t _ucCrc)
 }
 
 /**
- * @brief SD¿¨µÄ³õÊ¼»¯
+ * @brief SDå¡çš„åˆå§‹åŒ–
  * @param NULL
  * @retval uint8_t
 */
@@ -133,7 +133,7 @@ static uint8_t S_SDCard_Init(void)
 			for(index = 0; index < 4; index++)
 				ucaRxBuffer[index] = Drv_SPI_TransmitReceive(&s_tSPI, 0xFF);	
 						
-			/* ¿¨ÊÇ·ñÖ§³Ö2.7~3.6V */
+			/* å¡æ˜¯å¦æ”¯æŒ2.7~3.6V */
 			if(ucaRxBuffer[2]==0x01 && ucaRxBuffer[3]==0xAA)
 			{
 				usReTryNum = 0XFFFE;
@@ -199,8 +199,8 @@ static uint8_t S_SDCard_Init(void)
 }
 
 /**
- * @brief SD¿¨µÄ»ñµÃÏìÓ¦
- * @param _ucAck-Ó¦´ğĞÅºÅ
+ * @brief SDå¡çš„è·å¾—å“åº”
+ * @param _ucAck-åº”ç­”ä¿¡å·
  * @retval uint8_t
 */
 static uint8_t S_SDCard_GetResponse(uint8_t _ucAck)
@@ -217,9 +217,9 @@ static uint8_t S_SDCard_GetResponse(uint8_t _ucAck)
 }
 
 /**
- * @brief SD¿¨µÄ½ÓÊÕÊı¾İ
- * @param _ucpBuffer-»º³åÇøµØÖ·
- * @param _usLength-Êı¾İ³¤¶È
+ * @brief SDå¡çš„æ¥æ”¶æ•°æ®
+ * @param _ucpBuffer-ç¼“å†²åŒºåœ°å€
+ * @param _usLength-æ•°æ®é•¿åº¦
  * @retval uint8_t
 */
 static uint8_t S_SDCard_ReceiveData(uint8_t *_ucpBuffer, uint16_t _usLength)
@@ -240,10 +240,10 @@ static uint8_t S_SDCard_ReceiveData(uint8_t *_ucpBuffer, uint16_t _usLength)
 }
 
 /**
- * @brief SD¿¨µÄ¶ÁÈ¡´ÅÅÌÊı¾İ
- * @param _ucpBuffer-»º³åÇøµØÖ·
- * @param _ulSec-·ÖÇø
- * @param _ucCnt-Êı¾İ³¤¶È
+ * @brief SDå¡çš„è¯»å–ç£ç›˜æ•°æ®
+ * @param _ucpBuffer-ç¼“å†²åŒºåœ°å€
+ * @param _ulSec-åˆ†åŒº
+ * @param _ucCnt-æ•°æ®é•¿åº¦
  * @retval uint8_t
 */
 static uint8_t S_SDCard_ReadDisk(uint8_t *_ucpBuffer, uint32_t _ulSec, uint8_t _ucCnt)
@@ -279,9 +279,9 @@ static uint8_t S_SDCard_ReadDisk(uint8_t *_ucpBuffer, uint32_t _ulSec, uint8_t _
 }
 
 /**
- * @brief SD¿¨µÄ·¢ËÍÊı¾İ¿é
- * @param _ucpBuffer-»º³åÇøµØÖ·
- * @param _ucCmd-ÃüÁî
+ * @brief SDå¡çš„å‘é€æ•°æ®å—
+ * @param _ucpBuffer-ç¼“å†²åŒºåœ°å€
+ * @param _ucCmd-å‘½ä»¤
  * @retval uint8_t
 */
 static uint8_t S_SDCard_SendBlock(uint8_t *_ucpBuffer, uint8_t _ucCmd)
@@ -310,10 +310,10 @@ static uint8_t S_SDCard_SendBlock(uint8_t *_ucpBuffer, uint8_t _ucCmd)
 }
 
 /**
- * @brief SD¿¨µÄĞ´´ÅÅÌ
- * @param _ucpBuffer-»º³åÇøµØÖ·
- * @param _ulSec-·ÖÇø
- * @param _ucCnt-Êı¾İ³¤¶È
+ * @brief SDå¡çš„å†™ç£ç›˜
+ * @param _ucpBuffer-ç¼“å†²åŒºåœ°å€
+ * @param _ulSec-åˆ†åŒº
+ * @param _ucCnt-æ•°æ®é•¿åº¦
  * @retval uint8_t
 */
 static uint8_t S_SDCard_WriteDisk(uint8_t *_ucpBuffer, uint32_t _ulSec, uint8_t _ucCnt)
@@ -354,8 +354,8 @@ static uint8_t S_SDCard_WriteDisk(uint8_t *_ucpBuffer, uint32_t _ulSec, uint8_t 
 }
 
 /**
- * @brief SD¿¨µÄSPI³õÊ¼»¯
- * @param _tSPI-spi½á¹¹Ìå
+ * @brief SDå¡çš„SPIåˆå§‹åŒ–
+ * @param _tSPI-spiç»“æ„ä½“
  * @retval uint8_t
 */
 uint8_t OCD_SDCard_SPIInit(tagSPI_T _tSPI)
@@ -365,20 +365,20 @@ uint8_t OCD_SDCard_SPIInit(tagSPI_T _tSPI)
 	return S_SDCard_Init();
 }
 
-/* FATFSÎÄ¼şÏµÍ³ start */
+/* FATFSæ–‡ä»¶ç³»ç»Ÿ start */
 #ifdef FRAMEWORK_FATFS_ENABLE
 
 #define SD_CARD	 0  /* Example: Map MMC/SD card to physical drive 1 */
 
-#define FLASH_SECTOR_SIZE 	512		/* µ¥¸öÉÈÇø´óĞ¡ */
-#define FLASH_BLOCK_SIZE	8		/* Ã¿Æ¬BlockÓĞ8¸öÉÈÇø */
-#define FLASH_SECTOR_COUNT	2048*10	/* Ö¸¶¨ÉÈÇøÊıÁ¿-->FATFS¿ÉÓÃ´óĞ¡Îª10M */
+#define FLASH_SECTOR_SIZE 	512		/* å•ä¸ªæ‰‡åŒºå¤§å° */
+#define FLASH_BLOCK_SIZE	8		/* æ¯ç‰‡Blockæœ‰8ä¸ªæ‰‡åŒº */
+#define FLASH_SECTOR_COUNT	2048*10	/* æŒ‡å®šæ‰‡åŒºæ•°é‡-->FATFSå¯ç”¨å¤§å°ä¸º10M */
 
 DSTATUS disk_initialize (
 	BYTE _drv				/* Physical drive nmuber (0..) */
 )
 {
-	return RES_OK; //³õÊ¼»¯³É¹¦
+	return RES_OK; //åˆå§‹åŒ–æˆåŠŸ
 }
 
 DSTATUS disk_status (
@@ -397,17 +397,17 @@ DRESULT disk_read (
 {	
 	uint8_t res=0; 
     if (!count)
-		return RES_PARERR;	/* count²»ÄÜµÈÓÚ0£¬·ñÔò·µ»Ø²ÎÊı´íÎó */	
+		return RES_PARERR;	/* countä¸èƒ½ç­‰äº0ï¼Œå¦åˆ™è¿”å›å‚æ•°é”™è¯¯ */	
 	
 	switch(drv)
 	{
-		case SD_CARD:		/* SD¿¨ */
+		case SD_CARD:		/* SDå¡ */
 			res = S_SDCard_ReadDisk( ucRxBuffer, sector, count);	 
 
-		 	if(res)			/* STM32 SPIµÄbug,ÔÚsd¿¨²Ù×÷Ê§°ÜµÄÊ±ºòÈç¹û²»Ö´ĞĞÏÂÃæµÄÓï¾ä,¿ÉÄÜµ¼ÖÂSPI¶ÁĞ´Òì³£ */
+		 	if(res)			/* STM32 SPIçš„bug,åœ¨sdå¡æ“ä½œå¤±è´¥çš„æ—¶å€™å¦‚æœä¸æ‰§è¡Œä¸‹é¢çš„è¯­å¥,å¯èƒ½å¯¼è‡´SPIè¯»å†™å¼‚å¸¸ */
 			{
 				Drv_SPI_SpeedConfig(&s_tSPI, 0);
-				Drv_SPI_TransmitReceive(&s_tSPI, 0XFF);		/* Ìá¹©¶îÍâµÄ8¸öÊ±ÖÓ */
+				Drv_SPI_TransmitReceive(&s_tSPI, 0XFF);		/* æä¾›é¢å¤–çš„8ä¸ªæ—¶é’Ÿ */
 				Drv_SPI_SpeedConfig(&s_tSPI, 1);
 			}
 		break;
@@ -416,7 +416,7 @@ DRESULT disk_read (
 			res=1; 
 	}
 	
-	/* ´¦Àí·µ»ØÖµ£¬½«SPI_SD_driver.cµÄ·µ»ØÖµ×ª³Éff.cµÄ·µ»ØÖµ */
+	/* å¤„ç†è¿”å›å€¼ï¼Œå°†SPI_SD_driver.cçš„è¿”å›å€¼è½¬æˆff.cçš„è¿”å›å€¼ */
     if(res==0x00)
 		return RES_OK;	 
     else 
@@ -432,11 +432,11 @@ DRESULT disk_write (
 {
 	unsigned char res=0;
     if (!count)
-		return RES_PARERR;	/* count²»ÄÜµÈÓÚ0£¬·ñÔò·µ»Ø²ÎÊı´íÎó */
+		return RES_PARERR;	/* countä¸èƒ½ç­‰äº0ï¼Œå¦åˆ™è¿”å›å‚æ•°é”™è¯¯ */
 	
 	switch(drv)
 	{
-		case SD_CARD:		/* SD¿¨ */
+		case SD_CARD:		/* SDå¡ */
 			res=S_SDCard_WriteDisk( (unsigned char*)ucRxBuffer,sector,count);
 			while(res)
 			{
@@ -448,7 +448,7 @@ DRESULT disk_write (
 		default:
 			res=1; 
 	}
-    /* ´¦Àí·µ»ØÖµ£¬½«SPI_SD_driver.cµÄ·µ»ØÖµ×ª³Éff.cµÄ·µ»ØÖµ */
+    /* å¤„ç†è¿”å›å€¼ï¼Œå°†SPI_SD_driver.cçš„è¿”å›å€¼è½¬æˆff.cçš„è¿”å›å€¼ */
     if(res == 0x00)
 		return RES_OK;	 
     else 
@@ -462,22 +462,22 @@ DRESULT disk_ioctl (
 )
 {	
 	DRESULT res;						  			     
-	if(drv==SD_CARD)		/* SD¿¨ */
+	if(drv==SD_CARD)		/* SDå¡ */
 	{
 	    switch(ctrl)
 	    {
 		    case CTRL_SYNC:
 				return RES_OK; 
 		    case GET_SECTOR_COUNT:
-		        *(unsigned int*)ucRxBuffer = FLASH_SECTOR_COUNT;		/* »ñÈ¡ÉÈÇøÊı */
+		        *(unsigned int*)ucRxBuffer = FLASH_SECTOR_COUNT;		/* è·å–æ‰‡åŒºæ•° */
 		        res = RES_OK;
 		        break;	 
 		    case GET_SECTOR_SIZE:
-		        *(unsigned short*)ucRxBuffer = FLASH_SECTOR_SIZE;		/* »ñÈ¡ÉÈÇø´óĞ¡ */
+		        *(unsigned short*)ucRxBuffer = FLASH_SECTOR_SIZE;		/* è·å–æ‰‡åŒºå¤§å° */
 		        res = RES_OK;
 		        break;	 
 		    case GET_BLOCK_SIZE:
-				*(unsigned short*)ucRxBuffer = FLASH_BLOCK_SIZE;		/* »ñÈ¡¿é´óĞ¡ */
+				*(unsigned short*)ucRxBuffer = FLASH_BLOCK_SIZE;		/* è·å–å—å¤§å° */
 		        res = RES_OK;
 		        break;
 		    default:
@@ -486,7 +486,7 @@ DRESULT disk_ioctl (
 	    }
 	}
 	else 
-		res=RES_ERROR; /* ÆäËûµÄ²»Ö§³Ö */
+		res=RES_ERROR; /* å…¶ä»–çš„ä¸æ”¯æŒ */
 	return 
 	  res;
 }
@@ -496,4 +496,4 @@ DWORD get_fattime (void)
 	return 0;
 }
 #endif
-/* FATFSÎÄ¼şÏµÍ³ end */
+/* FATFSæ–‡ä»¶ç³»ç»Ÿ end */

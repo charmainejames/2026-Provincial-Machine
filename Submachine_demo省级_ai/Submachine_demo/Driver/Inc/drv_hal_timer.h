@@ -1,4 +1,4 @@
-#ifndef __DRV_TIMER_H_
+ï»¿#ifndef __DRV_TIMER_H_
 #define __DRV_TIMER_H_
 
 #include "drv_hal_conf.h"
@@ -6,9 +6,9 @@
 typedef struct
 {
 	TIM_HandleTypeDef 	tTimerHandle;
-	float 				fTimingLength;	/* ¶¨Ê±Ê±³¤·¶Î§0-59650.503125ºÁÃë */
-	uint8_t				ucPriority;		/* ÖĞ¶ÏÓÅÏÈ¼¶£¬0-15 */
-	uint8_t 			ucSubPriority;	/* ÖĞ¶Ï×ÓÓÅÏÈ¼¶£¬0-15 */
+	float 				fTimingLength;	/* å®šæ—¶æ—¶é•¿èŒƒå›´0-59650.503125æ¯«ç§’ */
+	uint8_t				ucPriority;		/* ä¸­æ–­ä¼˜å…ˆçº§ï¼Œ0-15 */
+	uint8_t 			ucSubPriority;	/* ä¸­æ–­å­ä¼˜å…ˆçº§ï¼Œ0-15 */
 }tagTIM_T;
 
 void Drv_Timer_Reset(tagTIM_T *_tTimer);

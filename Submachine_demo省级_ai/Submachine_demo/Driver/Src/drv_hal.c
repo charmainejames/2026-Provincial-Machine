@@ -1,17 +1,17 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼þÃû: drv_hal.c
+* æ–‡ä»¶å: drv_hal.c
 
-* ÄÚÈÝ¼òÊö£ºhal¿âÇý¶¯ÎÄ¼þ
+* å†…å®¹ç®€è¿°ï¼šhalåº“é©±åŠ¨æ–‡ä»¶
 
-* ÎÄ¼þÀúÊ·£º
+* æ–‡ä»¶åŽ†å²ï¼š
 
-* °æ±¾ºÅ	  ÈÕÆÚ		  ×÷Õß		   ËµÃ÷
-*  2.2 	  2023-03-29	±«³Ìè´		ÊÕÄÉtask_irq.cÏÂµ×²ãÖÐ¶Ïº¯Êý
+* ç‰ˆæœ¬å·	  æ—¥æœŸ		  ä½œè€…		   è¯´æ˜Ž
+*  2.2 	  2023-03-29	é²ç¨‹ç’		æ”¶çº³task_irq.cä¸‹åº•å±‚ä¸­æ–­å‡½æ•°
 
-* 1.0.0a  2020-02-22	Àî»·Óî		´´½¨¸ÃÎÄ¼þ
+* 1.0.0a  2020-02-22	æŽçŽ¯å®‡		åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "drv_hal_conf.h"
@@ -20,10 +20,10 @@
 
 static char s_cpOutput[256] = {0};
 /**
- * @brief DebugÊä³ö
+ * @brief Debugè¾“å‡º
  * @param _cpMsg
- * @param _cpFunc-¶ÔÓ¦º¯ÊýÖ¸Õë
- * @param _iLine-¶ÔÓ¦ÐÐºÅ
+ * @param _cpFunc-å¯¹åº”å‡½æ•°æŒ‡é’ˆ
+ * @param _iLine-å¯¹åº”è¡Œå·
  * @param _cpFmt
  * @retval Null
 */
@@ -41,7 +41,7 @@ void Drv_HAL_PrintLog(const char *_cpMsg,
 }
 
 /**
- * @brief DebugÊä³ö
+ * @brief Debugè¾“å‡º
  * @param _cpMsg
  * @retval Null
 */
@@ -66,7 +66,7 @@ void Drv_HAL_PrintBuf(const char *_cpMsg, ...)
 }
 
 /**
- * @brief ³ÌÐòÐÅÏ¢Êä³ö
+ * @brief ç¨‹åºä¿¡æ¯è¾“å‡º
  * @param Null
  * @retval Null
 */
@@ -77,20 +77,20 @@ void Drv_HAL_ProgramInfoOutput(void)
 }
 
 /**
- * @brief ÏµÍ³±¨´íº¯Êý
- * @param _cpFile-ÎÄ¼þÃûÖ¸Õë
- * @param _ulLine-ÐÐºÅ
+ * @brief ç³»ç»ŸæŠ¥é”™å‡½æ•°
+ * @param _cpFile-æ–‡ä»¶åæŒ‡é’ˆ
+ * @param _ulLine-è¡Œå·
  * @retval Null
 */
 void Drv_HAL_Error(char *_cpFile, uint32_t _ulLine)
 {
-	/* 	ÓÃ»§¿ÉÒÔÌí¼Ó×Ô¼ºµÄ´úÂë±¨¸æÔ´´úÂëÎÄ¼þÃûºÍ´úÂëÐÐºÅ£¬±ÈÈç½«´íÎóÎÄ¼þºÍÐÐºÅ´òÓ¡µ½´®¿Ú*/
+	/* 	ç”¨æˆ·å¯ä»¥æ·»åŠ è‡ªå·±çš„ä»£ç æŠ¥å‘Šæºä»£ç æ–‡ä»¶åå’Œä»£ç è¡Œå·ï¼Œæ¯”å¦‚å°†é”™è¯¯æ–‡ä»¶å’Œè¡Œå·æ‰“å°åˆ°ä¸²å£*/
 	printf("->Happen Error!!!\r\n"); 
 	printf("->Error Parameters Value: file %s on line %d\r\n", _cpFile, _ulLine); 
 }
 
 /**
- * @brief ÏµÍ³Ê±ÖÓ³õÊ¼»¯º¯Êý
+ * @brief ç³»ç»Ÿæ—¶é’Ÿåˆå§‹åŒ–å‡½æ•°
  * @param Null
  * @retval Null
 */
@@ -129,7 +129,7 @@ static void S_HAL_CLKConfig(void)
 #endif
 
 #if defined (STM32L4_SGA_ENABLE)	
-	/* ÄÚ²¿µÍËÙ¾§Õñ start */
+	/* å†…éƒ¨ä½Žé€Ÿæ™¶æŒ¯ start */
 	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
 	RCC_OscInitStruct.HSIState = RCC_HSI_ON;
 	RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
@@ -140,7 +140,7 @@ static void S_HAL_CLKConfig(void)
 	RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
 	RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
 	RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
-	/* ÄÚ²¿µÍËÙ¾§Õñ end */
+	/* å†…éƒ¨ä½Žé€Ÿæ™¶æŒ¯ end */
 	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
 	{
 		while(1);
@@ -162,7 +162,7 @@ static void S_HAL_CLKConfig(void)
 }
 
 /**
- * @brief RTTµ÷¶ÈÊ±ÖÓ³õÊ¼»¯º¯Êý
+ * @brief RTTè°ƒåº¦æ—¶é’Ÿåˆå§‹åŒ–å‡½æ•°
  * @param Null
  * @retval Null
 */
@@ -176,7 +176,7 @@ static void S_HAL_RTTCLKInit(void)
 #endif
 
 /**
- * @brief µÎ´ðÊ±ÖÓÊ¹ÄÜ
+ * @brief æ»´ç­”æ—¶é’Ÿä½¿èƒ½
  * @param Null
  * @retval Null
 */
@@ -186,7 +186,7 @@ void Drv_HAL_SysTickEnable(void)
 }
 
 /**
- * @brief µÎ´ðÊ±ÖÓÊ§ÄÜ
+ * @brief æ»´ç­”æ—¶é’Ÿå¤±èƒ½
  * @param Null
  * @retval Null
 */
@@ -211,14 +211,14 @@ void Drv_HAL_IncTick(void)
 }
 
 /**
- * @brief SGA¿â³õÊ¼»¯º¯Êý
+ * @brief SGAåº“åˆå§‹åŒ–å‡½æ•°
  * @param Null
  * @retval Null
 */
 void Drv_HAL_Init(void)
 {
-	HAL_Init();			/* HAL¿â³õÊ¼»¯ */
-	S_HAL_CLKConfig();	/* ÏµÍ³Ê±ÖÓ³õÊ¼»¯ */
+	HAL_Init();			/* HALåº“åˆå§‹åŒ– */
+	S_HAL_CLKConfig();	/* ç³»ç»Ÿæ—¶é’Ÿåˆå§‹åŒ– */
 	
 #ifdef RTT_ENABLE
 	S_HAL_RTTCLKInit();
@@ -319,7 +319,7 @@ void PendSV_Handler(void)
 }
 
 /**
- * @brief ÏµÍ³µÎ´ðÖÐ¶Ï
+ * @brief ç³»ç»Ÿæ»´ç­”ä¸­æ–­
  * @param Null
  * @retval Null
 */
@@ -329,7 +329,7 @@ void SysTick_Handler(void)
 }
 
 /**
- * @brief HAL¿âÏµÍ³±¨´íÖÐ¶Ï
+ * @brief HALåº“ç³»ç»ŸæŠ¥é”™ä¸­æ–­
  * @param Null
  * @retval Null
 */
@@ -346,7 +346,7 @@ void HardFault_Handler(void)
 #ifdef FREERTOS_ENABLE
 #include "task.h"
 /**
- * @brief Ó¦ÓÃÓÚFreeRTOSµÄÏµÍ³µÎ´ðÖÐ¶Ï
+ * @brief åº”ç”¨äºŽFreeRTOSçš„ç³»ç»Ÿæ»´ç­”ä¸­æ–­
  * @param Null
  * @retval Null
 */
@@ -378,7 +378,7 @@ void DebugMon_Handler(void)
 }
 
 /**
- * @brief hal¿âÓÃ»§×Ô¶¨Òå³õÊ¼»¯º¯Êý
+ * @brief halåº“ç”¨æˆ·è‡ªå®šä¹‰åˆå§‹åŒ–å‡½æ•°
  * @param Null
  * @retval Null
 */
@@ -392,7 +392,7 @@ void HAL_MspInit(void)
 #endif
 	
 #ifdef STM32F1_SGA_ENABLE
-    /* ÓÅÏÈ¼¶·Ö×é£¬Ö÷ÓÅÏÈ¼¶4Î»£¬¸±ÓÅÏÈ¼¶0Î» */
+    /* ä¼˜å…ˆçº§åˆ†ç»„ï¼Œä¸»ä¼˜å…ˆçº§4ä½ï¼Œå‰¯ä¼˜å…ˆçº§0ä½ */
 	HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
 
     /* System interrupt init*/
@@ -427,7 +427,7 @@ void HAL_MspInit(void)
 }
 
 /**
- * @brief SGA¿âprintfÖØ¶¨Òå
+ * @brief SGAåº“printfé‡å®šä¹‰
  * @param Null
  * @retval Null
 */
@@ -449,27 +449,27 @@ int fputc(int ch, FILE *f)
     uint16_t usCnt=0;
 
 #if	defined (STM32F1_SGA_ENABLE)
-	/* F1ÏµÁÐ */
-	while((PRINTF_UART->SR&0X40)==0)	/* Ñ­»··¢ËÍ,Ö±µ½·¢ËÍÍê±Ï */  
+	/* F1ç³»åˆ— */
+	while((PRINTF_UART->SR&0X40)==0)	/* å¾ªçŽ¯å‘é€,ç›´åˆ°å‘é€å®Œæ¯• */  
 
 #else
-	/* L4ÏµÁÐ */
-	while((PRINTF_UART->ISR&0X40)==0)	/* Ñ­»··¢ËÍ,Ö±µ½·¢ËÍÍê±Ï */
+	/* L4ç³»åˆ— */
+	while((PRINTF_UART->ISR&0X40)==0)	/* å¾ªçŽ¯å‘é€,ç›´åˆ°å‘é€å®Œæ¯• */
 
 #endif
     {
-		/* ·ÀÖ¹Òì³£³¬Ê±ÍË³ö */
+		/* é˜²æ­¢å¼‚å¸¸è¶…æ—¶é€€å‡º */
         if((usCnt++)>60000)
         {
             break;
         }          
     }   
 #if	defined (STM32F1_SGA_ENABLE)	
-	/* F1ÏµÁÐ */
+	/* F1ç³»åˆ— */
     PRINTF_UART->DR = (uint8_t) ch; 
 
 #else
-	/* L4ÏµÁÐ */
+	/* L4ç³»åˆ— */
 	PRINTF_UART->TDR = (uint8_t) ch; 
 
 #endif

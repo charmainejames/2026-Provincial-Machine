@@ -1,75 +1,75 @@
-#ifndef __DRV_UART_H_
+﻿#ifndef __DRV_UART_H_
 #define __DRV_UART_H_
 
 #include "drv_hal_conf.h"
 
-/* ���ڳ�ʱʱ�� */
+/* 串口超时时间 */
 #define UART_TIME_OUT	0xff
 
-/* �����жϽ��ճ��� */
+/* 串口中断接收长度 */
 #define UART_IT_RX_CACHE_SIZE 100
 
-/* ���ڽ�����Ϣ�ṹ�� */
+/* 串口接收信息结构体 */
 typedef struct
 {
-	/* �ж������Ϣ */
-	uint16_t			usRxCnt;				/* �������ݼ�����(�ж�ʹ��) */
-	uint16_t			usRxLength;			    /* �ܽ������ݳ���(�ж�ʹ��) */
-	uint8_t				ucpRxBuffer[1];			/* �жϽ���Buffer(�ж�ʹ��) */
-	uint8_t				*ucpITRxCache;			/* �жϽ��ջ�����(�ж�ʹ��) */
+	/* 中断相关信息 */
+	uint16_t			usRxCnt;				/* 接收数据计数器(中断使用) */
+	uint16_t			usRxLength;			    /* 总接收数据长度(中断使用) */
+	uint8_t				ucpRxBuffer[1];			/* 中断接收Buffer(中断使用) */
+	uint8_t				*ucpITRxCache;			/* 中断接收缓冲区(中断使用) */
 
-	/* DMA�����Ϣ */
-	uint16_t			usDMARxLength;			/* DMA�ܽ������ݳ���(DMAʹ��) */
-	uint16_t			usDMARxMAXSize;			/* DMA���ջ�������С(DMAʹ��) */
-	uint8_t				*ucpDMARxCache;			/* DMA���ջ�����(DMAʹ��) */
+	/* DMA相关信息 */
+	uint16_t			usDMARxLength;			/* DMA总接收数据长度(DMA使用) */
+	uint16_t			usDMARxMAXSize;			/* DMA接收缓冲区大小(DMA使用) */
+	uint8_t				*ucpDMARxCache;			/* DMA接收缓冲区(DMA使用) */
 
-	/* ��־λ��Ϣ */
-	uint8_t 			ucRxCplt;				/* ������ɱ�־(�ж�ʹ��) */
-	uint8_t				ucDMARxCplt;			/* DMA������ɱ�־(DMAʹ��) */
+	/* 标志位信息 */
+	uint8_t 			ucRxCplt;				/* 接收完成标志(中断使用) */
+	uint8_t				ucDMARxCplt;			/* DMA接收完成标志(DMA使用) */
 }tagUartRxInfo_T;
 
-/* ���ڷ�����Ϣ�ṹ�� */
+/* 串口发送信息结构体 */
 typedef struct 
 {
-	/* DMA�����Ϣ */
-	uint16_t			usDMATxLength;			/* �ܷ������ݳ���(DMAʹ��) */
-	uint16_t			usDMATxMAXSize;			/* DMA���ͻ�������С(DMAʹ��) */
-	uint8_t				*ucpDMATxCache;			/* DMA���ͻ�����(DMAʹ��) */
+	/* DMA相关信息 */
+	uint16_t			usDMATxLength;			/* 总发送数据长度(DMA使用) */
+	uint16_t			usDMATxMAXSize;			/* DMA发送缓冲区大小(DMA使用) */
+	uint8_t				*ucpDMATxCache;			/* DMA发送缓冲区(DMA使用) */
 
-	/* ��־λ��Ϣ */
-	uint8_t 			ucTxCplt;				/* ������ɱ�־(�ж�ʹ��) */
-	uint8_t 			ucDMATxCplt;			/* DMA������ɱ�־(DMAʹ��) */
+	/* 标志位信息 */
+	uint8_t 			ucTxCplt;				/* 发送完成标志(中断使用) */
+	uint8_t 			ucDMATxCplt;			/* DMA发送完成标志(DMA使用) */
 }tagUartTxInfo_T;
 
-/* ����DMA���� */
+/* 串口DMA配置 */
 typedef struct
 {
-	DMA_HandleTypeDef	tDMATx;					/* DMA���;�� */
-	DMA_HandleTypeDef	tDMARx;					/* DMA���վ�� */
+	DMA_HandleTypeDef	tDMATx;					/* DMA发送句柄 */
+	DMA_HandleTypeDef	tDMARx;					/* DMA接收句柄 */
 
-	bool 				bTxEnable;				/* ����ʹ�ܷ��� */
-	bool				bRxEnable;				/* ����ʹ�ܷ��� */
+	bool 				bTxEnable;				/* 发送使能符号 */
+	bool				bRxEnable;				/* 接收使能符号 */
 
-	uint8_t				ucDMARxPriority;		/* DMA�����ж����ȼ���0-15 */
-	uint8_t 			ucDMARxSubPriority;		/* DMA�����ж������ȼ���0-15 */
+	uint8_t				ucDMARxPriority;		/* DMA接收中断优先级，0-15 */
+	uint8_t 			ucDMARxSubPriority;		/* DMA接收中断子优先级，0-15 */
 
-	uint8_t				ucDMATxPriority;		/* DMA�����ж����ȼ���0-15 */
-	uint8_t 			ucDMATxSubPriority;		/* DMA�����ж������ȼ���0-15 */
+	uint8_t				ucDMATxPriority;		/* DMA发送中断优先级，0-15 */
+	uint8_t 			ucDMATxSubPriority;		/* DMA发送中断子优先级，0-15 */
 }tagDMAUart_T;
 
-/* �����豸�ṹ�� */
+/* 串口设备结构体 */
 typedef struct
 {
-	UART_HandleTypeDef 	tUARTHandle;	/* STM32�ڲ������豸ָ�� */
-	tagDMAUart_T		tUartDMA;		/* ����DMA���� */
-	tagUartRxInfo_T		tRxInfo;		/* ���ڽ�����Ϣ */
-	tagUartTxInfo_T		tTxInfo;		/* ���ڷ�����Ϣ */
-	tagGPIO_T			tGPIO[2];		/* GPIO��� */
-	uint8_t				ucPriority;		/* �ж����ȼ���0-15 */
-	uint8_t 			ucSubPriority;	/* �ж������ȼ���0-15 */
+	UART_HandleTypeDef 	tUARTHandle;	/* STM32内部串口设备指针 */
+	tagDMAUart_T		tUartDMA;		/* 串口DMA配置 */
+	tagUartRxInfo_T		tRxInfo;		/* 串口接收信息 */
+	tagUartTxInfo_T		tTxInfo;		/* 串口发送信息 */
+	tagGPIO_T			tGPIO[2];		/* GPIO句柄 */
+	uint8_t				ucPriority;		/* 中断优先级，0-15 */
+	uint8_t 			ucSubPriority;	/* 中断子优先级，0-15 */
 }tagUART_T;
 
-/* ������ӳ���
+/* 串口重映射表
 	USART1	full remap (TX/PB6, RX/PB7)
 			no remap (TX/PA9, RX/PA10)
 	USART2	full remap (CTS/PD3, RTS/PD4, TX/PD5, RX/PD6, CK/PD7)

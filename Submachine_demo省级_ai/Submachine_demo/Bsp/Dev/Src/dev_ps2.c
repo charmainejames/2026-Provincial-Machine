@@ -1,29 +1,29 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: dev_ps2.c
+* æ–‡ä»¶å: dev_ps2.c
 
-* ÄÚÈİ¼òÊö£ºPS2ÊÖ±úÇı¶¯Ä£¿éÎÄ¼ş
+* å†…å®¹ç®€è¿°ï¼šPS2æ‰‹æŸ„é©±åŠ¨æ¨¡å—æ–‡ä»¶
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ		   ÈÕÆÚ		   ×÷Õß		   ËµÃ÷
-*  2.1    		2023-03-22	  ±«³Ìè´	 ±ä¸üÎÄ¼şÎ»ÖÃ
+* ç‰ˆæœ¬å·		   æ—¥æœŸ		   ä½œè€…		   è¯´æ˜
+*  2.1    		2023-03-22	  é²ç¨‹ç’	 å˜æ›´æ–‡ä»¶ä½ç½®
 
-*  1.2  		2022-10-27	  ±«³Ìè´	 ´´½¨¸ÃÎÄ¼ş
+*  1.2  		2022-10-27	  é²ç¨‹ç’	 åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "dev_ps2.h"
 
-uint16_t usHandkey;	            	/* °´¼üÖµ¶ÁÈ¡£¬ÁãÊ±´æ´¢ */ 
-uint8_t ucaCMD[2] = {0x01,0x42};	/* ¿ªÊ¼ÃüÁî¡£ÇëÇóÊı¾İ */
-uint8_t ucaPS2Data[9] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}; /* Êı¾İ´æ´¢Êı×é */
-                    /*ucaPS2Data[0]    ¿Õ 
-                      ucaPS2Data[1]    0x73 ºìµÆÄ£Ê½ 0x41 ÃğµÆÄ£Ê½
-                      ucaPS2Data[2]    0x5A ·µ»ØÊı¾İÔ¤¸æ
-                      ucaPS2Data[3]    µÍ8Î»°´¼ü×´Ì¬ 0°´ÏÂ
-                      ucaPS2Data[4]    ¸ß8Î»°´¼ü×´Ì¬ 0°´ÏÂ
+uint16_t usHandkey;	            	/* æŒ‰é”®å€¼è¯»å–ï¼Œé›¶æ—¶å­˜å‚¨ */ 
+uint8_t ucaCMD[2] = {0x01,0x42};	/* å¼€å§‹å‘½ä»¤ã€‚è¯·æ±‚æ•°æ® */
+uint8_t ucaPS2Data[9] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}; /* æ•°æ®å­˜å‚¨æ•°ç»„ */
+                    /*ucaPS2Data[0]    ç©º 
+                      ucaPS2Data[1]    0x73 çº¢ç¯æ¨¡å¼ 0x41 ç­ç¯æ¨¡å¼
+                      ucaPS2Data[2]    0x5A è¿”å›æ•°æ®é¢„å‘Š
+                      ucaPS2Data[3]    ä½8ä½æŒ‰é”®çŠ¶æ€ 0æŒ‰ä¸‹
+                      ucaPS2Data[4]    é«˜8ä½æŒ‰é”®çŠ¶æ€ 0æŒ‰ä¸‹
                       ucaPS2Data[5]    PSS_RX
                       ucaPS2Data[6]    PSS_RY
                       ucaPS2Data[7]    PSS_LX
@@ -50,9 +50,9 @@ uint16_t usaMASK[] =
 };
 
 /**
- * @brief ÏòÊÖ±ú·¢ËÍÖ¸Áîº¯Êı
- * @param _tPS2-PS2¾ä±úÖ¸Õë
- * @param _ucCMD-·¢ËÍµÄÖ¸Áî£¬Ê®Áù½øÖÆ
+ * @brief å‘æ‰‹æŸ„å‘é€æŒ‡ä»¤å‡½æ•°
+ * @param _tPS2-PS2å¥æŸ„æŒ‡é’ˆ
+ * @param _ucCMD-å‘é€çš„æŒ‡ä»¤ï¼Œåå…­è¿›åˆ¶
  * @retval Null
 */
 static void S_PS2_Cmd(tagPS2_T *_tPS2,uint8_t _ucCMD)
@@ -64,11 +64,11 @@ static void S_PS2_Cmd(tagPS2_T *_tPS2,uint8_t _ucCMD)
 	{
 		if(ref&_ucCMD)
 		{
-			DO_H;                   /* Êä³öÒ»Î»¿ØÖÆÎ» */
+			DO_H;                   /* è¾“å‡ºä¸€ä½æ§åˆ¶ä½ */
 		}
 		else DO_L;
 
-		CLK_H;                      /* Ê±ÖÓÀ­¸ß */
+		CLK_H;                      /* æ—¶é’Ÿæ‹‰é«˜ */
 		DELAY_TIME;
 		CLK_L;
 		DELAY_TIME;
@@ -80,8 +80,8 @@ static void S_PS2_Cmd(tagPS2_T *_tPS2,uint8_t _ucCMD)
 }
 
 /**
- * @brief ÊÖ±úÅäÖÃ³õÊ¼»¯
- * @param _tPS2-PS2¾ä±úÖ¸Õë
+ * @brief æ‰‹æŸ„é…ç½®åˆå§‹åŒ–
+ * @param _tPS2-PS2å¥æŸ„æŒ‡é’ˆ
  * @retval Null
 */
 static void S_PS2_ShortPoll(tagPS2_T *_tPS2)
@@ -98,8 +98,8 @@ static void S_PS2_ShortPoll(tagPS2_T *_tPS2)
 }
 
 /**
- * @brief ÊÖ±ú½øÈëÅäÖÃ
- * @param _tPS2-PS2¾ä±úÖ¸Õë
+ * @brief æ‰‹æŸ„è¿›å…¥é…ç½®
+ * @param _tPS2-PS2å¥æŸ„æŒ‡é’ˆ
  * @retval Null
 */
 static void S_PS2_EnterConfing(tagPS2_T *_tPS2)
@@ -120,9 +120,9 @@ static void S_PS2_EnterConfing(tagPS2_T *_tPS2)
 }
 
 /**
- * @brief ÊÖ±ú·¢ËÍÄ£Ê½ÉèÖÃ
- * @param _tPS2-PS2¾ä±úÖ¸Õë
- * @note Ä¬ÈÏÎªÄ£ÄâÁ¿·¢ËÍÄ£Ê½£¬²»¿ÉÒÔÍ¨¹ı°´¼ü¸ü¸Ä¡£ÈçĞè¸ü¸ÄÔÚº¯ÊıÌåÀïÃæĞŞ¸Ä
+ * @brief æ‰‹æŸ„å‘é€æ¨¡å¼è®¾ç½®
+ * @param _tPS2-PS2å¥æŸ„æŒ‡é’ˆ
+ * @note é»˜è®¤ä¸ºæ¨¡æ‹Ÿé‡å‘é€æ¨¡å¼ï¼Œä¸å¯ä»¥é€šè¿‡æŒ‰é”®æ›´æ”¹ã€‚å¦‚éœ€æ›´æ”¹åœ¨å‡½æ•°ä½“é‡Œé¢ä¿®æ”¹
  * @retval Null
 */
 static void S_PS2_TurnOnAnalogMode(tagPS2_T *_tPS2)
@@ -131,9 +131,9 @@ static void S_PS2_TurnOnAnalogMode(tagPS2_T *_tPS2)
 	S_PS2_Cmd(_tPS2,0x01);  
 	S_PS2_Cmd(_tPS2,0x44);  
 	S_PS2_Cmd(_tPS2,0X00);
-	S_PS2_Cmd(_tPS2,0x01); /* analog=0x01;digital=0x00  Èí¼şÉèÖÃ·¢ËÍÄ£Ê½ */
-	S_PS2_Cmd(_tPS2,0x03); /* Ox03Ëø´æÉèÖÃ£¬¼´²»¿ÉÍ¨¹ı°´¼ü¡°MODE¡±ÉèÖÃÄ£Ê½¡£*/
-				           /* 0xEE²»Ëø´æÈí¼şÉèÖÃ£¬¿ÉÍ¨¹ı°´¼ü¡°MODE¡±ÉèÖÃÄ£Ê½¡£*/
+	S_PS2_Cmd(_tPS2,0x01); /* analog=0x01;digital=0x00  è½¯ä»¶è®¾ç½®å‘é€æ¨¡å¼ */
+	S_PS2_Cmd(_tPS2,0x03); /* Ox03é”å­˜è®¾ç½®ï¼Œå³ä¸å¯é€šè¿‡æŒ‰é”®â€œMODEâ€è®¾ç½®æ¨¡å¼ã€‚*/
+				           /* 0xEEä¸é”å­˜è½¯ä»¶è®¾ç½®ï¼Œå¯é€šè¿‡æŒ‰é”®â€œMODEâ€è®¾ç½®æ¨¡å¼ã€‚*/
 	S_PS2_Cmd(_tPS2,0X00);
 	S_PS2_Cmd(_tPS2,0X00);
 	S_PS2_Cmd(_tPS2,0X00);
@@ -143,8 +143,8 @@ static void S_PS2_TurnOnAnalogMode(tagPS2_T *_tPS2)
 }
 
 /**
- * @brief ÊÖ±úÍê³É²¢±£´æÅäÖÃ
- * @param _tPS2-PS2¾ä±úÖ¸Õë
+ * @brief æ‰‹æŸ„å®Œæˆå¹¶ä¿å­˜é…ç½®
+ * @param _tPS2-PS2å¥æŸ„æŒ‡é’ˆ
  * @retval Null
 */
 static void S_PS2_ExitConfing(tagPS2_T *_tPS2)
@@ -165,9 +165,9 @@ static void S_PS2_ExitConfing(tagPS2_T *_tPS2)
 }
 
 /**
- * @brief ´ÓÊÖ±ú´¦½ÓÊÕÊı¾İº¯Êı
- * @param _tPS2-PS2¾ä±úÖ¸Õë
- * @note µ¥¶ÀÊ¹ÓÃÊ±ĞèÌáÇ°µ÷ÓÃDev_PS2_ClearData
+ * @brief ä»æ‰‹æŸ„å¤„æ¥æ”¶æ•°æ®å‡½æ•°
+ * @param _tPS2-PS2å¥æŸ„æŒ‡é’ˆ
+ * @note å•ç‹¬ä½¿ç”¨æ—¶éœ€æå‰è°ƒç”¨Dev_PS2_ClearData
  * @retval Null
 */
 void Dev_PS2_ReadData(tagPS2_T *_tPS2)
@@ -176,10 +176,10 @@ void Dev_PS2_ReadData(tagPS2_T *_tPS2)
 	volatile uint16_t ref=0x01;
 
 	CS_L;
-	S_PS2_Cmd(_tPS2,ucaCMD[0]);  		/* ¿ªÊ¼ÃüÁî */
-	S_PS2_Cmd(_tPS2,ucaCMD[1]);  		/* ÇëÇóÊı¾İ */
+	S_PS2_Cmd(_tPS2,ucaCMD[0]);  		/* å¼€å§‹å‘½ä»¤ */
+	S_PS2_Cmd(_tPS2,ucaCMD[1]);  		/* è¯·æ±‚æ•°æ® */
 
-	/* ¿ªÊ¼½ÓÊÕÊı¾İ */
+	/* å¼€å§‹æ¥æ”¶æ•°æ® */
 	for(byte=2;byte<9;byte++)    
 	{
 		for(ref=0x01;ref<0x100;ref<<=1)
@@ -198,7 +198,7 @@ void Dev_PS2_ReadData(tagPS2_T *_tPS2)
 }
 
 /**
- * @brief Çå³ı»º³åÇøÊı¾İ
+ * @brief æ¸…é™¤ç¼“å†²åŒºæ•°æ®
  * @param Null
  * @retval Null
 */
@@ -211,9 +211,9 @@ void Dev_PS2_ClearData(void)
 }
 
 /**
- * @brief ¶Ô¶Á³öÀ´µÄPS2µÄÊı¾İ½øĞĞ´¦Àí,·µ»Ø°´¼ü×´Ì¬
- * @param _tPS2-PS2¾ä±úÖ¸Õë
- * @retval uint8_t-°´¼üµÄĞòºÅ
+ * @brief å¯¹è¯»å‡ºæ¥çš„PS2çš„æ•°æ®è¿›è¡Œå¤„ç†,è¿”å›æŒ‰é”®çŠ¶æ€
+ * @param _tPS2-PS2å¥æŸ„æŒ‡é’ˆ
+ * @retval uint8_t-æŒ‰é”®çš„åºå·
 */
 uint8_t Dev_PS2_DataKey(tagPS2_T *_tPS2)
 {
@@ -222,23 +222,23 @@ uint8_t Dev_PS2_DataKey(tagPS2_T *_tPS2)
 	Dev_PS2_ClearData();
 	Dev_PS2_ReadData(_tPS2);
 
-	usHandkey = (ucaPS2Data[4]<<8)|ucaPS2Data[3];     /* ÕâÊÇ16¸ö°´¼ü  °´ÏÂÎª0£¬Î´°´ÏÂÎª1 */
+	usHandkey = (ucaPS2Data[4]<<8)|ucaPS2Data[3];     /* è¿™æ˜¯16ä¸ªæŒ‰é”®  æŒ‰ä¸‹ä¸º0ï¼ŒæœªæŒ‰ä¸‹ä¸º1 */
 	for(index = 0;index < 16;index++)
 	{	    
 		if((usHandkey&(1<<(usaMASK[index]-1)))==0)
-		return index+1;		/* °´¼üµÄĞòºÅ */
+		return index+1;		/* æŒ‰é”®çš„åºå· */
 	}
-	return 0;           	/* Ã»ÓĞÈÎºÎ°´¼ü°´ÏÂ */
+	return 0;           	/* æ²¡æœ‰ä»»ä½•æŒ‰é”®æŒ‰ä¸‹ */
 }
 
 /**
- * @brief »ñÈ¡Ò»¸öÒ£¸ËXÖá»òÕßYÖáµÄÄ£ÄâÁ¿
- * @param _ucButton-Ò¡¸Ë´æ´¢Î»ÖÃ
- * 			PSS_RX 5	ÓÒÒ¡¸ËXÖáÊı¾İ
-			PSS_RY 6	ÓÒÒ¡¸ËYÖáÊı¾İ
-			PSS_LX 7	×óÒ¡¸ËXÖáÊı¾İ
-			PSS_LY 8	×óÒ¡¸ËYÖáÊı¾İ
- * @retval uint8_t-Ä£ÄâÁ¿ ·¶Î§0~256
+ * @brief è·å–ä¸€ä¸ªé¥æ†Xè½´æˆ–è€…Yè½´çš„æ¨¡æ‹Ÿé‡
+ * @param _ucButton-æ‘‡æ†å­˜å‚¨ä½ç½®
+ * 			PSS_RX 5	å³æ‘‡æ†Xè½´æ•°æ®
+			PSS_RY 6	å³æ‘‡æ†Yè½´æ•°æ®
+			PSS_LX 7	å·¦æ‘‡æ†Xè½´æ•°æ®
+			PSS_LY 8	å·¦æ‘‡æ†Yè½´æ•°æ®
+ * @retval uint8_t-æ¨¡æ‹Ÿé‡ èŒƒå›´0~256
 */
 uint8_t Dev_PS2_AnologData(uint8_t _ucButton)
 {
@@ -246,33 +246,33 @@ uint8_t Dev_PS2_AnologData(uint8_t _ucButton)
 }
 
 /**
- * @brief ÅĞ¶ÏÊÇ·ñÎªºìµÆ£¨Ä£ÄâÁ¿£©Ä£Ê½£¬0x41=ÂÌµÆ£¬0x73=ºìµÆ
- * @param _tPS2-PS2¾ä±úÖ¸Õë
- * @retval uint8_t-0£¬ºìµÆÄ£Ê½£»1£¬ÂÌµÆÄ£Ê½
+ * @brief åˆ¤æ–­æ˜¯å¦ä¸ºçº¢ç¯ï¼ˆæ¨¡æ‹Ÿé‡ï¼‰æ¨¡å¼ï¼Œ0x41=ç»¿ç¯ï¼Œ0x73=çº¢ç¯
+ * @param _tPS2-PS2å¥æŸ„æŒ‡é’ˆ
+ * @retval uint8_t-0ï¼Œçº¢ç¯æ¨¡å¼ï¼›1ï¼Œç»¿ç¯æ¨¡å¼
 */
 uint8_t Dev_PS2_RedLight(tagPS2_T *_tPS2)
 {
 	CS_L;
-	S_PS2_Cmd(_tPS2,ucaCMD[0]);  /* ¿ªÊ¼ÃüÁî */
-	S_PS2_Cmd(_tPS2,ucaCMD[1]);  /* ÇëÇóÊı¾İ */
+	S_PS2_Cmd(_tPS2,ucaCMD[0]);  /* å¼€å§‹å‘½ä»¤ */
+	S_PS2_Cmd(_tPS2,ucaCMD[1]);  /* è¯·æ±‚æ•°æ® */
 	CS_H;
 	if(ucaPS2Data[1] == 0X73)   return 0 ;
 	else return 1;
 }
 
 /**
- * @brief ÊÖ±úÅäÖÃÕğ¶¯º¯Êı
- * @param _tPS2-PS2¾ä±úÖ¸Õë
- * @param _ucMotor1-ÓÒ²àĞ¡Õğ¶¯µç»ú 0x00¹Ø£¬ÆäËû¿ª
- * @param _ucMotor2-×ó²à´óÕğ¶¯µç»ú 0x40~0xFF µç»ú¿ª£¬ÖµÔ½´ó Õğ¶¯Ô½´ó
+ * @brief æ‰‹æŸ„é…ç½®éœ‡åŠ¨å‡½æ•°
+ * @param _tPS2-PS2å¥æŸ„æŒ‡é’ˆ
+ * @param _ucMotor1-å³ä¾§å°éœ‡åŠ¨ç”µæœº 0x00å…³ï¼Œå…¶ä»–å¼€
+ * @param _ucMotor2-å·¦ä¾§å¤§éœ‡åŠ¨ç”µæœº 0x40~0xFF ç”µæœºå¼€ï¼Œå€¼è¶Šå¤§ éœ‡åŠ¨è¶Šå¤§
  * @retval Null
 */
 void Dev_PS2_Vibration(tagPS2_T *_tPS2,uint8_t _ucMotor1, uint8_t _ucMotor2)
 {
 	CS_L;
 	Drv_Delay_Us(16);
-    S_PS2_Cmd(_tPS2,ucaCMD[0]);  /* ¿ªÊ¼ÃüÁî */
-	S_PS2_Cmd(_tPS2,ucaCMD[1]);  /* ÇëÇóÊı¾İ */
+    S_PS2_Cmd(_tPS2,ucaCMD[0]);  /* å¼€å§‹å‘½ä»¤ */
+	S_PS2_Cmd(_tPS2,ucaCMD[1]);  /* è¯·æ±‚æ•°æ® */
 	S_PS2_Cmd(_tPS2,0X00);
 	S_PS2_Cmd(_tPS2,_ucMotor1);
 	S_PS2_Cmd(_tPS2,_ucMotor2);
@@ -285,8 +285,8 @@ void Dev_PS2_Vibration(tagPS2_T *_tPS2,uint8_t _ucMotor1, uint8_t _ucMotor2)
 }
 
 /**
- * @brief ÊÖ±ú¿ªÆôÕğ¶¯Ä£Ê½
- * @param _tPS2-PS2¾ä±úÖ¸Õë
+ * @brief æ‰‹æŸ„å¼€å¯éœ‡åŠ¨æ¨¡å¼
+ * @param _tPS2-PS2å¥æŸ„æŒ‡é’ˆ
  * @retval Null
 */
 void Dev_PS2_VibrationMode(tagPS2_T *_tPS2)
@@ -303,19 +303,19 @@ void Dev_PS2_VibrationMode(tagPS2_T *_tPS2)
 }
 
 /**
- * @brief ÊÖ±ú³õÊ¼»¯º¯Êı
- * @param _tPS2-PS2¾ä±úÖ¸Õë
+ * @brief æ‰‹æŸ„åˆå§‹åŒ–å‡½æ•°
+ * @param _tPS2-PS2å¥æŸ„æŒ‡é’ˆ
  * @retval Null
 */
 void Dev_PS2_Init(tagPS2_T *_tPS2)
 {
-    Drv_GPIO_Init(_tPS2->tGPIO,4);	/* ³õÊ¼»¯ËùÓÃI/O¿Ú */
+    Drv_GPIO_Init(_tPS2->tGPIO,4);	/* åˆå§‹åŒ–æ‰€ç”¨I/Oå£ */
 
 	S_PS2_ShortPoll(_tPS2);
 	S_PS2_ShortPoll(_tPS2);
 	S_PS2_ShortPoll(_tPS2);
-	S_PS2_EnterConfing(_tPS2);		/* ½øÈëÅäÖÃÄ£Ê½ */
-	S_PS2_TurnOnAnalogMode(_tPS2);	/* ¡°ºìÂÌµÆ¡±ÅäÖÃÄ£Ê½£¬²¢Ñ¡ÔñÊÇ·ñ±£´æ */
-	//PS2_VibrationMode();			/* ¿ªÆôÕğ¶¯Ä£Ê½ */
-	S_PS2_ExitConfing(_tPS2);		/* Íê³É²¢±£´æÅäÖÃ */
+	S_PS2_EnterConfing(_tPS2);		/* è¿›å…¥é…ç½®æ¨¡å¼ */
+	S_PS2_TurnOnAnalogMode(_tPS2);	/* â€œçº¢ç»¿ç¯â€é…ç½®æ¨¡å¼ï¼Œå¹¶é€‰æ‹©æ˜¯å¦ä¿å­˜ */
+	//PS2_VibrationMode();			/* å¼€å¯éœ‡åŠ¨æ¨¡å¼ */
+	S_PS2_ExitConfing(_tPS2);		/* å®Œæˆå¹¶ä¿å­˜é…ç½® */
 }

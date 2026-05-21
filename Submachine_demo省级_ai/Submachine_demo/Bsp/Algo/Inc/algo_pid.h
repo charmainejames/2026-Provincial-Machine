@@ -1,30 +1,30 @@
-#ifndef __ALGO_PID_H_
+ï»¿#ifndef __ALGO_PID_H_
 #define __ALGO_PID_H_
 
 #include "drv_hal_conf.h"
 
 typedef struct
 {
-    float fCurr_Value;  /* µ±Ç°Öµ */
-    float fExp_Value;   /* Éè¶¨µÄÆÚÍûÖµ */
+    float fCurr_Value;  /* å½“å‰å€¼ */
+    float fExp_Value;   /* è®¾å®šçš„æœŸæœ›å€¼ */
 	
-    float fKp;          /* ±ÈÀıÏµÊı */
-    float fKi;          /* Î¢·ÖÏµÊı */
-    float fKd;          /* »ı·ÖÏµÊı */
+    float fKp;          /* æ¯”ä¾‹ç³»æ•° */
+    float fKi;          /* å¾®åˆ†ç³»æ•° */
+    float fKd;          /* ç§¯åˆ†ç³»æ•° */
     
-    float fPout;        /* ±ÈÀıÏîÊä³ö */
-    float fIout;        /* »ı·ÖÏîÊä³ö */
-    float fDout;        /* Î¢·ÖÏîÊä³ö */
+    float fPout;        /* æ¯”ä¾‹é¡¹è¾“å‡º */
+    float fIout;        /* ç§¯åˆ†é¡¹è¾“å‡º */
+    float fDout;        /* å¾®åˆ†é¡¹è¾“å‡º */
 
-    float fCtrl_Out;    /* ±¾´ÎÊä³öÖµ */
-    float fPre_Out;     /* Ç°Ò»´ÎÊä³öÖµ */
+    float fCtrl_Out;    /* æœ¬æ¬¡è¾“å‡ºå€¼ */
+    float fPre_Out;     /* å‰ä¸€æ¬¡è¾“å‡ºå€¼ */
 
-    float fMax_Iout;    /* PID×î´ó»ı·ÖÊä³ö */
+    float fMax_Iout;    /* PIDæœ€å¤§ç§¯åˆ†è¾“å‡º */
 
-    float fDbuf[3];     /* Î¢·ÖÏî×î½üÈı¸öÖµ 0Îª×îĞÂ 1ÉÏÒ»´Î 2ÉÏÉÏ´Î */
-    float fError[3];    /* Îó²îÏî×î½üÈı¸öÖµ 0Îª×îĞÂ 1ÉÏÒ»´Î 2ÉÏÉÏ´Î */
+    float fDbuf[3];     /* å¾®åˆ†é¡¹æœ€è¿‘ä¸‰ä¸ªå€¼ 0ä¸ºæœ€æ–° 1ä¸Šä¸€æ¬¡ 2ä¸Šä¸Šæ¬¡ */
+    float fError[3];    /* è¯¯å·®é¡¹æœ€è¿‘ä¸‰ä¸ªå€¼ 0ä¸ºæœ€æ–° 1ä¸Šä¸€æ¬¡ 2ä¸Šä¸Šæ¬¡ */
 	
-    int fMax_Out;     /* PID×î´óÊä³ö */
+    int fMax_Out;     /* PIDæœ€å¤§è¾“å‡º */
 	
 	float alpha;
 	
@@ -32,12 +32,12 @@ typedef struct
 
 typedef struct
 {
-    float fKp;          /* ±ÈÀıÏµÊı */
-    float fKi;          /* Î¢·ÖÏµÊı */
-    float fKd;          /* »ı·ÖÏµÊı */
+    float fKp;          /* æ¯”ä¾‹ç³»æ•° */
+    float fKi;          /* å¾®åˆ†ç³»æ•° */
+    float fKd;          /* ç§¯åˆ†ç³»æ•° */
 
-    float fMax_Iout;    /* PID×î´ó»ı·ÖÊä³ö */
-    float fMax_Out;     /* PID×î´óÊä³ö */
+    float fMax_Iout;    /* PIDæœ€å¤§ç§¯åˆ†è¾“å‡º */
+    float fMax_Out;     /* PIDæœ€å¤§è¾“å‡º */
 	
 	float alpha;
 

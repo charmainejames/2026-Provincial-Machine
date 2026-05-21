@@ -1,19 +1,19 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: drv_hal_spi.c
+* æ–‡ä»¶å: drv_hal_spi.c
 
-* ÄÚÈİ¼òÊö£ºspiÇı¶¯ÎÄ¼ş
+* å†…å®¹ç®€è¿°ï¼šspié©±åŠ¨æ–‡ä»¶
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ		ÈÕÆÚ		×÷Õß		ËµÃ÷
-* 1.1.7 	2022-10-11   ±«³Ìè´		ÓÅ»¯Ö´ĞĞË³Ğò
+* ç‰ˆæœ¬å·		æ—¥æœŸ		ä½œè€…		è¯´æ˜
+* 1.1.7 	2022-10-11   é²ç¨‹ç’		ä¼˜åŒ–æ‰§è¡Œé¡ºåº
 
-* 1.1.4 	2022-09-03   ±«³Ìè´		ĞÂÔöSPIÒı½ÅÖØÓ³Éä´úÂë
+* 1.1.4 	2022-09-03   é²ç¨‹ç’		æ–°å¢SPIå¼•è„šé‡æ˜ å°„ä»£ç 
 
-* 1.0.0a 	2020-02-22	 Àî»·Óî		´´½¨¸ÃÎÄ¼ş
+* 1.0.0a 	2020-02-22	 æç¯å®‡		åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "drv_hal_conf.h"
@@ -21,8 +21,8 @@
 #ifdef DRV_HAL_SPI_ENABLE
 
 /**
- * @brief SPIÊ±ÖÓÊ¹ÄÜº¯Êı
- * @param _tSPI-spi½á¹¹ÌåÖ¸Õë
+ * @brief SPIæ—¶é’Ÿä½¿èƒ½å‡½æ•°
+ * @param _tSPI-spiç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_SPI_CLKEnable(tagSPI_T *_tSPI)
@@ -42,28 +42,28 @@ static void S_SPI_CLKEnable(tagSPI_T *_tSPI)
 }
 
 /**
- * @brief SPIµÄGPIOÅäÖÃº¯Êı
- * @param _tSPI-spi½á¹¹ÌåÖ¸Õë
+ * @brief SPIçš„GPIOé…ç½®å‡½æ•°
+ * @param _tSPI-spiç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_SPI_GPIOConfig(tagSPI_T *_tSPI)
 {
-	/* ¿ªÆô¸´ÓÃÄ£Ê½Ê±ÖÓ */
+	/* å¼€å¯å¤ç”¨æ¨¡å¼æ—¶é’Ÿ */
 	__HAL_RCC_AFIO_CLK_ENABLE();
 
-	/* ¸ù¾İ²»Í¬SPIµÄucAFMode¿ªÆô¶ÔÓ¦µÄÖØÓ³Éä£¬ÖØÓ³Éä±íÔÚdrv_hal_spi.hÖĞ */
+	/* æ ¹æ®ä¸åŒSPIçš„ucAFModeå¼€å¯å¯¹åº”çš„é‡æ˜ å°„ï¼Œé‡æ˜ å°„è¡¨åœ¨drv_hal_spi.hä¸­ */
 	if(_tSPI->tSPIHandle.Instance == SPI1)
 	{
 		if(_tSPI->tGPIO->ucAFMode == NO_REMAP)				__HAL_AFIO_REMAP_SPI1_DISABLE();
 		else if(_tSPI->tGPIO->ucAFMode == FULL_REMAP)		__HAL_AFIO_REMAP_SPI1_ENABLE();		
 	}
 	
-	Drv_GPIO_Init(_tSPI->tGPIO, 4);	/* GPIO³õÊ¼»¯ */
+	Drv_GPIO_Init(_tSPI->tGPIO, 4);	/* GPIOåˆå§‹åŒ– */
 }
 
 /**
- * @brief spi²ÎÊıÅäÖÃº¯Êı
- * @param _tSPI-spi½á¹¹ÌåÖ¸Õë
+ * @brief spiå‚æ•°é…ç½®å‡½æ•°
+ * @param _tSPI-spiç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_SPI_ParamConfig(tagSPI_T *_tSPI)
@@ -75,9 +75,9 @@ static void S_SPI_ParamConfig(tagSPI_T *_tSPI)
 }
 
 /**
- * @brief Ó²¼şSPIËÙ¶ÈÉèÖÃ
- * @param _tSPI-spi½á¹¹ÌåÖ¸Õë
- * @param _ucSpeed- 1-¸ßËÙ£¬0-µÍËÙ
+ * @brief ç¡¬ä»¶SPIé€Ÿåº¦è®¾ç½®
+ * @param _tSPI-spiç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucSpeed- 1-é«˜é€Ÿï¼Œ0-ä½é€Ÿ
  * @retval Null 
 */
 void Drv_SPI_SpeedConfig(tagSPI_T *_tSPI, uint8_t _ucSpeed)
@@ -99,10 +99,10 @@ void Drv_SPI_SpeedConfig(tagSPI_T *_tSPI, uint8_t _ucSpeed)
 }
 
 /**
- * @brief Ó²¼şSPI·¢ËÍºÍ½ÓÊÕ
- * @param _tSPI-spi½á¹¹ÌåÖ¸Õë
- * @param _ucTxData-ĞèÒª·¢ËÍµÄÒ»¸ö×Ö½ÚÊı¾İ
- * @retval uint8_t-½ÓÊÕµ½µÄÒ»¸ö×Ö½ÚÊı¾İ
+ * @brief ç¡¬ä»¶SPIå‘é€å’Œæ¥æ”¶
+ * @param _tSPI-spiç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucTxData-éœ€è¦å‘é€çš„ä¸€ä¸ªå­—èŠ‚æ•°æ®
+ * @retval uint8_t-æ¥æ”¶åˆ°çš„ä¸€ä¸ªå­—èŠ‚æ•°æ®
 */
 uint8_t Drv_SPI_TransmitReceive(tagSPI_T *_tSPI, uint8_t _ucTxData)
 {
@@ -114,9 +114,9 @@ uint8_t Drv_SPI_TransmitReceive(tagSPI_T *_tSPI, uint8_t _ucTxData)
 }
 
 /**
- * @brief Ó²¼şSPI·¢ËÍ
- * @param _tSPI-spi½á¹¹ÌåÖ¸Õë
- * @param _ucTxData-ĞèÒª·¢ËÍµÄÒ»¸ö×Ö½ÚÊı¾İ
+ * @brief ç¡¬ä»¶SPIå‘é€
+ * @param _tSPI-spiç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucTxData-éœ€è¦å‘é€çš„ä¸€ä¸ªå­—èŠ‚æ•°æ®
  * @retval NULL
 */
 void Drv_SPI_Transmit(tagSPI_T *_tSPI, uint8_t _ucTxData)
@@ -125,8 +125,8 @@ void Drv_SPI_Transmit(tagSPI_T *_tSPI, uint8_t _ucTxData)
 }
 
 /**
- * @brief Ó²¼şSPI³õÊ¼»¯
- * @param _tSPI-spi½á¹¹ÌåÖ¸Õë
+ * @brief ç¡¬ä»¶SPIåˆå§‹åŒ–
+ * @param _tSPI-spiç»“æ„ä½“æŒ‡é’ˆ
  * @retval null
 */
 void Drv_SPI_Init(tagSPI_T *_tSPI)

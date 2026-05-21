@@ -1,27 +1,27 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: ocd_ds3231.c
+* æ–‡ä»¶å: ocd_ds3231.c
 
-* ÄÚÈİ¼òÊö£ºds3231Ä£¿éÎÄ¼ş
+* å†…å®¹ç®€è¿°ï¼šds3231æ¨¡å—æ–‡ä»¶
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ	ÈÕÆÚ		×÷Õß		ËµÃ÷
+* ç‰ˆæœ¬å·	æ—¥æœŸ		ä½œè€…		è¯´æ˜
 
-* 1.0.0a 	2020-02-22	Àî»·Óî		´´½¨¸ÃÎÄ¼ş
-* 1.0.1a 	2020-03-10	Àî»·Óî		ĞŞ¸´OCD_DS3231_TimeGetASCIIº¯ÊıµÄÂß¼­´íÎóËùµ¼ÖÂµÄÖ¸ÕëÅÜ·ÉÎÊÌâ
-									ĞŞ¸ÄOCD_DS3231_TimeGetASCIIºÍOCD_DS3231_TimeGetDec½Ó¿ÚÒÔ¼°Ö´ĞĞÂß¼­
-									ĞŞ¸Ä²¿·Öº¯Êı½Ó¿ÚÃû³Æ£¬ÓÉÊ®½øÖÆÃèÊöĞŞ¸ÄÎªÕıÈ·µÄÊ®Áù½øÖÆÃèÊö
-									ĞŞ¸ÄÈ«²¿º¯ÊıµÄÊ×²ÎÊıÀàĞÍ£¬È«²¿¸ÄÓÃDS3231µÄ×Ô½á¹¹Ìå
+* 1.0.0a 	2020-02-22	æç¯å®‡		åˆ›å»ºè¯¥æ–‡ä»¶
+* 1.0.1a 	2020-03-10	æç¯å®‡		ä¿®å¤OCD_DS3231_TimeGetASCIIå‡½æ•°çš„é€»è¾‘é”™è¯¯æ‰€å¯¼è‡´çš„æŒ‡é’ˆè·‘é£é—®é¢˜
+									ä¿®æ”¹OCD_DS3231_TimeGetASCIIå’ŒOCD_DS3231_TimeGetDecæ¥å£ä»¥åŠæ‰§è¡Œé€»è¾‘
+									ä¿®æ”¹éƒ¨åˆ†å‡½æ•°æ¥å£åç§°ï¼Œç”±åè¿›åˆ¶æè¿°ä¿®æ”¹ä¸ºæ­£ç¡®çš„åå…­è¿›åˆ¶æè¿°
+									ä¿®æ”¹å…¨éƒ¨å‡½æ•°çš„é¦–å‚æ•°ç±»å‹ï¼Œå…¨éƒ¨æ”¹ç”¨DS3231çš„è‡ªç»“æ„ä½“
 
 ****************************************************************************/
 #include "ocd_ds3231.h"
 
 /**
- * @brief DS3231ÄÚ²¿ÑÓÊ±º¯Êı
- * @param _ulUs-ÑÓÊ±£¨µ¥Î»£ºus£©
+ * @brief DS3231å†…éƒ¨å»¶æ—¶å‡½æ•°
+ * @param _ulUs-å»¶æ—¶ï¼ˆå•ä½ï¼šusï¼‰
  * @retval	NULL
  */
 static void S_DS3231_DelayUs(uint8_t _ulUs)
@@ -33,11 +33,11 @@ static void S_DS3231_DelayUs(uint8_t _ulUs)
 }
 
 /**
- * @brief ÏòDS3231¶ÁÊı¾İ
- * @param _tDS3231-ds3231½á¹¹ÌåÖ¸Õë
- * @param _ucDevAddr-µØÖ·
- * @param _ucReg-¼Ä´æÆ÷
- * @retval uint8_t-0-¶ÁÊ§°Ü£»ÆäËü-¼Ä´æÆ÷Êı¾İ
+ * @brief å‘DS3231è¯»æ•°æ®
+ * @param _tDS3231-ds3231ç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucDevAddr-åœ°å€
+ * @param _ucReg-å¯„å­˜å™¨
+ * @retval uint8_t-0-è¯»å¤±è´¥ï¼›å…¶å®ƒ-å¯„å­˜å™¨æ•°æ®
  */
 static uint8_t S_DS3231_ReadByte(tagDS3231_T *_tDS3231, uint8_t _ucDevAddr, uint8_t _ucReg)
 {
@@ -72,12 +72,12 @@ static uint8_t S_DS3231_ReadByte(tagDS3231_T *_tDS3231, uint8_t _ucDevAddr, uint
 }
 
 /**
- * @brief ÏòDS3231Ğ´Êı¾İ
- * @param _tDS3231-ds3231½á¹¹ÌåÖ¸Õë
- * @param _ucDevAddr-µØÖ·
- * @param _ucReg-¼Ä´æÆ÷
- * @param _ucData-Êı¾İ
- * @retval uint8_t-0-Ğ´Ê§°Ü£»1-Ğ´³É¹¦
+ * @brief å‘DS3231å†™æ•°æ®
+ * @param _tDS3231-ds3231ç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucDevAddr-åœ°å€
+ * @param _ucReg-å¯„å­˜å™¨
+ * @param _ucData-æ•°æ®
+ * @retval uint8_t-0-å†™å¤±è´¥ï¼›1-å†™æˆåŠŸ
  */
 static uint8_t S_DS3231_WriteByte(tagDS3231_T *_tDS3231, uint8_t _ucDevAddr, uint8_t _ucReg, uint8_t _ucData)
 {
@@ -107,10 +107,10 @@ static uint8_t S_DS3231_WriteByte(tagDS3231_T *_tDS3231, uint8_t _ucDevAddr, uin
 }
 
 /**
- * @brief ×Ö·û´®×ª»»Ê®Áù½øÖÆ
- * @param _ucpSrc-×Ö·ûµØÖ·
- * @param _ucLen-×Ö·û³¤¶È
- * @retval uint32_t-Ê®Áù½øÖÆ
+ * @brief å­—ç¬¦ä¸²è½¬æ¢åå…­è¿›åˆ¶
+ * @param _ucpSrc-å­—ç¬¦åœ°å€
+ * @param _ucLen-å­—ç¬¦é•¿åº¦
+ * @retval uint32_t-åå…­è¿›åˆ¶
  */
 static uint32_t S_DS3231_StringToHex(uint8_t *_ucpSrc, uint8_t _ucLen)
 {
@@ -124,40 +124,40 @@ static uint32_t S_DS3231_StringToHex(uint8_t *_ucpSrc, uint8_t _ucLen)
 }
 
 /**
- * @brief ÏòDS3231Ê±¼äÉèÖÃ£¨Ê®Áù½øÖÆ£©
- * @param _tDS3231-ds3231½á¹¹ÌåÖ¸Õë
- * @param _tTime-Ê±¼ä½á¹¹ÌåµØÖ·Ö¸Õë
- * @retval uint8_t-0-ÉèÖÃÊ§°Ü£»1-ÉèÖÃ³É¹¦
+ * @brief å‘DS3231æ—¶é—´è®¾ç½®ï¼ˆåå…­è¿›åˆ¶ï¼‰
+ * @param _tDS3231-ds3231ç»“æ„ä½“æŒ‡é’ˆ
+ * @param _tTime-æ—¶é—´ç»“æ„ä½“åœ°å€æŒ‡é’ˆ
+ * @retval uint8_t-0-è®¾ç½®å¤±è´¥ï¼›1-è®¾ç½®æˆåŠŸ
  */
 uint8_t OCD_DS3231_TimeSetHex(tagDS3231_T *_tDS3231, tagDS3231Time_T *_tTime)
 {
 	do
 	{
-		/* ÉèÖÃÄê */
+		/* è®¾ç½®å¹´ */
 		if(S_DS3231_WriteByte(_tDS3231, DS3231_IIC_ADDR, DS3231_YEAR,(_tTime->ucYear)) == 0)
 			return 0;
 		
-		/* ÉèÖÃÔÂ */
+		/* è®¾ç½®æœˆ */
 		if(S_DS3231_WriteByte(_tDS3231, DS3231_IIC_ADDR, DS3231_MONTH,(_tTime->ucMonth)) == 0)
 			return 0;
 		
-		/* ÉèÖÃÈÕ */
+		/* è®¾ç½®æ—¥ */
 		if(S_DS3231_WriteByte(_tDS3231, DS3231_IIC_ADDR, DS3231_DAY,(_tTime->ucDate)) == 0)
 			return 0;
 		
-		/* ÉèÖÃÊ± */
+		/* è®¾ç½®æ—¶ */
 		if(S_DS3231_WriteByte(_tDS3231, DS3231_IIC_ADDR, DS3231_HOUR,(_tTime->ucHour)) == 0)
 			return 0;
 		
-		/* ÉèÖÃ·Ö */
+		/* è®¾ç½®åˆ† */
 		if(S_DS3231_WriteByte(_tDS3231, DS3231_IIC_ADDR, DS3231_MINUTE,(_tTime->ucMinute)) == 0)
 			return 0;
 		
-		/* ÉèÖÃÃë */
+		/* è®¾ç½®ç§’ */
 		if(S_DS3231_WriteByte(_tDS3231, DS3231_IIC_ADDR, DS3231_SECOND,(_tTime->ucSecond)) == 0)
 			return 0;
 		
-		/* ÉèÖÃĞÇÆÚ¼¸ */
+		/* è®¾ç½®æ˜ŸæœŸå‡  */
 		if(S_DS3231_WriteByte(_tDS3231, DS3231_IIC_ADDR, DS3231_WEEK,(_tTime->ucWeek)) == 0)
 			return 0;
 	}while(0);
@@ -166,10 +166,10 @@ uint8_t OCD_DS3231_TimeSetHex(tagDS3231_T *_tDS3231, tagDS3231Time_T *_tTime)
 }
 
 /**
- * @brief ÏòDS3231Ê±¼äÉèÖÃ£¨ASCII£©
- * @param _tDS3231-ds3231½á¹¹ÌåÖ¸Õë
- * @param _tTime-Ê±¼ä½á¹¹ÌåµØÖ·Ö¸Õë
- * @retval uint8_t-0-ÉèÖÃÊ§°Ü£»1-ÉèÖÃ³É¹¦
+ * @brief å‘DS3231æ—¶é—´è®¾ç½®ï¼ˆASCIIï¼‰
+ * @param _tDS3231-ds3231ç»“æ„ä½“æŒ‡é’ˆ
+ * @param _tTime-æ—¶é—´ç»“æ„ä½“åœ°å€æŒ‡é’ˆ
+ * @retval uint8_t-0-è®¾ç½®å¤±è´¥ï¼›1-è®¾ç½®æˆåŠŸ
  */
 uint8_t OCD_DS3231_TimeSetASCII(tagDS3231_T *_tDS3231, tagDS3231TimeASCII_T *_tTime)
 {
@@ -186,29 +186,29 @@ uint8_t OCD_DS3231_TimeSetASCII(tagDS3231_T *_tDS3231, tagDS3231TimeASCII_T *_tT
 }
 
 /**
- * @brief ÏòDS3231Ê±¼ä¶ÁÈ¡£¨Ê®Áù½øÖÆ£©
- * @param _tDS3231-ds3231½á¹¹ÌåÖ¸Õë
- * @param _tTime-Ê±¼ä½á¹¹ÌåµØÖ·Ö¸Õë
- * @retval uint8_t-0-ÉèÖÃÊ§°Ü£»1-ÉèÖÃ³É¹¦
+ * @brief å‘DS3231æ—¶é—´è¯»å–ï¼ˆåå…­è¿›åˆ¶ï¼‰
+ * @param _tDS3231-ds3231ç»“æ„ä½“æŒ‡é’ˆ
+ * @param _tTime-æ—¶é—´ç»“æ„ä½“åœ°å€æŒ‡é’ˆ
+ * @retval uint8_t-0-è®¾ç½®å¤±è´¥ï¼›1-è®¾ç½®æˆåŠŸ
  */
 uint8_t OCD_DS3231_TimeGetHex(tagDS3231_T *_tDS3231, tagDS3231Time_T *_tTime)
 {	
-	_tTime->ucYear = S_DS3231_ReadByte(_tDS3231, DS3231_IIC_ADDR, DS3231_YEAR);		/* Äê */
-	_tTime->ucMonth = S_DS3231_ReadByte(_tDS3231, DS3231_IIC_ADDR, DS3231_MONTH);	/* ÔÂ */
-	_tTime->ucDate = S_DS3231_ReadByte(_tDS3231, DS3231_IIC_ADDR, DS3231_DAY);		/* ÈÕ */
-	_tTime->ucHour = S_DS3231_ReadByte(_tDS3231, DS3231_IIC_ADDR, DS3231_HOUR);		/* Ê± */
-	_tTime->ucMinute = S_DS3231_ReadByte(_tDS3231, DS3231_IIC_ADDR, DS3231_MINUTE);	/* ·Ö */
-	_tTime->ucSecond = S_DS3231_ReadByte(_tDS3231, DS3231_IIC_ADDR, DS3231_SECOND);	/* Ãë */
-	_tTime->ucWeek = S_DS3231_ReadByte(_tDS3231, DS3231_IIC_ADDR, DS3231_WEEK);		/* ĞÇÆÚ¼¸ */
+	_tTime->ucYear = S_DS3231_ReadByte(_tDS3231, DS3231_IIC_ADDR, DS3231_YEAR);		/* å¹´ */
+	_tTime->ucMonth = S_DS3231_ReadByte(_tDS3231, DS3231_IIC_ADDR, DS3231_MONTH);	/* æœˆ */
+	_tTime->ucDate = S_DS3231_ReadByte(_tDS3231, DS3231_IIC_ADDR, DS3231_DAY);		/* æ—¥ */
+	_tTime->ucHour = S_DS3231_ReadByte(_tDS3231, DS3231_IIC_ADDR, DS3231_HOUR);		/* æ—¶ */
+	_tTime->ucMinute = S_DS3231_ReadByte(_tDS3231, DS3231_IIC_ADDR, DS3231_MINUTE);	/* åˆ† */
+	_tTime->ucSecond = S_DS3231_ReadByte(_tDS3231, DS3231_IIC_ADDR, DS3231_SECOND);	/* ç§’ */
+	_tTime->ucWeek = S_DS3231_ReadByte(_tDS3231, DS3231_IIC_ADDR, DS3231_WEEK);		/* æ˜ŸæœŸå‡  */
 	
 	return 1;
 }
 
 /**
- * @brief ÏòDS3231Ê±¼ä¶ÁÈ¡£¨ASCII£©
- * @param _tDS3231-ds3231½á¹¹ÌåÖ¸Õë
- * @param _tTime-Ê±¼ä½á¹¹ÌåµØÖ·Ö¸Õë
- * @retval uint8_t-0-ÉèÖÃÊ§°Ü£»1-ÉèÖÃ³É¹¦
+ * @brief å‘DS3231æ—¶é—´è¯»å–ï¼ˆASCIIï¼‰
+ * @param _tDS3231-ds3231ç»“æ„ä½“æŒ‡é’ˆ
+ * @param _tTime-æ—¶é—´ç»“æ„ä½“åœ°å€æŒ‡é’ˆ
+ * @retval uint8_t-0-è®¾ç½®å¤±è´¥ï¼›1-è®¾ç½®æˆåŠŸ
  */
 uint8_t OCD_DS3231_TimeGetASCII(tagDS3231_T *_tDS3231, tagDS3231TimeASCII_T *_tTime)
 {
@@ -235,9 +235,9 @@ uint8_t OCD_DS3231_TimeGetASCII(tagDS3231_T *_tDS3231, tagDS3231TimeASCII_T *_tT
 }
 
 /**
- * @brief DS3231ÄÖÖÓÉèÖÃ£¨ASCII£©
- * @param _tDS3231-ds3231½á¹¹ÌåÖ¸Õë
- * @param _tTime-Ê±¼ä½á¹¹ÌåµØÖ·Ö¸Õë
+ * @brief DS3231é—¹é’Ÿè®¾ç½®ï¼ˆASCIIï¼‰
+ * @param _tDS3231-ds3231ç»“æ„ä½“æŒ‡é’ˆ
+ * @param _tTime-æ—¶é—´ç»“æ„ä½“åœ°å€æŒ‡é’ˆ
  * @retval Null
  */
 void OCD_DS3231_Alarm1ConfigASCII(tagDS3231_T *_tDS3231, tagDS3231TimeASCII_T *_tTime)
@@ -258,15 +258,15 @@ void OCD_DS3231_Alarm1ConfigASCII(tagDS3231_T *_tDS3231, tagDS3231TimeASCII_T *_
 	S_DS3231_WriteByte(_tDS3231, DS3231_IIC_ADDR, DS3231_CONTROL, ucRes|0x05);
 	
 	ucRes = S_DS3231_ReadByte(_tDS3231, DS3231_IIC_ADDR, DS3231_STATUS);
-	S_DS3231_WriteByte(_tDS3231, DS3231_IIC_ADDR, DS3231_STATUS, ucRes&0xfC);	/* ÄÖÖÓ1¡¢2±êÖ¾Î»ÇåÁã */
+	S_DS3231_WriteByte(_tDS3231, DS3231_IIC_ADDR, DS3231_STATUS, ucRes&0xfC);	/* é—¹é’Ÿ1ã€2æ ‡å¿—ä½æ¸…é›¶ */
 	
 	//DS3231_Interrupt_ENABLE(Interrupt_EXTI_X_IRQn,ENABLE);
 }
 
 /**
- * @brief DS3231ÄÖÖÓÉèÖÃ£¨Hex£©
- * @param _tDS3231-iic½á¹¹ÌåÖ¸Õë
- * @param _tTime-Ê±¼ä½á¹¹ÌåµØÖ·Ö¸Õë
+ * @brief DS3231é—¹é’Ÿè®¾ç½®ï¼ˆHexï¼‰
+ * @param _tDS3231-iicç»“æ„ä½“æŒ‡é’ˆ
+ * @param _tTime-æ—¶é—´ç»“æ„ä½“åœ°å€æŒ‡é’ˆ
  * @retval Null
  */
 void OCD_DS3231_Alarm1ConfigHex(tagDS3231_T *_tDS3231, tagDS3231Time_T *_tTime)
@@ -282,14 +282,14 @@ void OCD_DS3231_Alarm1ConfigHex(tagDS3231_T *_tDS3231, tagDS3231Time_T *_tTime)
 	S_DS3231_WriteByte(_tDS3231, DS3231_IIC_ADDR, DS3231_CONTROL, ucRes|0x05);
 	
 	ucRes = S_DS3231_ReadByte(_tDS3231, DS3231_IIC_ADDR, DS3231_STATUS);
-	S_DS3231_WriteByte(_tDS3231, DS3231_IIC_ADDR, DS3231_STATUS, ucRes&0xfC);	/* ÄÖÖÓ1¡¢2±êÖ¾Î»ÇåÁã */
+	S_DS3231_WriteByte(_tDS3231, DS3231_IIC_ADDR, DS3231_STATUS, ucRes&0xfC);	/* é—¹é’Ÿ1ã€2æ ‡å¿—ä½æ¸…é›¶ */
 	
 	//DS3231_Interrupt_ENABLE(Interrupt_EXTI_X_IRQn,ENABLE);
 }
 
 /**
- * @brief DS3231³õÊ¼»¯
- * @param _tDS3231-ds3231½á¹¹ÌåÖ¸Õë
+ * @brief DS3231åˆå§‹åŒ–
+ * @param _tDS3231-ds3231ç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
  */
 void OCD_DS3231_Init(tagDS3231_T *_tDS3231)

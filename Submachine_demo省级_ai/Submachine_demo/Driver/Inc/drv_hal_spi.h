@@ -1,4 +1,4 @@
-#ifndef __DRV_SPI_H_
+Ôªø#ifndef __DRV_SPI_H_
 #define __DRV_SPI_H_
 
 #include "drv_hal_conf.h"
@@ -16,7 +16,7 @@ typedef struct
 	tagGPIO_T			tGPIO[4];
 }tagSPI_T;
 
-/* SPI÷ÿ”≥…‰±Ì
+/* SPIÈáçÊò†Â∞ÑË°®
 	SPI1 full remap (NSS/PA15, SCK/PB3, MISO/PB4, MOSI/PB5)
 		 no remap (NSS/PA4,  SCK/PA5, MISO/PA6, MOSI/PA7)
 */

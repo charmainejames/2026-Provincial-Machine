@@ -1,11 +1,11 @@
-#ifndef __DRV_PWM_H_
+ï»¿#ifndef __DRV_PWM_H_
 #define __DRV_PWM_H_
 
 #include "drv_hal_conf.h"
 
 #define MAX_RELOAD		1000000
 
-static uint8_t *s_ucpCheckCache;	/* PWMÍ¨µÀÕ¼ÓÃ¼ìÑé */
+static uint8_t *s_ucpCheckCache;	/* PWMé€šé“å ç”¨æ£€éªŒ */
 
 enum
 {
@@ -24,15 +24,15 @@ enum
 
 typedef struct
 {
-	TIM_HandleTypeDef 	tPWMHandle;		/* STM32ÄÚ²¿PWMÉè±¸¾ä±ú */
-	TIM_OC_InitTypeDef	tPWMChannel;	/* STM32ÄÚ²¿PWMÍ¨µÀ¾ä±ú */
-	uint32_t			ulFreq;			/* ÆµÂÊ(Hz) */
-	float				fDuty;			/* Õ¼¿Õ±È(%) */
-	uint8_t				ucChannel;		/* Í¨µÀ */
-	tagGPIO_T			tGPIO;			/* GPIOÉèÖÃ */
+	TIM_HandleTypeDef 	tPWMHandle;		/* STM32å†…éƒ¨PWMè®¾å¤‡å¥æŸ„ */
+	TIM_OC_InitTypeDef	tPWMChannel;	/* STM32å†…éƒ¨PWMé€šé“å¥æŸ„ */
+	uint32_t			ulFreq;			/* é¢‘ç‡(Hz) */
+	float				fDuty;			/* å ç©ºæ¯”(%) */
+	uint8_t				ucChannel;		/* é€šé“ */
+	tagGPIO_T			tGPIO;			/* GPIOè®¾ç½® */
 }tagPWM_T;
 
-/*  ¶¨Ê±Æ÷ÖØÓ³Éä±í
+/*  å®šæ—¶å™¨é‡æ˜ å°„è¡¨
 	TIM1 	full remap (ETR/PE7,  CH1/PE9, CH2/PE11, CH3/PE13, CH4/PE14, BKIN/PE15, CH1N/PE8,  CH2N/PE10, CH3N/PE12)
 			partial remap (ETR/PA12, CH1/PA8, CH2/PA9,  CH3/PA10, CH4/PA11, BKIN/PA6,  CH1N/PA7,  CH2N/PB0,  CH3N/PB1)
 			no remap (ETR/PA12, CH1/PA8, CH2/PA9,  CH3/PA10, CH4/PA11, BKIN/PB12, CH1N/PB13, CH2N/PB14, CH3N/PB15)
@@ -49,9 +49,9 @@ typedef struct
 	TIM4 	full remap (TIM4_CH1/PD12, TIM4_CH2/PD13, TIM4_CH3/PD14, TIM4_CH4/PD15)
 			no remap (TIM4_CH1/PB6,  TIM4_CH2/PB7,  TIM4_CH3/PB8,  TIM4_CH4/PB9)
 
-	TIM5CH4 enable TIM5_CH4 is connected to PA3     Ê¹ÓÃÍêÈ«ÖØÓ³ÉäucMode
+	TIM5CH4 enable TIM5_CH4 is connected to PA3     ä½¿ç”¨å®Œå…¨é‡æ˜ å°„ucMode
 
-	TIM67DMA enable TIM6_DAC1 DMA request/DMA1 Channel3, TIM7_DAC2 DMA request/DMA1 Channel4 Ê¹ÓÃÍêÈ«ÖØÓ³ÉäucMode
+	TIM67DMA enable TIM6_DAC1 DMA request/DMA1 Channel3, TIM7_DAC2 DMA request/DMA1 Channel4 ä½¿ç”¨å®Œå…¨é‡æ˜ å°„ucMode
 */
 
 void Drv_PWM_DutyFactorSet(tagPWM_T *_tPWM,float _fDuty);

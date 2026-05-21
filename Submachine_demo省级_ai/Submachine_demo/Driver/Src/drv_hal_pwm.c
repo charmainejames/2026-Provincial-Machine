@@ -1,25 +1,25 @@
-/****************************************************************************
+ï»¿/****************************************************************************
 
-* SigmaÍÅ¶Ó
+* Sigmaå›¢é˜Ÿ
 
-* ÎÄ¼şÃû: drv_hal_pwm.c
+* æ–‡ä»¶å: drv_hal_pwm.c
 
-* ÄÚÈİ¼òÊö£ºPWMÇı¶¯ÎÄ¼ş
+* å†…å®¹ç®€è¿°ï¼šPWMé©±åŠ¨æ–‡ä»¶
 
-* ÎÄ¼şÀúÊ·£º
+* æ–‡ä»¶å†å²ï¼š
 
-* °æ±¾ºÅ	   ÈÕÆÚ		  	×÷Õß		  ËµÃ÷
-*  2.7		2023-08-09   ±«³Ìè´		¼õÉÙ³õÊ¼»¯½á¹¹Ìå±ØÒª²ÎÊı£¬ÏÖ½öĞèI/O¼´¿ÉÊä³ö
+* ç‰ˆæœ¬å·	   æ—¥æœŸ		  	ä½œè€…		  è¯´æ˜
+*  2.7		2023-08-09   é²ç¨‹ç’		å‡å°‘åˆå§‹åŒ–ç»“æ„ä½“å¿…è¦å‚æ•°ï¼Œç°ä»…éœ€I/Oå³å¯è¾“å‡º
 
-*  2.6     	2023-06-07   ±«³Ìè´		¸ü¸Ä²¿·Öº¯ÊıÃüÃû
+*  2.6     	2023-06-07   é²ç¨‹ç’		æ›´æ”¹éƒ¨åˆ†å‡½æ•°å‘½å
 
-* 2.3.1 	2023-05-05   ±«³Ìè´		¸ñÊ½ÓÅ»¯
+* 2.3.1 	2023-05-05   é²ç¨‹ç’		æ ¼å¼ä¼˜åŒ–
 
-* 1.1.7 	2022-10-11   ±«³Ìè´		ÓÅ»¯Ö´ĞĞË³Ğò
+* 1.1.7 	2022-10-11   é²ç¨‹ç’		ä¼˜åŒ–æ‰§è¡Œé¡ºåº
 
-* 1.1.2 	2022-08-08	 ±«³Ìè´		ĞÂÔö¶¨Ê±Æ÷Òı½ÅÖØÓ³Éä´úÂë
+* 1.1.2 	2022-08-08	 é²ç¨‹ç’		æ–°å¢å®šæ—¶å™¨å¼•è„šé‡æ˜ å°„ä»£ç 
 
-* 1.0.0a 	2020-02-22	 Àî»·Óî		´´½¨¸ÃÎÄ¼ş
+* 1.0.0a 	2020-02-22	 æç¯å®‡		åˆ›å»ºè¯¥æ–‡ä»¶
 
 ****************************************************************************/
 #include "drv_hal_conf.h"
@@ -27,48 +27,48 @@
 #ifdef DRV_HAL_PWM_ENABLE
 
 /**
- * @brief PWM²¨Ê±ÖÓÊ¹ÄÜ
- * @param _tPWM-PWM½á¹¹ÌåÖ¸Õë
+ * @brief PWMæ³¢æ—¶é’Ÿä½¿èƒ½
+ * @param _tPWM-PWMç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_PWM_CLKEnable(tagPWM_T *_tPWM)
 {
 	if(_tPWM->tPWMHandle.Instance == TIM1)
 	{
-		__HAL_RCC_TIM1_CLK_ENABLE();	/* Ê¹ÄÜ¶¨Ê±Æ÷1 */
+		__HAL_RCC_TIM1_CLK_ENABLE();	/* ä½¿èƒ½å®šæ—¶å™¨1 */
 	}
 	else if(_tPWM->tPWMHandle.Instance == TIM2)
 	{
-		__HAL_RCC_TIM2_CLK_ENABLE();	/* Ê¹ÄÜ¶¨Ê±Æ÷2 */
+		__HAL_RCC_TIM2_CLK_ENABLE();	/* ä½¿èƒ½å®šæ—¶å™¨2 */
 	}
 	else if(_tPWM->tPWMHandle.Instance == TIM3)
 	{
-		__HAL_RCC_TIM3_CLK_ENABLE();	/* Ê¹ÄÜ¶¨Ê±Æ÷3 */
+		__HAL_RCC_TIM3_CLK_ENABLE();	/* ä½¿èƒ½å®šæ—¶å™¨3 */
 	}
 	else if(_tPWM->tPWMHandle.Instance == TIM4)
 	{
-		__HAL_RCC_TIM4_CLK_ENABLE();	/* Ê¹ÄÜ¶¨Ê±Æ÷4 */
+		__HAL_RCC_TIM4_CLK_ENABLE();	/* ä½¿èƒ½å®šæ—¶å™¨4 */
 	}
 	else if(_tPWM->tPWMHandle.Instance == TIM5)
 	{
-		__HAL_RCC_TIM5_CLK_ENABLE();	/* Ê¹ÄÜ¶¨Ê±Æ÷5 */
+		__HAL_RCC_TIM5_CLK_ENABLE();	/* ä½¿èƒ½å®šæ—¶å™¨5 */
 	}
 	else if(_tPWM->tPWMHandle.Instance == TIM8)
 	{
-		__HAL_RCC_TIM8_CLK_ENABLE();	/* Ê¹ÄÜ¶¨Ê±Æ÷8 */
+		__HAL_RCC_TIM8_CLK_ENABLE();	/* ä½¿èƒ½å®šæ—¶å™¨8 */
 	}
 }
 
 /**
- * @brief PWM²¨²ÎÊıÉèÖÃ
- * @param _tPWM-PWM½á¹¹ÌåÖ¸Õë
+ * @brief PWMæ³¢å‚æ•°è®¾ç½®
+ * @param _tPWM-PWMç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_PWM_PramConfig(tagPWM_T *_tPWM)
 {	
-	_tPWM->tPWMHandle.Init.Prescaler			= SYSTEM_CLOCK - 1;         		/* ¶¨Ê±Æ÷·ÖÆµ */
-	_tPWM->tPWMHandle.Init.CounterMode			= TIM_COUNTERMODE_UP;			    /* ÏòÉÏ¼ÆÊıÄ£Ê½ */
-	_tPWM->tPWMHandle.Init.Period				= MAX_RELOAD /_tPWM->ulFreq - 1;	/* ×Ô¶¯ÖØ×°ÔØÖµ */
+	_tPWM->tPWMHandle.Init.Prescaler			= SYSTEM_CLOCK - 1;         		/* å®šæ—¶å™¨åˆ†é¢‘ */
+	_tPWM->tPWMHandle.Init.CounterMode			= TIM_COUNTERMODE_UP;			    /* å‘ä¸Šè®¡æ•°æ¨¡å¼ */
+	_tPWM->tPWMHandle.Init.Period				= MAX_RELOAD /_tPWM->ulFreq - 1;	/* è‡ªåŠ¨é‡è£…è½½å€¼ */
 	_tPWM->tPWMHandle.Init.ClockDivision		= TIM_CLOCKDIVISION_DIV1;
 	_tPWM->tPWMHandle.Init.AutoReloadPreload 	= TIM_AUTORELOAD_PRELOAD_DISABLE;
 	if (HAL_TIM_PWM_Init(&_tPWM->tPWMHandle) != HAL_OK)
@@ -76,41 +76,41 @@ static void S_PWM_PramConfig(tagPWM_T *_tPWM)
 		Drv_HAL_Error(__FILE__, __LINE__);
 	}
     
-	/* Ä£Ê½Ñ¡ÔñPWM1 */
+	/* æ¨¡å¼é€‰æ‹©PWM1 */
 	_tPWM->tPWMChannel.OCMode		= TIM_OCMODE_PWM1;
     
- 	/* ÉèÖÃ±È½ÏÖµ,´ËÖµÓÃÀ´È·¶¨Õ¼¿Õ±È£¬Ä¬ÈÏ±È½ÏÖµÎª×Ô¶¯ÖØ×°ÔØÖµµÄÒ»°ë,¼´Õ¼¿Õ±ÈÎª50% */    
+ 	/* è®¾ç½®æ¯”è¾ƒå€¼,æ­¤å€¼ç”¨æ¥ç¡®å®šå ç©ºæ¯”ï¼Œé»˜è®¤æ¯”è¾ƒå€¼ä¸ºè‡ªåŠ¨é‡è£…è½½å€¼çš„ä¸€åŠ,å³å ç©ºæ¯”ä¸º50% */    
 	_tPWM->tPWMChannel.Pulse		= (MAX_RELOAD / _tPWM->ulFreq -1) * _tPWM->fDuty / 100;
     
-    /* Êä³ö±È½Ï¼«ĞÔÎª¸ß */
+    /* è¾“å‡ºæ¯”è¾ƒææ€§ä¸ºé«˜ */
 	_tPWM->tPWMChannel.OCPolarity	= TIM_OCPOLARITY_HIGH;
 	
-	if(HAL_TIM_PWM_ConfigChannel(&_tPWM->tPWMHandle,&_tPWM->tPWMChannel,_tPWM->ucChannel))	/* ÅäÖÃÍ¨µÀ */
+	if(HAL_TIM_PWM_ConfigChannel(&_tPWM->tPWMHandle,&_tPWM->tPWMChannel,_tPWM->ucChannel))	/* é…ç½®é€šé“ */
 	{
 		Drv_HAL_Error(__FILE__, __LINE__);
 	}				
-	if(HAL_TIM_PWM_Start(&_tPWM->tPWMHandle,_tPWM->ucChannel))	/* ¿ªÆôÍ¨µÀ */
+	if(HAL_TIM_PWM_Start(&_tPWM->tPWMHandle,_tPWM->ucChannel))	/* å¼€å¯é€šé“ */
 	{
 		Drv_HAL_Error(__FILE__, __LINE__);
 	}
 }
 
 /**
- * @brief PWM¶ÔÓ¦GPIOÅäÖÃ
- * @param _tPWM-PWM½á¹¹ÌåÖ¸Õë
+ * @brief PWMå¯¹åº”GPIOé…ç½®
+ * @param _tPWM-PWMç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_PWM_GPIOConfig(tagPWM_T *_tPWM)
 {
-	/*PWMÉú³ÉÄ¬ÈÏI/OÅäÖÃ*/
-	_tPWM->tGPIO.tGPIOInit.Mode	 = GPIO_MODE_AF_PP;			/* ¸´ÓÃÍÆÍìÊä³ö */
-	_tPWM->tGPIO.tGPIOInit.Pull	 = GPIO_PULLUP;				/* ÉÏÀ­ */
-	_tPWM->tGPIO.tGPIOInit.Speed = GPIO_SPEED_FREQ_HIGH;	/* ¸ßËÙÄ£Ê½ */
+	/*PWMç”Ÿæˆé»˜è®¤I/Oé…ç½®*/
+	_tPWM->tGPIO.tGPIOInit.Mode	 = GPIO_MODE_AF_PP;			/* å¤ç”¨æ¨æŒ½è¾“å‡º */
+	_tPWM->tGPIO.tGPIOInit.Pull	 = GPIO_PULLUP;				/* ä¸Šæ‹‰ */
+	_tPWM->tGPIO.tGPIOInit.Speed = GPIO_SPEED_FREQ_HIGH;	/* é«˜é€Ÿæ¨¡å¼ */
 
-	/* ¿ªÆô¸´ÓÃÄ£Ê½Ê±ÖÓ */
+	/* å¼€å¯å¤ç”¨æ¨¡å¼æ—¶é’Ÿ */
 	__HAL_RCC_AFIO_CLK_ENABLE();
 
-	/* ¸ù¾İ²»Í¬¶¨Ê±Æ÷µÄucAFMode¿ªÆô¶ÔÓ¦µÄÖØÓ³Éä£¬ÖØÓ³Éä±íÔÚdrv_hal_pwm.hÖĞ */
+	/* æ ¹æ®ä¸åŒå®šæ—¶å™¨çš„ucAFModeå¼€å¯å¯¹åº”çš„é‡æ˜ å°„ï¼Œé‡æ˜ å°„è¡¨åœ¨drv_hal_pwm.hä¸­ */
 	if(_tPWM->tPWMHandle.Instance == TIM1)
 	{
 		if(_tPWM->tGPIO.ucAFMode == NO_REMAP)				__HAL_AFIO_REMAP_TIM1_DISABLE();
@@ -146,25 +146,25 @@ static void S_PWM_GPIOConfig(tagPWM_T *_tPWM)
 	}
 
 
-	Drv_GPIO_Init(&_tPWM->tGPIO, 1);		/* GPIO³õÊ¼»¯ */
+	Drv_GPIO_Init(&_tPWM->tGPIO, 1);		/* GPIOåˆå§‹åŒ– */
 }
 
 /**
- * @brief PWM²¨²ÎÊıÆ¥Åäº¯Êı
- * @param _tPWM-PWM½á¹¹ÌåÖ¸Õë
+ * @brief PWMæ³¢å‚æ•°åŒ¹é…å‡½æ•°
+ * @param _tPWM-PWMç»“æ„ä½“æŒ‡é’ˆ
  * @retval Null
 */
 static void S_PWM_ParamMatch(tagPWM_T *_tPWM)
 {
-	/* PWM²¨²ÎÊı */
+	/* PWMæ³¢å‚æ•° */
 	DEFAULT(_tPWM->fDuty,7.5);
 	DEFAULT(_tPWM->ulFreq,50);
 
-	/* Èç¹ûÖ¸¶¨¶¨Ê±Æ÷ÔòÍË³ö */
+	/* å¦‚æœæŒ‡å®šå®šæ—¶å™¨åˆ™é€€å‡º */
 	if(_tPWM->tPWMHandle.Instance != NULL)
 		return;
 
-	/* ¸ù¾İÑ¡ÔñµÄGPIOÀ´ÅäÖÃ¶¨Ê±Æ÷ */
+	/* æ ¹æ®é€‰æ‹©çš„GPIOæ¥é…ç½®å®šæ—¶å™¨ */
 	if(_tPWM->tGPIO.tGPIOPort == GPIOA)
 	{
 		switch(_tPWM->tGPIO.tGPIOInit.Pin)
@@ -480,9 +480,9 @@ static void S_PWM_ParamMatch(tagPWM_T *_tPWM)
 }
 
 /**
- * @brief PWM²¨Õ¼¿Õ±ÈÉèÖÃ
- * @param _tPWM-PWM½á¹¹ÌåÖ¸Õë
- * @param _fDuty-Õ¼¿Õ±È(µ¥Î»£º%)
+ * @brief PWMæ³¢å ç©ºæ¯”è®¾ç½®
+ * @param _tPWM-PWMç»“æ„ä½“æŒ‡é’ˆ
+ * @param _fDuty-å ç©ºæ¯”(å•ä½ï¼š%)
  * @retval Null
 */
 void Drv_PWM_DutyFactorSet(tagPWM_T *_tPWM, float _fDuty)
@@ -512,10 +512,10 @@ void Drv_PWM_DutyFactorSet(tagPWM_T *_tPWM, float _fDuty)
 }
 
 /**
- * @brief PWM²¨¸ßµçÆ½Ê±¼äÉèÖÃ
- * @param _tPWM-PWM½á¹¹ÌåÖ¸Õë
- * @param _usTime-¸ßµçÆ½Ê±¼ä(µ¥Î»£ºus)
- * @note ÔÚPWM²¨ÆµÂÊÎª50HZµÄÇ°ÌáÏÂ
+ * @brief PWMæ³¢é«˜ç”µå¹³æ—¶é—´è®¾ç½®
+ * @param _tPWM-PWMç»“æ„ä½“æŒ‡é’ˆ
+ * @param _usTime-é«˜ç”µå¹³æ—¶é—´(å•ä½ï¼šus)
+ * @note åœ¨PWMæ³¢é¢‘ç‡ä¸º50HZçš„å‰æä¸‹
  * @retval Null
 */
 void Drv_PWM_HighLvTimeSet(tagPWM_T *_tPWM, uint16_t _usTime)
@@ -548,9 +548,9 @@ void Drv_PWM_HighLvTimeSet(tagPWM_T *_tPWM, uint16_t _usTime)
 }
 
 /**
- * @brief PWM³õÊ¼»¯
- * @param _tPWM-PWM½á¹¹ÌåÖ¸Õë
- * @param _ucNum-PWMÊıÁ¿
+ * @brief PWMåˆå§‹åŒ–
+ * @param _tPWM-PWMç»“æ„ä½“æŒ‡é’ˆ
+ * @param _ucNum-PWMæ•°é‡
  * @retval Null
 */
 void Drv_PWM_Init(tagPWM_T *_tPWM, uint8_t _ucNum)

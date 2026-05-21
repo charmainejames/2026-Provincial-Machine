@@ -1,43 +1,43 @@
-#ifndef __OCD_DS3231_H_
+ï»¿#ifndef __OCD_DS3231_H_
 #define __OCD_DS3231_H_
 
 #include "drv_hal_conf.h"
 
-/* ds3231ºÍDS1337ÓÃµÄÍ¬Ò»Ì×Çı¶¯ */
+/* ds3231å’ŒDS1337ç”¨çš„åŒä¸€å¥—é©±åŠ¨ */
 #define DS3231_TYPE_ENABLE
 //#define DS1337_TYPE _ENABLE
 
 #define DS3231_IIC_ADDR 	0XD0
 
-#define DS3231_WriteAddress 0xD0    /* Æ÷¼şĞ´µØÖ· */
-#define DS3231_ReadAddress  0xD1    /* Æ÷¼ş¶ÁµØÖ· */
+#define DS3231_WriteAddress 0xD0    /* å™¨ä»¶å†™åœ°å€ */
+#define DS3231_ReadAddress  0xD1    /* å™¨ä»¶è¯»åœ°å€ */
 
-#define DS3231_SECOND       0x00    /* Ãë */
-#define DS3231_MINUTE       0x01    /* ·Ö */
-#define DS3231_HOUR         0x02    /* Ê± */
-#define DS3231_WEEK         0x03    /* ĞÇÆÚ */
-#define DS3231_DAY          0x04    /* ÈÕ */
-#define DS3231_MONTH        0x05    /* ÔÂ */
-#define DS3231_YEAR         0x06    /* Äê */
+#define DS3231_SECOND       0x00    /* ç§’ */
+#define DS3231_MINUTE       0x01    /* åˆ† */
+#define DS3231_HOUR         0x02    /* æ—¶ */
+#define DS3231_WEEK         0x03    /* æ˜ŸæœŸ */
+#define DS3231_DAY          0x04    /* æ—¥ */
+#define DS3231_MONTH        0x05    /* æœˆ */
+#define DS3231_YEAR         0x06    /* å¹´ */
 
-/* ÄÖÁå1¼Ä´æÆ÷ */            
-#define DS3231_ALARM1SECOND 0x07    /* Ãë */
-#define DS3231_ALARM1MINUTE 0x08    /* ·Ö */
-#define DS3231_ALARM1HOUR   0x09    /* Ê± */
-#define DS3231_ALARM1WEEK   0x0A    /* ĞÇÆÚ/ÈÕ */
+/* é—¹é“ƒ1å¯„å­˜å™¨ */            
+#define DS3231_ALARM1SECOND 0x07    /* ç§’ */
+#define DS3231_ALARM1MINUTE 0x08    /* åˆ† */
+#define DS3231_ALARM1HOUR   0x09    /* æ—¶ */
+#define DS3231_ALARM1WEEK   0x0A    /* æ˜ŸæœŸ/æ—¥ */
 
-/* ÄÖÁå2¼Ä´æÆ÷ */
-#define DS3231_ALARM2MINUTE 0x0b    /* ·Ö */
-#define DS3231_ALARM2HOUR   0x0c    /* Ê± */
-#define DS3231_ALARM2WEEK   0x0d    /* ĞÇÆÚ/ÈÕ */
+/* é—¹é“ƒ2å¯„å­˜å™¨ */
+#define DS3231_ALARM2MINUTE 0x0b    /* åˆ† */
+#define DS3231_ALARM2HOUR   0x0c    /* æ—¶ */
+#define DS3231_ALARM2WEEK   0x0d    /* æ˜ŸæœŸ/æ—¥ */
 
-#define DS3231_CONTROL      0x0e    /* ¿ØÖÆ¼Ä´æÆ÷ */
-#define DS3231_STATUS       0x0f    /* ×´Ì¬¼Ä´æÆ÷ */
-#define BSY                 2       /* Ã¦ */
-#define OSF                 7       /* Õñµ´Æ÷Í£Ö¹±êÖ¾ */
-#define DS3231_XTAL         0x10    /* ¾§ÌåÀÏ»¯¼Ä´æÆ÷ */
-#define DS3231_TEMPERATUREH 0x11    /* ÎÂ¶È¼Ä´æÆ÷¸ß×Ö½Ú(8Î») */
-#define DS3231_TEMPERATUREL 0x12    /* ÎÂ¶È¼Ä´æÆ÷µÍ×Ö½Ú(¸ß2Î») */
+#define DS3231_CONTROL      0x0e    /* æ§åˆ¶å¯„å­˜å™¨ */
+#define DS3231_STATUS       0x0f    /* çŠ¶æ€å¯„å­˜å™¨ */
+#define BSY                 2       /* å¿™ */
+#define OSF                 7       /* æŒ¯è¡å™¨åœæ­¢æ ‡å¿— */
+#define DS3231_XTAL         0x10    /* æ™¶ä½“è€åŒ–å¯„å­˜å™¨ */
+#define DS3231_TEMPERATUREH 0x11    /* æ¸©åº¦å¯„å­˜å™¨é«˜å­—èŠ‚(8ä½) */
+#define DS3231_TEMPERATUREL 0x12    /* æ¸©åº¦å¯„å­˜å™¨ä½å­—èŠ‚(é«˜2ä½) */
 
 typedef struct 
 {
