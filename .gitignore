@@ -1,33 +1,37 @@
-# ============================================================================
-# Keil MDK-ARM 工程 .gitignore
-# 忽略所有编译产物，只跟踪源码 + 工程文件
-# ============================================================================
+# Keil MDK build outputs
+**/Objects/
+**/Listings/
+**/DebugConfig/
+**/*.o
+**/*.d
+**/*.crf
+**/*.axf
+**/*.elf
+**/*.lst
+**/*.map
+**/*.dep
+**/*.lnp
+**/*.iex
+**/*.build_log.htm
 
-# === Keil 编译输出文件夹 ===
-Objects/
-Listings/
-DebugConfig/
-
-# === 编译产物（散落在别处时也忽略） ===
-*.o
-*.d
-*.crf
-*.axf
-*.lst
-*.map
-*.dep
-*.lnp
-*.iex
-*.build_log.htm
-
-# === Keil 用户 GUI 状态（每台机器不同，团队不共享） ===
+# User-specific IDE settings
+.claude/
+.codex/
+.idea/
+.vscode/
 *.uvguix.*
-
-# === 编辑器/系统备份文件 ===
+*.uvoptx
+*.uvopt
 *.bak
 *.gbk.bak
-Thumbs.db
-.DS_Store
+*.code-workspace
+JLinkLog.txt
+JLinkSettings.ini
+EventRecorderStub.scvd
 
-# === Git 内部备份（之前移出的内仓库等） ===
-_*_git_backup_*/
+# Operating system and temporary files
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+_*_git_backup_/

@@ -1,4 +1,37 @@
-# SGA Library
+# 2026省机
+
+面向 2026 年省级竞赛设备开发的 STM32 控制工程。项目基于 SGA Library，当前仓库保留应用逻辑、任务调度、控制算法、设备驱动、硬件抽象层以及 Keil 工程，适合作为省赛设备的统一固件代码库。
+
+## 项目结构
+
+```text
+Apply/      用户逻辑、任务与业务代码
+Bsp/        PID、几何算法、设备和片外外设驱动
+Doc/        开发规范、维护记录和使用文档
+Driver/     GPIO、PWM、串口、定时器等底层驱动
+Hardware/   STM32F1/STM32L4 CMSIS 与 HAL 支持
+Project/    Keil MDK 工程文件
+Firmware/   经过完整重编译验证的 HEX 固件
+```
+
+主要业务修改应集中在 `Apply`，通用控制算法位于 `Bsp/Algo`，工程入口为 `Project/STM32.uvprojx`。
+
+## 构建
+
+1. 使用 Keil MDK 打开 `Project/STM32.uvprojx`。
+2. 检查目标芯片、下载器和宏定义是否与实物一致。
+3. 执行 Rebuild，编译产物保留在本地，不提交到 Git。
+
+当前验证固件位于 `Firmware/2026省机.hex`。
+
+## 仓库约定
+
+- `main` 保存能够正常编译的稳定版本。
+- 不提交 `.claude`、`.idea`、个人 VS Code 配置、编译日志和 Keil 中间文件。
+- 修改底层库前先阅读 `Doc/SGA库代码规范V1.1.md` 和工程接手文档。
+- 竞赛功能应在独立分支完成，验证后再合并到 `main`。
+
+## SGA Library 基础说明
 
 - 一个基于STM32F1系列和STM32L4系列的代码库
 
